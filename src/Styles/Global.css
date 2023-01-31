@@ -16,21 +16,27 @@
 html{
     scroll-behavior: smooth;
 }
+body{
+    background-color: #141414;
+}
 p,h1,h2,h3,h4,h5,h6{
     margin: 0;
 }
 
 /* Navigation Bar */
 nav{
+    z-index: 1;
+    position: fixed;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 60px;
-    width: auto;
+    width: 100%;
     height: 68px;
-    background: linear-gradient(180deg, #000000 0%, #333333 100%);
+    background: transparent;
+    transition: .5s ease;
 }
 nav .left{
+    margin-left: 60px;
     display: flex;
 }
 nav .left .logo{
@@ -57,10 +63,72 @@ nav .left .nav_links .links:hover{
     cursor: pointer;
     color: rgb(177, 176, 176);
 }
+nav .left .nav_links .browse_container{
+    display: none;
+}
+nav .right{
+    margin-right: 60px;
+}
 nav .right .avatar{
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 3px;
     height: 33px;
     width: 30px;
-    object-fit: cover;
+    object-fit: contain;
+}
+
+/*RESPONSIVE*/
+@media screen and (max-width: 884px) {
+    nav .left .nav_links .links{
+        display: none;
+    }
+    nav .left .nav_links .browse_container{
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        color: #ffff;
+        transition: .4s;
+    }
+    nav .left .nav_links .browse_container:hover{
+        color: rgb(177, 176, 176);
+    }
+    nav .left .nav_links .browse_container p{
+        font-family: netflix_bold,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+        font-size: .86rem;
+    }
+    nav .left .nav_links .browse_container svg{
+        font-size: 1.5rem;
+    }
+    /* Mui Configuration */
+    .MuiPaper-root{
+      background-color: rgba(0, 0, 0, 0.801) !important;
+    }
+    .MuiPaper-root::before{
+      background-color: rgba(0, 0, 0, 0.801) !important;
+    }
+    .mui_links{
+        margin: 0% auto;
+        padding: 0 30px;
+        font-family: netflix_light,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+        font-size: .86rem;
+        color: rgb(216, 215, 215);
+    }
+    .mui_links_active{
+        color: #ffff;
+        font-family: netflix_medium,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+    }
+}
+@media screen and (max-width: 551px) {
+    nav .left{
+        margin-left: 20px;
+    }
+    nav .right{
+        margin-right: 20px;
+    }
+}
+
+@media screen and (max-width: 221px) {
+    html{
+        display: none;
+    }
 }
