@@ -156,14 +156,14 @@
 }
 @media screen and (max-width: 701px) {
     .HomePage{
-        height: 40vh;
+        height: 50vh;
     }
     /* Cover Photo */
     .HomePage .CoverPhoto_container{
-        height: 40vh;
+        height: 50vh;
     }
     .HomePage .TrailerVideo_container video{
-        width: 150%;
+        width: 200%;
     }
 
     /* Primary Details */
@@ -208,9 +208,21 @@
     } 
 }
 @media screen and (max-width: 551px) {
+    .HomePage{
+        height: 50vh;
+    }
+    /* Cover Photo */
+    .HomePage .CoverPhoto_container{
+        height: 50vh;
+    }
+    .HomePage .TrailerVideo_container video{
+        width: 250%;
+    }
     /* Primary Details */
     .Primary_Details{
         left: 20px;
+        bottom: 0;
+        top: 15vh;
     }
     .Primary_Details .description{
         margin-top: 10px;
@@ -239,7 +251,7 @@
 }
 @media screen and (max-width: 451px) {
     .HomePage .TrailerVideo_container video{
-        width: 250%;
+        width: 295%;
     }
 }
 @media screen and (max-width: 431px) {
@@ -261,26 +273,21 @@
         height: 20px;
     }
 }
+@media screen and (max-width: 376px) {
+    .Primary_Details .title_img{
+        width: 180px;
+    }
+}
 @media screen and (max-width: 356px) {
     .age_play{    
         display: none;
     }
 }
 @media screen and (max-width: 351px) {
-    .HomePage{
-        height: 30vh;
-    }
-    /* Cover Photo */
-    .HomePage .CoverPhoto_container{
-        height: 30vh;
-    }
     .HomePage .TrailerVideo_container video{
-        width: 200%;
+        width: 400%;
     }
 
-    .Primary_Details{
-        top: 9vh;
-    }
     .Primary_Details .title_img{
         width: 200px;
     }
@@ -290,14 +297,9 @@
     }
 }
 @media screen and (max-width: 321px) {
-    .HomePage .TrailerVideo_container video{
-        width: 300%;
-    }
+
 }
 @media screen and (max-width: 301px) {
-    .Primary_Details{
-        top: 7vh;
-    }
     .Primary_Details .btn_container .btn{
         padding: 10px 15px;
         gap: 8px;
