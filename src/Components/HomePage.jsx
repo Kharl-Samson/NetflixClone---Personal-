@@ -41,7 +41,6 @@ export default function HomePage() {
 
   // Generates Random Number from 0 - 4   
   var random_Number =  Math.floor(Math.random() * 5) + 0;
-  console.log(random_Number)
 
   setTimeout(function () {
     document.getElementById("trailer_video").play();
