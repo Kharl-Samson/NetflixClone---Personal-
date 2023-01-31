@@ -1,0 +1,66 @@
+@font-face { font-family: netflix_light; src: url('../Assets/Netflix_Font/NetflixSans-Light.otf'); } 
+@font-face { font-family: netflix_regular; src: url('../Assets/Netflix_Font/NetflixSans-Regular.otf'); } 
+@font-face { font-family: netflix_medium; src: url('../Assets/Netflix_Font/NetflixSans-Medium.otf'); } 
+@font-face { font-family: netflix_bold; src: url('../Assets/Netflix_Font/NetflixSans-Bold.otf'); } 
+/* font-family: netflix_regular,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif; */
+
+*{
+    padding: 0;
+    margin: 0;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+html{
+    scroll-behavior: smooth;
+}
+p,h1,h2,h3,h4,h5,h6{
+    margin: 0;
+}
+
+/* Navigation Bar */
+nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 60px;
+    width: auto;
+    height: 68px;
+    background: linear-gradient(180deg, #000000 0%, #333333 100%);
+}
+nav .left{
+    display: flex;
+}
+nav .left .logo{
+    height: 25px;
+    width: auto;
+    margin-right: 45px;
+}
+nav .left .nav_links{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+nav .left .nav_links .links{
+    font-family: netflix_light,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+    font-size: .86rem;
+    color: rgb(216, 215, 215);
+    transition: .4s;
+}
+nav .left .nav_links .active{
+    font-family: netflix_regular,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+    color: #ffff;
+}
+nav .left .nav_links .links:hover{
+    cursor: pointer;
+    color: rgb(177, 176, 176);
+}
+nav .right .avatar{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 3px;
+    height: 33px;
+    width: 30px;
+    object-fit: cover;
+}
