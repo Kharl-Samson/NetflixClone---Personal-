@@ -99,6 +99,9 @@
     align-items: center;
     justify-content: center;
     transition: .4s;
+    opacity: 0%;
+    transition: .8s;
+    pointer-events: none;
 }
 .age_play .controls:hover{
     cursor: pointer;
@@ -108,13 +111,16 @@
     color: #ffff;
     height: 40px;
 }  
+.age_play .controls #mute_icon,.age_play .controls #replay_icon{
+    display: none;
+}
 .age_play .age_restriction{
     background-color: #6964647a;
     border-left: 3px solid #ffff;
     height: 50px;
     display: flex;
     align-items: center;
-    width: 130px;
+    width: 120px;
 } 
 .age_play .age_restriction span{
     font-family: netflix_regular,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
