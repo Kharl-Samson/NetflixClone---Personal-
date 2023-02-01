@@ -149,17 +149,17 @@ export default function HomePage() {
 
         {/* Movie Primary Details */}
         <div className='Primary_Details'>
-            <img src={movie_title_array[random_Number]} alt='Title' className='title_img' id="title_img"/>
+            <img src={movie_title_array[random_Number]} alt='Title' className='title_img' id="title_img" loading="lazy"/>
             <p className='description' id="description">{movie_description[random_Number]}</p>
 
             <div className='btn_container' id="btn_container">
               <div className='btn'>
-                <img src={play_icon} alt="Play Icon"/>
+                <img src={play_icon} alt="Play Icon" loading="lazy"/>
                 <span>Play</span>
               </div>
 
               <div className='btn'>
-                <img src={info_icon} alt="Play Icon"/>
+                <img src={info_icon} alt="Play Icon" loading="lazy"/>
                 <span>More Info</span>
               </div>
             </div>

@@ -37,7 +37,7 @@ export default function Navbar() {
   return (
     <nav id="navbar">
       <div className='left'>
-        <img src={Netflix_Logo} alt="Netflix Logo" className='logo'/>
+        <img src={Netflix_Logo} alt="Netflix Logo" className='logo' loading="lazy"/>
 
         <div className='nav_links'>
           <p className='links active'>Home</p>
@@ -111,7 +111,7 @@ export default function Navbar() {
       </div>
 
       <div className='right'>
-        <img src={Default_Avatar} alt="Avatar" className='avatar'/>
+        <img src={Default_Avatar} alt="Avatar" className='avatar' loading="lazy"/>
       </div>
     </nav>
   )
