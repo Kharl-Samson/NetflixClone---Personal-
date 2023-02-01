@@ -42,25 +42,46 @@ export default function HomePage() {
   // Generates Random Number from 0 - 4   
   var random_Number =  Math.floor(Math.random() * 5) + 0;
 
-  setTimeout(function () {
-    document.getElementById("trailer_video").play();
 
-    document.getElementById("trailer_video").onended = function(e) {
-      trailer_ctr = 3
-      document.getElementById("unmute_icon").style.display = "none"
-      document.getElementById("mute_icon").style.display = "none"
-      document.getElementById("replay_icon").style.display = "block"
+  var isVideoloaded = false;
+  function check_video_is_loaded(){
+    const videoElement = document.getElementById("trailer_video");
+    videoElement.addEventListener('loadeddata', (e) => {
+      //Video should now be loaded but we can add a second check
+      if(videoElement.readyState >= 3){
+        isVideoloaded = true
+      }
+    });
+  }
+  var myInterval = setInterval(check_video_is_loaded, 10);
+  
 
-      document.getElementById("CoverPhoto_container").style.opacity = "100%"
-      document.getElementById("CoverPhoto_container").style.transition = ".1s%"
-      document.getElementById("description").style.display = "block"
-    };
-  }, 3000);
-  setTimeout(function () {
-    document.getElementById("CoverPhoto_container").style.opacity = "0%"
-    document.getElementById("controls_btn").style.opacity = "100%"
-    document.getElementById("controls_btn").style.pointerEvents = "auto"
-  }, 4000);
+  function toClear_interval(){
+    if(isVideoloaded === true){
+      clearInterval(myInterval);
+      clearInterval(clear_Interval);
+
+      setTimeout(function () {
+        document.getElementById("CoverPhoto_container").style.opacity = "0%"
+        document.getElementById("controls_btn").style.opacity = "100%"
+        document.getElementById("controls_btn").style.pointerEvents = "auto"
+      }, 4000);
+
+      document.getElementById("trailer_video").play();
+
+      document.getElementById("trailer_video").onended = function(e) {
+        trailer_ctr = 3
+        document.getElementById("unmute_icon").style.display = "none"
+        document.getElementById("mute_icon").style.display = "none"
+        document.getElementById("replay_icon").style.display = "block"
+        
+        document.getElementById("CoverPhoto_container").style.opacity = "100%"
+        document.getElementById("CoverPhoto_container").style.transition = ".1s%"
+        document.getElementById("description").style.display = "block"
+      };
+    }
+  }
+  var clear_Interval = setInterval(toClear_interval, 10);
 
   setTimeout(function () {
     const mq701 = window.matchMedia("(max-width: 701px)");
