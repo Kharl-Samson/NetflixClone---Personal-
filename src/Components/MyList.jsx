@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import "../Styles/List.css";
-// import { Carousel } from '@trendyol-js/react-carousel';
 import Carousel from 'carousel-react-rcdev'
 
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import Item from './Item';
 
-// Testing youtube
-import YouTube from 'react-youtube';
-import { red } from '@mui/material/colors';
 
 export default function MyList() {
   let api_key = "11a61ae7e3b2ca3ab361c0a1fa158769"
