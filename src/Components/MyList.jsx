@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import "../Styles/List.css";
 
-
+import Carousel from 'carousel-react-rcdev'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import Item from './Item';
@@ -106,9 +106,9 @@ export default function MyList() {
             >
                 <KeyboardArrowRightIcon id="image_swipe_icon_right"/>
             </div>
-            {/* <Carousel>
+            <Carousel>
                 {myList_mapping}
-            </Carousel>  */}
+            </Carousel> 
         </div>
 
     </div>
