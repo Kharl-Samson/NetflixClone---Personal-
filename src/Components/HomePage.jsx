@@ -65,6 +65,7 @@ export default function HomePage() {
         document.getElementById("CoverPhoto_container").style.opacity = "0%"
         document.getElementById("controls_btn").style.opacity = "100%"
         document.getElementById("controls_btn").style.pointerEvents = "auto"
+        document.getElementById("trailer_video").style.pointerEvents = "auto"
       }, 4000);
 
       document.getElementById("trailer_video").play();
@@ -131,8 +132,13 @@ export default function HomePage() {
     }
   }
 
-
-
+  function separate_unmute(){
+    document.getElementById("trailer_video").muted = false
+    document.getElementById("unmute_icon").style.display = "none"
+    document.getElementById("replay_icon").style.display = "none"
+    document.getElementById("mute_icon").style.display = "block"
+    trailer_ctr = 2
+  }
 
   return (
     <div className='HomePage'>
@@ -144,7 +150,7 @@ export default function HomePage() {
 
         {/* For Trailer Video */}
         <div className='TrailerVideo_container'>
-            <video src={trailer_video_array[random_Number]} id="trailer_video" muted/>
+            <video src={trailer_video_array[random_Number]} id="trailer_video" muted onClick={separate_unmute}/>
         </div>
 
         {/* Movie Primary Details */}

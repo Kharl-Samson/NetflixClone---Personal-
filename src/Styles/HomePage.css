@@ -12,6 +12,7 @@
     height: 100vh;
     width: 100%;
     transition: 1.5s;
+    z-index: 0;
 }
 .HomePage .CoverPhoto_container img{
     height: 100%;
@@ -26,10 +27,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 0;
 }
 .HomePage .TrailerVideo_container video{
     height: 150vh;
     width: 120%;
+    pointer-events: none;
 }
 
 /* Primary Details */
@@ -153,6 +156,11 @@
     .HomePage .TrailerVideo_container video{
         width: 250%;
     }
+
+    /* Primary Details */
+    .Primary_Details{
+        bottom: 35vh;
+    }
 }
 @media screen and (max-width: 701px) {
     .HomePage{
@@ -168,8 +176,7 @@
 
     /* Primary Details */
     .Primary_Details{
-        bottom: 0;
-        top: 12vh;
+        bottom: 62vh;
     }
     .Primary_Details .title_img{
         width: 300px;
@@ -194,6 +201,10 @@
     }
 }
 @media screen and (max-width: 631px) {
+    /* Primary Details */
+    .Primary_Details{
+        bottom: 59vh;
+    }
     .Primary_Details .description{
         max-width: 320px;
     }
@@ -221,8 +232,6 @@
     /* Primary Details */
     .Primary_Details{
         left: 20px;
-        bottom: 0;
-        top: 15vh;
     }
     .Primary_Details .description{
         margin-top: 10px;

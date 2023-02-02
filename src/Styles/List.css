@@ -1,0 +1,120 @@
+.list_container{
+    height: 40px;
+    width: auto;
+    z-index: 1;
+    bottom: 14vh;
+    position: relative;
+}
+.list_container .title{
+    font-size: 1.7rem;
+    font-family: netflix_medium,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+    color: #ffff;
+}
+.list_container .image_carousel_container{
+    margin-top: 15px;
+    min-height: 150px;
+    width: auto;
+    transition: .1s;
+}
+.list_container .image_carousel_container .each_image{
+    margin-right: 10px;
+    height: 150px;
+    width: 280px;
+    background-color: black;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: .4s;
+}
+.list_container .image_carousel_container .each_image:last-of-type{
+    position: relative;
+    margin-right: 0;
+}
+.list_container .image_carousel_container .each_image .movie_cover{
+    width: 280px;
+    height: 150px;
+    border-radius: 5px;
+    transition: .5s;
+}
+.list_container .image_carousel_container .left_btn,
+.list_container .image_carousel_container .right_btn{
+    cursor: pointer;
+    position: absolute;
+    height: 150px;
+    width: 60px;
+    background-color: rgba(0, 0, 0, 0.411);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .4s;
+    opacity: 0;
+}
+.list_container .image_carousel_container .right_btn{
+    right: 0;
+}
+.list_container .image_carousel_container .left_btn svg,
+.list_container .image_carousel_container .right_btn svg{
+    color: #ffff;
+    font-size: 40px;
+    transition: .3s;
+}
+
+.list_container .image_carousel_container .left_btn{
+    left: 60px;
+    display: none;
+}
+.for_margin_left{
+    margin-left: 60px;
+}
+
+/* Carousel Buttton Configuration */
+.sc-bcXHqe  {
+    max-width: 100% !important;
+    flex-grow: 1 !important;
+}
+.sc-gswNZR
+{
+    max-width: 100% !important;
+    width: 100% !important;
+}
+#prev img, #next img{
+    display: none; 
+}
+#prev{
+    cursor: pointer;
+    position: absolute !important;
+    width: 60px !important;
+    height: 150px !important;
+    border: none !important;
+    background-color: transparent !important;
+    margin-left: -10px;
+}
+#next{
+    background-color: transparent !important;
+    cursor: pointer;
+    position: absolute !important;
+    width: 60px !important;
+    height: 150px !important;
+    border: none !important;
+    right: 0;
+    margin-right: -10px;
+    z-index: 10;
+}
+
+/* Responsive */
+@media screen and (max-width: 861px) {
+    .list_container{
+        bottom: 10vh;
+    }
+}
+@media screen and (max-width: 631px) {
+    .list_container{
+        bottom: 7vh;
+    }
+}
+@media screen and (max-width: 551px) {
+    .for_margin_left{
+        margin-left: 20px;
+    }
+    
+}
