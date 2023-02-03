@@ -14,10 +14,9 @@
     margin-top: 15px;
     min-height: 150px;
     width: auto;
-    transition: .1s;
+    transition: .2s;
 }
 .list_container .image_carousel_container .each_image{
-    margin-right: 10px;
     height: 150px;
     width: 280px;
     background-color: black;
@@ -42,7 +41,7 @@
     height: 150px;
     width: 60px;
     background-color: rgba(0, 0, 0, 0.411);
-    z-index: 1;
+    z-index: 2;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -67,39 +66,16 @@
     margin-left: 60px;
 }
 
-/* Carousel Buttton Configuration */
-.sc-bcXHqe  {
-    max-width: 100% !important;
-    flex-grow: 1 !important;
+/* Swiper Carousel Buttton Configuration */
+.swiper-button-prev,
+.swiper-button-next{
+    opacity: 0 !important;
+    z-index: -99 !important;
 }
-.sc-gswNZR
-{
-    max-width: 100% !important;
-    width: 100% !important;
-}
-#prev img, #next img{
-    display: none; 
-}
-#prev{
-    cursor: pointer;
-    position: absolute !important;
-    width: 60px !important;
-    height: 150px !important;
-    border: none !important;
-    background-color: transparent !important;
-    margin-left: -10px;
-}
-#next{
-    background-color: transparent !important;
-    cursor: pointer;
-    position: absolute !important;
-    width: 60px !important;
-    height: 150px !important;
-    border: none !important;
-    right: 0;
-    margin-right: -10px;
-    z-index: 10;
-}
+
+
+/* test */
+
 
 /* Responsive */
 @media screen and (max-width: 861px) {

@@ -1,81 +1,91 @@
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import axios from 'axios';
 import "../Styles/List.css";
 
-import Carousel from 'carousel-react-rcdev'
+// import Carousel from 'carousel-react-rcdev'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import Item from './Item';
 
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// modules styles
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
+// import required modules
+import { Pagination, Navigation ,FreeMode} from "swiper";
 
 export default function MyList() {
-  let api_key = "11a61ae7e3b2ca3ab361c0a1fa158769"
+
+  // My API Setting Configuration
+  const API_KEY = "11a61ae7e3b2ca3ab361c0a1fa158769";
+  const API_BASE_URL = "https://api.themoviedb.org/3";
 
   // Hook for getting genres
   const [genres, setGenres] = useState([]);
   const loadGenre = async () => {
-    const res = await axios.get("https://api.themoviedb.org/3/genre/movie/list?api_key="+api_key);
+    const res = await axios.get(`${API_BASE_URL}/genre/movie/list?api_key=${API_KEY}`);
     setGenres(res.data.genres);
-  
   };
   
   // Hook for getting all Trending Now
   const [trending, setTrending] = useState([]);
   const loadTrending = async () => {
-    const res = await axios.get("https://api.themoviedb.org/3/trending/all/day?api_key="+api_key);
+    const res = await axios.get(`${API_BASE_URL}/trending/all/day?api_key=${API_KEY}`);
     setTrending(res.data.results);
   };
 
-  // Use effect for all
+  // Use effect for all hooks
   useEffect(() => {
     loadTrending();
     loadGenre();
-  }, []);
+  }, [API_KEY, API_BASE_URL]);
 
   var key_mapping = -1; 
-
   const myList_mapping = trending.map((res) => {
-    key_mapping++
-
-    var genres_array = [] 
-    genres.map((response) => {
-        for(var x = 0 ; x < res.genre_ids.length ; x++){
-          if(response.id === res.genre_ids[x]){
-            genres_array.push(response.name)
+      key_mapping++
+      var genres_array = [] 
+      genres.map((response) => {
+          for(var x = 0 ; x < res.genre_ids.length ; x++){
+            response.id === res.genre_ids[x] ? genres_array.push(response.name) : ""
           }
-        }
-    });
-
+      });
       return (
-        <Item
-         key = {key_mapping}
-         image = {res.backdrop_path}
-         movie_id = {res.id}
-         class_key = {key_mapping}
-         genres = {genres_array}
-        />
+        <SwiperSlide     key = {res.id}>
+          <Item
+           image = {res.backdrop_path}
+           movie_id = {res.id}
+           class_key = {key_mapping}
+           genres = {genres_array}
+          />
+        </SwiperSlide>
+
        )
   });
 
   function swipe_right() {
-    document.getElementById("next").click();
+    document.getElementsByClassName("swiper-button-next")[0].click();
 
     document.getElementsByClassName("left_btn")[0].style.display = "flex"
     document.getElementsByClassName("left_btn")[0].style.left = "0"
     document.getElementsByClassName("image_carousel_container")[0].style.marginLeft = "0"
   }
   function swipe_left() {
-    document.getElementById("prev").click();
+    document.getElementsByClassName("swiper-button-prev")[0].click();
 
-    const mq = window.matchMedia("(max-width: 551px)");
-    if (mq.matches) {
-      document.getElementsByClassName("left_btn")[0].style.left = "20px"
-      document.getElementsByClassName("image_carousel_container")[0].style.marginLeft = "20px"
-    }
-    else{
-      document.getElementsByClassName("left_btn")[0].style.left = "60px"
-      document.getElementsByClassName("image_carousel_container")[0].style.marginLeft = "60px"
-    }
+    // const mq = window.matchMedia("(max-width: 551px)");
+    // if (mq.matches) {
+    //   document.getElementsByClassName("left_btn")[0].style.left = "20px"
+    //   document.getElementsByClassName("image_carousel_container")[0].style.marginLeft = "20px"
+    // }
+    // else{
+    //   document.getElementsByClassName("left_btn")[0].style.left = "60px"
+    //   document.getElementsByClassName("image_carousel_container")[0].style.marginLeft = "60px"
+    // }
   }
 
   function hover_swipe(classkey,img_icon){
@@ -106,9 +116,20 @@ export default function MyList() {
             >
                 <KeyboardArrowRightIcon id="image_swipe_icon_right"/>
             </div>
-            <Carousel>
+
+            {/* Carousel Using React Swiper */}
+            <Swiper
+              slidesPerView={7}
+              slidesPerGroupSkip = {1}
+              spaceBetween={170}
+              loop={true}
+              navigation={true}
+              modules={[Navigation]}
+              className="mySwiper"
+            >
                 {myList_mapping}
-            </Carousel> 
+            </Swiper>
+
         </div>
 
     </div>

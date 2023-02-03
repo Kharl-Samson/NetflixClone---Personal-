@@ -2,11 +2,11 @@ import React from 'react';
 
 export default function Item(props) {
   function hover_this_item(){
-    document.getElementById("each_image"+props.class_key).style.height = "250px"
+    // document.getElementById("each_image"+props.class_key).style.height = "250px"
   }
 
   function out_hover_this_item(){
-    document.getElementById("each_image"+props.class_key).style.height = "150px"
+    // document.getElementById("each_image"+props.class_key).style.height = "150px"
   }
 
 
