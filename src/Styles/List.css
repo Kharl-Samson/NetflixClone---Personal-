@@ -12,15 +12,16 @@
 }
 .list_container .image_carousel_container{
     margin-top: 15px;
-    min-height: 150px;
+    min-height: 160px;
     width: auto;
     transition: .2s;
 }
 .mySwiper{
     width:  100%;
+    height: auto !important;
 }
 .eachSwiper{
-    height: 150px !important;
+    min-height: 160px !important;
     width: 280px !important;
     margin-right: 10px !important;
 }
@@ -28,28 +29,29 @@
     margin-right: 0 !important;
 }
 .list_container .image_carousel_container .each_image{
-    height: 150px;
-    width: 280px;
-    background-color: black;
+    height: 160px;
+    width: 100%;
+    background-color: #181818;
     border-radius: 5px;
+    overflow: hidden;
     cursor: pointer;
-    transition: .4s;
+    transition: .2s;
+    z-index: 0;
 }
 .list_container .image_carousel_container .each_image:last-of-type{
     position: relative;
     margin-right: 0;
 }
 .list_container .image_carousel_container .each_image .movie_cover{
-    width: 280px;
-    height: 150px;
-    border-radius: 5px;
-    transition: .5s;
+    width: 100%;
+    height: 160px;
+    transition: .2s;
 }
 .list_container .image_carousel_container .left_btn,
 .list_container .image_carousel_container .right_btn{
     cursor: pointer;
     position: absolute;
-    height: 150px;
+    height: 160px;
     width: 60px;
     background-color: rgba(0, 0, 0, 0.411);
     z-index: 2;
@@ -86,8 +88,100 @@
 }
 
 
-/* test */
+/* Hover Container */
+.each_image .btn_configuration{
+    width: 90%;
+    height: 42px;
+    margin: 0 auto;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+.each_image .btn_configuration .side{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.each_image .btn_configuration .side .circle{
+    height: 38px;
+    width: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .4s;
+}
+.each_image .btn_configuration .side .circle:hover{
+    cursor: pointer;
+    opacity: 70%;
+}
+.each_image .btn_configuration .side .circle .circle_icon{
+    height: 22px;
+    width: auto;
+}
+.each_image .btn_configuration .side .circle:nth-child(1){
+    border: 2px solid #ffff;
+    background-color: #ffff;
+}
+.each_image .btn_configuration .side .circle:nth-child(2){
+    border: 2px solid #5c5c5c;
+    background-color: #232323;
+}
+.each_image .btn_configuration .side .circle:nth-child(2):hover{
+    border: 2px solid #ffff;
+}
 
+.each_image .btn_configuration .side .circle_other{
+    height: 38px;
+    width: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .4s;
+    border: 2px solid #5c5c5c;
+    background-color: #232323;
+}
+.each_image .btn_configuration .side .circle_other .circle_icon{
+    height: auto;
+    width: 20px;
+}
+.each_image .btn_configuration .side .circle_other:hover{
+    border: 2px solid #ffff;
+    opacity: 70%;
+}
+.each_image .title_part{
+    width: 90%;
+    margin: 0% auto;
+    margin-top: 15px;
+    color: #ffff;
+    font-size: 1.3rem;
+    font-family: netflix_medium,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+}
+.each_image .section_part{
+    width: 90%;
+    margin: 0% auto;
+    margin-top: 10px;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: netflix_regular,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+    font-size: 1rem;
+    color:#616161;
+}
+.each_image .section_part p{
+    transition: 1s;
+}
+.each_image .section_part p b{
+    color:#616161;
+}
+.each_image .section_part p:first-child b:first-child{
+    display: none;
+}
 
 /* Responsive */
 @media screen and (max-width: 861px) {

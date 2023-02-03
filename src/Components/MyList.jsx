@@ -12,12 +12,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 // modules styles
 import "swiper/css";
-import "swiper/css/free-mode";
 import "swiper/css/navigation";
-import "swiper/css/pagination";
 
 // import required modules
-import { Pagination, Navigation ,FreeMode} from "swiper";
+import {Navigation} from "swiper";
 
 export default function MyList() {
 
@@ -61,10 +59,11 @@ export default function MyList() {
            movie_id = {res.id}
            class_key = {key_mapping}
            genres = {genres_array}
+           title = {res.title}
+           name = {res.name}
           />
         </SwiperSlide>
-
-       )
+      )
   });
 
   function swipe_right() {
@@ -76,16 +75,6 @@ export default function MyList() {
   }
   function swipe_left() {
     document.getElementsByClassName("swiper-button-prev")[0].click();
-
-    // const mq = window.matchMedia("(max-width: 551px)");
-    // if (mq.matches) {
-    //   document.getElementsByClassName("left_btn")[0].style.left = "20px"
-    //   document.getElementsByClassName("image_carousel_container")[0].style.marginLeft = "20px"
-    // }
-    // else{
-    //   document.getElementsByClassName("left_btn")[0].style.left = "60px"
-    //   document.getElementsByClassName("image_carousel_container")[0].style.marginLeft = "60px"
-    // }
   }
 
   function hover_swipe(classkey,img_icon){
