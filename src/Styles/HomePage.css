@@ -195,9 +195,7 @@
 
     /* Movie play button and age restrictions  */
     .age_play{ 
-        height: 50px; 
-        bottom: 0;
-        top: 30vh;
+        bottom: 65vh;
     }
 }
 @media screen and (max-width: 631px) {
@@ -208,33 +206,42 @@
     .Primary_Details .description{
         max-width: 320px;
     }
+    .age_play{ 
+        bottom: 62vh;
+    }
 }
 @media screen and (max-width: 601px) {
     .HomePage .TrailerVideo_container video{
         width: 200%;
     }
-
+    .age_play{ 
+        bottom: 60vh;
+    }
     .age_play .age_restriction{
         width: 70px;
     } 
 }
 @media screen and (max-width: 551px) {
     .HomePage{
-        height: 50vh;
+        height: 60vh;
     }
     /* Cover Photo */
     .HomePage .CoverPhoto_container{
-        height: 50vh;
+        height: 60vh;
     }
     .HomePage .TrailerVideo_container video{
-        width: 250%;
+        width: 300%;
     }
     /* Primary Details */
     .Primary_Details{
         left: 20px;
+        bottom: 53vh;
     }
     .Primary_Details .description{
         margin-top: 10px;
+    }
+    .age_play{ 
+        bottom: 57vh;
     }
 }
 @media screen and (max-width: 471px) {
@@ -243,7 +250,9 @@
         font-size: 1rem;
         transition: .4s;
     }
-
+    .age_play{ 
+        bottom: 55vh;
+    }
     .age_play .controls{
         height: 35px;
         width: 35px;
@@ -267,7 +276,9 @@
     .age_play{    
         height: auto;
         flex-direction: column;
-        top: 25vh;
+        justify-content: flex-end;
+        bottom: 55vh;
+        top: 0;
     }
 }
 @media screen and (max-width: 401px) {

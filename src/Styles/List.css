@@ -101,6 +101,9 @@
     }
 }
 @media screen and (max-width: 551px) {
+    .list_container{
+        bottom: 10vh;
+    }
     .for_margin_left{
         margin-left: 20px;
     }
