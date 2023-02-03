@@ -16,6 +16,17 @@
     width: auto;
     transition: .2s;
 }
+.mySwiper{
+    width:  100%;
+}
+.eachSwiper{
+    height: 150px !important;
+    width: 280px !important;
+    margin-right: 10px !important;
+}
+.eachSwiper:last-of-type{
+    margin-right: 0 !important;
+}
 .list_container .image_carousel_container .each_image{
     height: 150px;
     width: 280px;
@@ -71,6 +82,7 @@
 .swiper-button-next{
     opacity: 0 !important;
     z-index: -99 !important;
+    pointer-events: none !important;
 }
 
 

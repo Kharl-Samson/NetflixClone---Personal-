@@ -55,7 +55,7 @@ export default function MyList() {
           }
       });
       return (
-        <SwiperSlide     key = {res.id}>
+        <SwiperSlide key = {res.id} className="eachSwiper">
           <Item
            image = {res.backdrop_path}
            movie_id = {res.id}
@@ -119,9 +119,9 @@ export default function MyList() {
 
             {/* Carousel Using React Swiper */}
             <Swiper
+              mousewheel={true}
               slidesPerView={7}
-              slidesPerGroupSkip = {1}
-              spaceBetween={170}
+              grabCursor={false}
               loop={true}
               navigation={true}
               modules={[Navigation]}
