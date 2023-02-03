@@ -23,6 +23,12 @@ const LightTooltip = styled(({ className, ...props }) => (
 
 export default function Item(props) {
   function hover_this_item(){
+    document.getElementById("movie_id").value = props.movie_id
+    document.getElementById("name_key").value = props.title === undefined ? props.name : props.title
+    document.getElementById("genre_key").value = props.genres
+    document.getElementById("date_key").value = props.date === undefined ? props.first_air_date : props.date
+    document.getElementById("overview_key").value = props.overview
+
     if (window.innerWidth > 821) {
       props.class_key !== 0 ? document.getElementById("each_image"+props.class_key).style.marginLeft = "-55px" : ""
       document.getElementById("each_image"+props.class_key).style.height = "auto"
@@ -40,6 +46,11 @@ export default function Item(props) {
   }
 
   function out_hover_this_item(){
+    document.getElementById("movie_id").value = null
+    document.getElementById("name_key").value = null
+    document.getElementById("genre_key").value = null
+    document.getElementById("date_key").value = null
+    document.getElementById("overview_key").value = null
     if (window.innerWidth > 821) {
     props.class_key !== 0 ? document.getElementById("each_image"+props.class_key).style.marginLeft = "0" : ""
       document.getElementById("each_image"+props.class_key).style.height = "160px"
@@ -52,7 +63,7 @@ export default function Item(props) {
   }
 
   return (
-    <div className="each_image" id={"each_image"+props.class_key} onMouseOver={hover_this_item} onMouseOut={out_hover_this_item}>
+    <div className="each_image" id={"each_image"+props.class_key} onMouseOver={hover_this_item} onMouseOut={out_hover_this_item} onClick={props.click_funtion}>
       <img src={"https://image.tmdb.org/t/p/original/"+props.image} id={"movie_cover"+props.class_key}  alt="Movie Cover" className='movie_cover'/>
       
       <div className='btn_configuration'>
@@ -87,6 +98,7 @@ export default function Item(props) {
           })
         }
       </div>
+
     </div>
 
   )

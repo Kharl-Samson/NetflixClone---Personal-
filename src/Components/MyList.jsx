@@ -7,6 +7,9 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import Item from './Item';
 
+// From Mui
+import CloseIcon from '@mui/icons-material/Close';
+
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -16,6 +19,9 @@ import "swiper/css/navigation";
 
 // import required modules
 import {Navigation} from "swiper";
+
+// From React-youtube
+import YouTube from 'react-youtube';
 
 export default function MyList() {
 
@@ -61,6 +67,10 @@ export default function MyList() {
            genres = {genres_array}
            title = {res.title}
            name = {res.name}
+           date = {res.release_date}
+           first_air_date = {res.first_air_date}
+           overview = {res.overview}
+           click_funtion = {show_info}
           />
         </SwiperSlide>
       )
@@ -84,6 +94,72 @@ export default function MyList() {
   function out_hover_swipe(classkey,img_icon){
     document.getElementsByClassName(classkey)[0].style.opacity = "0%"
     document.getElementById(img_icon).style.fontSize = "40px"
+  }
+
+  // Youtube player functions 
+  const [trailerId, setTrailerId] = useState("");
+  var MOVIE_ID = ""
+  function show_info(){
+    playVideo()
+
+    var title = document.getElementById("name_key").value
+    var genre = document.getElementById("genre_key").value
+    var date = document.getElementById("date_key").value
+    var overview = document.getElementById("overview_key").value
+
+    document.getElementById("modal_movie_title").textContent = title
+    genre = genre.replace(/,/g, " ● ");
+    document.getElementById("modal_movie_genre").textContent = genre
+    document.getElementById("modal_movie_date").textContent = date
+    document.getElementById("modal_movie_overview").textContent = overview
+ 
+    MOVIE_ID = document.getElementById("movie_id").value;
+    document.getElementById("youtube_modal").style.display = "flex"
+    loadTrailer();
+  }
+  function close_info(){
+    stopVideo()
+    document.getElementById("youtube_modal").style.display = "none"
+  }
+
+  const loadTrailer = async () => {
+    const res = await axios.get(`${API_BASE_URL}/movie/${MOVIE_ID}/videos?api_key=${API_KEY}`);
+    for(var i = 0 ; i < res.data.results.length ; i++){
+      if (res.data.results[i].name.toUpperCase().indexOf('OFFICIAL TRAILER') > -1)
+      {
+        setTrailerId(res.data.results[i].key);
+        break;
+      }
+      else{
+        setTrailerId(null);
+      }
+    }
+  };
+
+  const opts = {
+    playerVars: {
+      autoplay: 1,
+    },
+  };
+
+  const [player, setPlayer] = useState(null);
+  const onReady = (event) => {
+    setPlayer(event.target);
+  };
+  const stopVideo = () => {
+    player.stopVideo();
+  };
+
+  const playVideo = () => {
+    player.playVideo();
+  };
+
+
+  // Close all modals 
+  window.onclick = function(event) {
+    if (event.target === document.getElementById("youtube_modal")) {
+      close_info()
+    }   
   }
 
   return (
@@ -121,6 +197,36 @@ export default function MyList() {
 
         </div>
 
+    {/* Modal for clicking each_item */}
+    <div className='modal_container' id="youtube_modal">
+      <div className='my_modal'>
+        <div className='close_btn' onClick={close_info}><CloseIcon/></div>
+
+         {/* Testing youtube player */}
+         <YouTube 
+           id="youtube_player"
+           videoId={trailerId} 
+           opts={opts}
+           onReady={onReady}
+         />
+
+         <div className='details_container'>
+            <p className='title' id="modal_movie_title">N/A</p>
+            <p className='genres' id="modal_movie_genre">N/A</p>
+            <p className='date'><span>Release Date : </span> <span id="modal_movie_date">N/A</span></p>
+            <p className='overview' id="modal_movie_overview">N/A</p>
+         </div>
+
+      </div>
+    </div>
+
+    {/* Movie Id Key Value */}
+    <input type="hidden" id="movie_id"/>
+    <input type="hidden" id="name_key"/>
+    <input type="hidden" id="genre_key"/>
+    <input type="hidden" id="date_key"/>
+    <input type="hidden" id="overview_key"/>
+    
     </div>
   )
 }
