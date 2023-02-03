@@ -52,13 +52,20 @@ export default function Item(props) {
     document.getElementById("date_key").value = null
     document.getElementById("overview_key").value = null
     if (window.innerWidth > 821) {
-    props.class_key !== 0 ? document.getElementById("each_image"+props.class_key).style.marginLeft = "0" : ""
+      props.class_key !== 0 ? document.getElementById("each_image"+props.class_key).style.marginLeft = "0" : ""
       document.getElementById("each_image"+props.class_key).style.height = "160px"
       document.getElementById("each_image"+props.class_key).style.width = "100%"
       document.getElementById("each_image"+props.class_key).style.zIndex = "0"
       document.getElementById("each_image"+props.class_key).style.boxShadow = "none"
 
       document.getElementById("movie_cover"+props.class_key).style.height = "160px"
+    }
+  }
+
+
+  if (window.innerWidth < 551) {
+    for (var x = 0 ; x < document.getElementsByClassName("each_image").length ; x++){
+      document.getElementsByClassName("each_image")[x].style.pointerEvents = "none"
     }
   }
 

@@ -132,14 +132,6 @@ export default function HomePage() {
     }
   }
 
-  function separate_unmute(){
-    document.getElementById("trailer_video").muted = false
-    document.getElementById("unmute_icon").style.display = "none"
-    document.getElementById("replay_icon").style.display = "none"
-    document.getElementById("mute_icon").style.display = "block"
-    trailer_ctr = 2
-  }
-
   return (
     <div className='HomePage'>
 
@@ -150,7 +142,7 @@ export default function HomePage() {
 
         {/* For Trailer Video */}
         <div className='TrailerVideo_container'>
-            <video src={trailer_video_array[random_Number]} id="trailer_video" muted onClick={separate_unmute}/>
+            <video src={trailer_video_array[random_Number]} id="trailer_video" muted/>
         </div>
 
         {/* Movie Primary Details */}

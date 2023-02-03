@@ -1,4 +1,5 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import VideoModal from './VideoModal';
 import axios from 'axios';
 import "../Styles/List.css";
 
@@ -7,8 +8,8 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import Item from './Item';
 
-// From Mui
-import CloseIcon from '@mui/icons-material/Close';
+// From Moment
+import moment from 'moment';
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -19,9 +20,6 @@ import "swiper/css/navigation";
 
 // import required modules
 import {Navigation} from "swiper";
-
-// From React-youtube
-import YouTube from 'react-youtube';
 
 export default function MyList() {
 
@@ -100,7 +98,8 @@ export default function MyList() {
   const [trailerId, setTrailerId] = useState("");
   var MOVIE_ID = ""
   function show_info(){
-    playVideo()
+    document.getElementById("youtube_modal").style.display = "flex"
+    document.getElementById("progress_bar").style.display = "flex"
 
     var title = document.getElementById("name_key").value
     var genre = document.getElementById("genre_key").value
@@ -110,16 +109,24 @@ export default function MyList() {
     document.getElementById("modal_movie_title").textContent = title
     genre = genre.replace(/,/g, " ● ");
     document.getElementById("modal_movie_genre").textContent = genre
-    document.getElementById("modal_movie_date").textContent = date
+    var dateFormat =  moment(date).format('LL');
+    document.getElementById("modal_movie_date").textContent = dateFormat
     document.getElementById("modal_movie_overview").textContent = overview
- 
+
     MOVIE_ID = document.getElementById("movie_id").value;
-    document.getElementById("youtube_modal").style.display = "flex"
-    loadTrailer();
+    setTimeout(function () {
+      document.getElementById("progress_bar").style.display = "none"
+      document.getElementById("my_modal").style.display = "block"
+      loadTrailer();
+      playVideo()
+    }, 700);
   }
   function close_info(){
     stopVideo()
+    setTrailerId(null);
     document.getElementById("youtube_modal").style.display = "none"
+    document.getElementById("progress_bar").style.display = "block"
+    document.getElementById("my_modal").style.display = "none"
   }
 
   const loadTrailer = async () => {
@@ -136,12 +143,7 @@ export default function MyList() {
     }
   };
 
-  const opts = {
-    playerVars: {
-      autoplay: 1,
-    },
-  };
-
+  // Youtube Video Configuration
   const [player, setPlayer] = useState(null);
   const onReady = (event) => {
     setPlayer(event.target);
@@ -149,11 +151,9 @@ export default function MyList() {
   const stopVideo = () => {
     player.stopVideo();
   };
-
   const playVideo = () => {
     player.playVideo();
   };
-
 
   // Close all modals 
   window.onclick = function(event) {
@@ -165,7 +165,6 @@ export default function MyList() {
   return (
     <div className='list_container'>
         <p className='title for_margin_left'>Trending Now</p>
-
         <div className='image_carousel_container for_margin_left'>
             <div className='left_btn' 
                 onClick={swipe_left}  
@@ -194,31 +193,14 @@ export default function MyList() {
             >
                 {myList_mapping}
             </Swiper>
-
         </div>
 
     {/* Modal for clicking each_item */}
-    <div className='modal_container' id="youtube_modal">
-      <div className='my_modal'>
-        <div className='close_btn' onClick={close_info}><CloseIcon/></div>
-
-         {/* Testing youtube player */}
-         <YouTube 
-           id="youtube_player"
-           videoId={trailerId} 
-           opts={opts}
-           onReady={onReady}
-         />
-
-         <div className='details_container'>
-            <p className='title' id="modal_movie_title">N/A</p>
-            <p className='genres' id="modal_movie_genre">N/A</p>
-            <p className='date'><span>Release Date : </span> <span id="modal_movie_date">N/A</span></p>
-            <p className='overview' id="modal_movie_overview">N/A</p>
-         </div>
-
-      </div>
-    </div>
+    <VideoModal
+      close_info = {close_info}
+      trailerId = {trailerId}
+      onReady = {onReady}
+    />
 
     {/* Movie Id Key Value */}
     <input type="hidden" id="movie_id"/>

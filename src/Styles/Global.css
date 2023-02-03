@@ -92,13 +92,14 @@ nav .right .avatar{
 }
 .modal_container .my_modal{
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    border-radius: 7px;
+    border-radius: 10px;
     width: 49%;
     max-width: 937px;
     padding-bottom: 30px;
     height: auto;
     background-color: #181818;
     overflow: hidden;
+    display: none;
 }
 .modal_container .my_modal .close_btn{
     height: 40px;
@@ -159,7 +160,27 @@ nav .right .avatar{
 }
 
 /*RESPONSIVE*/
+@media screen and (max-width: 1301px) {
+    .modal_container .my_modal{
+        width: 55%;
+    }
+}
+@media screen and (max-width: 1101px) {
+    .modal_container .my_modal{
+        width: 60%;
+    }
+    #youtube_player{
+        height: 370px;
+    }
+}
 @media screen and (max-width: 884px) {
+    .modal_container .my_modal{
+        width: 80%;
+    }
+    #youtube_player{
+        height: 350px;
+    }
+
     nav .left .nav_links .links{
         display: none;
     }
