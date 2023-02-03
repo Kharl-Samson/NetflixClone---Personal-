@@ -81,7 +81,8 @@ nav .right .avatar{
 /* Modal Container */
 .modal_container{
     position: fixed;
-    inset: 0;
+    top: 0;
+    left: 0;
     height: 100vh;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.555);
@@ -100,6 +101,28 @@ nav .right .avatar{
     background-color: #181818;
     overflow: hidden;
     display: none;
+    -webkit-animation: scale-up-center 0.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) ;
+	animation: scale-up-center 0.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) ;
+}
+@-webkit-keyframes scale-up-center {
+    0% {
+      -webkit-transform: scale(0.5);
+              transform: scale(0.5);
+    }
+    100% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+  }
+  @keyframes scale-up-center {
+    0% {
+      -webkit-transform: scale(0.5);
+              transform: scale(0.5);
+    }
+    100% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
 }
 .modal_container .my_modal .close_btn{
     height: 40px;
@@ -160,9 +183,34 @@ nav .right .avatar{
 }
 
 /*RESPONSIVE*/
-@media screen and (max-width: 1301px) {
+@media screen and (max-width: 1441px) {
+    #youtube_player{
+        height: 370px;
+    }
+}
+@media screen and (max-width: 1367px) {
     .modal_container .my_modal{
-        width: 55%;
+        width: 45%;
+    }
+    #youtube_player{
+        height: 300px;
+    }
+}
+@media screen and (max-width: 1177px) {
+    .modal_container .my_modal{
+        width: 50%;
+    }
+    .modal_container .my_modal .details_container .title{
+        font-size: 1.4rem;
+    }
+    .modal_container .my_modal .details_container .date{
+        font-size: 1.1rem;
+    }
+    .modal_container .my_modal .details_container .genres{
+        font-size: .9rem;
+    }
+    .modal_container .my_modal .details_container .overview{
+        font-size: .9rem;
     }
 }
 @media screen and (max-width: 1101px) {
@@ -218,6 +266,27 @@ nav .right .avatar{
     .mui_links_active{
         color: #ffff;
         font-family: netflix_medium,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+    }
+}
+@media screen and (max-width: 800px) {
+    .modal_container .my_modal{
+        width: 70%;
+        padding-bottom: 10px;
+    }
+    #youtube_player{
+        height: 200px;
+    }
+    .modal_container .my_modal .details_container .title{
+        font-size: .9rem;
+    }
+    .modal_container .my_modal .details_container .date{
+        font-size: .9rem;
+    }
+    .modal_container .my_modal .details_container .genres{
+        font-size: .9rem;
+    }
+    .modal_container .my_modal .details_container .overview{
+        font-size: .9rem;
     }
 }
 @media screen and (max-width: 551px) {

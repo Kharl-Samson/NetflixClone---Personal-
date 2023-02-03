@@ -5,6 +5,12 @@
     bottom: 14vh;
     position: relative;
 }
+.Trending_now_container,
+.tvShows_now_container,
+.topRated_now_container
+{
+    margin-top: 220px;
+}
 .list_container .title{
     font-size: 1.7rem;
     font-family: netflix_medium,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;

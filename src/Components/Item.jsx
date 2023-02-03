@@ -23,14 +23,15 @@ const LightTooltip = styled(({ className, ...props }) => (
 
 export default function Item(props) {
   function hover_this_item(){
-    document.getElementById("movie_id").value = props.movie_id
-    document.getElementById("name_key").value = props.title === undefined ? props.name : props.title
-    document.getElementById("genre_key").value = props.genres
-    document.getElementById("date_key").value = props.date === undefined ? props.first_air_date : props.date
-    document.getElementById("overview_key").value = props.overview
+    document.getElementById(props.mv_id).value = props.movie_id
+    document.getElementById(props.nm_id).value = props.title === undefined ? props.name : props.title
+    document.getElementById(props.gr_id).value = props.genres
+    document.getElementById(props.dk_id).value = props.date === undefined ? props.first_air_date : props.date
+    document.getElementById(props.ov_id).value = props.overview
 
     if (window.innerWidth > 821) {
-      props.class_key !== 0 ? document.getElementById("each_image"+props.class_key).style.marginLeft = "-55px" : ""
+      document.getElementById(props.index_id).style.zIndex = "2"
+      props.class_count !== 0 ? document.getElementById("each_image"+props.class_key).style.marginLeft = "-55px" : ""
       document.getElementById("each_image"+props.class_key).style.height = "auto"
       document.getElementById("each_image"+props.class_key).style.width = "400px"
       document.getElementById("each_image"+props.class_key).style.zIndex = "1"
@@ -46,13 +47,15 @@ export default function Item(props) {
   }
 
   function out_hover_this_item(){
-    document.getElementById("movie_id").value = null
-    document.getElementById("name_key").value = null
-    document.getElementById("genre_key").value = null
-    document.getElementById("date_key").value = null
-    document.getElementById("overview_key").value = null
+    document.getElementById(props.mv_id).value = null
+    document.getElementById(props.nm_id).value = null
+    document.getElementById(props.gr_id).value = null
+    document.getElementById(props.dk_id).value = null
+    document.getElementById(props.ov_id).value = null
+
     if (window.innerWidth > 821) {
-      props.class_key !== 0 ? document.getElementById("each_image"+props.class_key).style.marginLeft = "0" : ""
+      document.getElementById(props.index_id).style.zIndex = "1"
+      props.class_count !== 0 ? document.getElementById("each_image"+props.class_key).style.marginLeft = "0" : ""
       document.getElementById("each_image"+props.class_key).style.height = "160px"
       document.getElementById("each_image"+props.class_key).style.width = "100%"
       document.getElementById("each_image"+props.class_key).style.zIndex = "0"
@@ -63,11 +66,11 @@ export default function Item(props) {
   }
 
 
-  if (window.innerWidth < 551) {
-    for (var x = 0 ; x < document.getElementsByClassName("each_image").length ; x++){
-      document.getElementsByClassName("each_image")[x].style.pointerEvents = "none"
-    }
-  }
+  // if (window.innerWidth < 551) {
+  //   for (var x = 0 ; x < document.getElementsByClassName("each_image").length ; x++){
+  //     document.getElementsByClassName("each_image")[x].style.pointerEvents = "none"
+  //   }
+  // }
 
   return (
     <div className="each_image" id={"each_image"+props.class_key} onMouseOver={hover_this_item} onMouseOut={out_hover_this_item} onClick={props.click_funtion}>

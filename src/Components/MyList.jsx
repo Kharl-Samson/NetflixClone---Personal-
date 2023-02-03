@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import VideoModal from './VideoModal';
 import axios from 'axios';
 import "../Styles/List.css";
 
@@ -20,6 +19,7 @@ import "swiper/css/navigation";
 
 // import required modules
 import {Navigation} from "swiper";
+import VideoModal_List from './VideoModals/VideoModal_List';
 
 export default function MyList() {
 
@@ -37,7 +37,7 @@ export default function MyList() {
   // Hook for getting all Trending Now
   const [trending, setTrending] = useState([]);
   const loadTrending = async () => {
-    const res = await axios.get(`${API_BASE_URL}/trending/all/day?api_key=${API_KEY}`);
+    const res = await axios.get(`${API_BASE_URL}/movie/popular?api_key=${API_KEY}`);
     setTrending(res.data.results);
   };
 
@@ -61,7 +61,8 @@ export default function MyList() {
           <Item
            image = {res.backdrop_path}
            movie_id = {res.id}
-           class_key = {key_mapping}
+           class_count = {key_mapping}
+           class_key = {"list"+key_mapping}
            genres = {genres_array}
            title = {res.title}
            name = {res.name}
@@ -69,6 +70,12 @@ export default function MyList() {
            first_air_date = {res.first_air_date}
            overview = {res.overview}
            click_funtion = {show_info}
+           index_id = {"list_container"}
+           mv_id = {"movie_id_List"}
+           nm_id = {"name_key_List"}
+           gr_id = {"genre_key_List"}
+           dk_id = {"date_key_List"}
+           ov_id = {"overview_key_List"}
           />
         </SwiperSlide>
       )
@@ -98,13 +105,17 @@ export default function MyList() {
   const [trailerId, setTrailerId] = useState("");
   var MOVIE_ID = ""
   function show_info(){
+    for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
+      document.getElementsByClassName("list_container")[x].style.zIndex = "-1"
+    }
+    
     document.getElementById("youtube_modal").style.display = "flex"
     document.getElementById("progress_bar").style.display = "flex"
 
-    var title = document.getElementById("name_key").value
-    var genre = document.getElementById("genre_key").value
-    var date = document.getElementById("date_key").value
-    var overview = document.getElementById("overview_key").value
+    var title = document.getElementById("name_key_List").value
+    var genre = document.getElementById("genre_key_List").value
+    var date = document.getElementById("date_key_List").value
+    var overview = document.getElementById("overview_key_List").value
 
     document.getElementById("modal_movie_title").textContent = title
     genre = genre.replace(/,/g, " ● ");
@@ -113,7 +124,7 @@ export default function MyList() {
     document.getElementById("modal_movie_date").textContent = dateFormat
     document.getElementById("modal_movie_overview").textContent = overview
 
-    MOVIE_ID = document.getElementById("movie_id").value;
+    MOVIE_ID = document.getElementById("movie_id_List").value;
     setTimeout(function () {
       document.getElementById("progress_bar").style.display = "none"
       document.getElementById("my_modal").style.display = "block"
@@ -122,6 +133,9 @@ export default function MyList() {
     }, 700);
   }
   function close_info(){
+    for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
+      document.getElementsByClassName("list_container")[x].style.zIndex = "1"
+    }
     stopVideo()
     setTrailerId(null);
     document.getElementById("youtube_modal").style.display = "none"
@@ -163,8 +177,8 @@ export default function MyList() {
   }
 
   return (
-    <div className='list_container'>
-        <p className='title for_margin_left'>Trending Now</p>
+    <div className='list_container' id="list_container">
+        <p className='title for_margin_left'>My List</p>
         <div className='image_carousel_container for_margin_left'>
             <div className='left_btn' 
                 onClick={swipe_left}  
@@ -196,18 +210,18 @@ export default function MyList() {
         </div>
 
     {/* Modal for clicking each_item */}
-    <VideoModal
+    <VideoModal_List
       close_info = {close_info}
       trailerId = {trailerId}
       onReady = {onReady}
     />
 
     {/* Movie Id Key Value */}
-    <input type="hidden" id="movie_id"/>
-    <input type="hidden" id="name_key"/>
-    <input type="hidden" id="genre_key"/>
-    <input type="hidden" id="date_key"/>
-    <input type="hidden" id="overview_key"/>
+    <input type="hidden" id="movie_id_List"/>
+    <input type="hidden" id="name_key_List"/>
+    <input type="hidden" id="genre_key_List"/>
+    <input type="hidden" id="date_key_List"/>
+    <input type="hidden" id="overview_key_List"/>
     
     </div>
   )
