@@ -35,10 +35,12 @@ export default function Susepenseful() {
     setGenres(res.data.genres);
   };
   
+  // Generates Random Number from 1 - 20   
+  var random_keySus =  Math.floor(Math.random() * 20) + 1;
   // Hook for getting all suspenseful Now
   const [suspenseful, setsuspenseful] = useState([]);
   const loadsuspenseful = async () => {
-    const res = await axios.get(`${API_BASE_URL}/tv/popular?api_key=${API_KEY}&language=en-US&page=4`);
+    const res = await axios.get(`${API_BASE_URL}/tv/popular?api_key=${API_KEY}&language=en-US&page=${random_keySus}`);
     setsuspenseful(res.data.results);
   };
 

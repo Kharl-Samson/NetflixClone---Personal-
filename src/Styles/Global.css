@@ -55,6 +55,7 @@ nav .left .nav_links .links{
     font-size: .86rem;
     color: rgb(216, 215, 215);
     transition: .4s;
+    text-decoration: none;
 }
 nav .left .nav_links .active{
     font-family: netflix_regular,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
@@ -183,9 +184,77 @@ nav .right .avatar{
     font-family: netflix_light,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
 }
 
+
+/* Footer */
+.footer_container{
+    margin-top: 250px;
+    width: 100%;
+    height: auto;
+    background-color: rgb(22, 22, 22); 
+    padding: 70px 0;
+    overflow: hidden;
+}
+.footer_container .top{
+    margin: 0% auto;
+    max-width: 75%;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.footer_container .logo img{
+    max-width: 130px;
+}
+.footer_container .info .info_content{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.footer_container .info .info_content p{
+    font-family: netflix_light,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+    font-size: .9rem;
+    max-width: 400px;
+    color: #979797;
+    text-align: center;
+}
+.footer_container .footer .footer_nav{
+    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 20px;
+    border-bottom: 2px solid #979797;
+    padding: 10px 20px;
+}
+.footer_container .footer .footer_nav a{
+    text-decoration: none;
+    color: #ffff;
+    font-size: 1rem;
+    font-family: netflix_light,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+}
+.footer_container .footer .footer_nav a:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+.footer_container .footer p{
+    margin-top: 5px;
+    color: #979797;
+    font-size: 1rem;
+    font-family: netflix_light,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+    text-align: center;
+}
+
+
+
 /*RESPONSIVE*/
 @media screen and (max-width: 1441px) {
     #youtube_player{
+        height: 370px;
+    }
+    .modal_container .my_modal .movie_banners{
+        margin-top: -375px;
         height: 370px;
     }
 }
@@ -195,6 +264,15 @@ nav .right .avatar{
     }
     #youtube_player{
         height: 300px;
+    }
+    .modal_container .my_modal .movie_banners{
+        margin-top: -305px;
+        height: 300px;
+    }
+}
+@media screen and (max-width: 1201px) {
+    .footer_container .contact_content{
+        width: 90%;
     }
 }
 @media screen and (max-width: 1177px) {
@@ -221,12 +299,24 @@ nav .right .avatar{
     #youtube_player{
         height: 370px;
     }
+    .modal_container .my_modal .movie_banners{
+        margin-top: -375px;
+        height: 370px;
+    }
+
+    .footer_container .top{
+        max-width: 90%;
+    }
 }
 @media screen and (max-width: 884px) {
     .modal_container .my_modal{
         width: 80%;
     }
     #youtube_player{
+        height: 350px;
+    }
+    .modal_container .my_modal .movie_banners{
+        margin-top: -355px;
         height: 350px;
     }
 
@@ -262,6 +352,7 @@ nav .right .avatar{
         padding: 0 30px;
         font-family: netflix_light,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
         font-size: .86rem;
+        text-decoration: none;
         color: rgb(216, 215, 215);
     }
     .mui_links_active{
@@ -277,6 +368,11 @@ nav .right .avatar{
     #youtube_player{
         height: 200px;
     }
+    .modal_container .my_modal .movie_banners{
+        margin-top: -205px;
+        height: 200px;
+    }
+
     .modal_container .my_modal .details_container .title{
         font-size: .9rem;
     }
@@ -290,6 +386,13 @@ nav .right .avatar{
         font-size: .9rem;
     }
 }
+@media screen and (max-width: 601px) {
+    .footer_container .bg_content{
+        margin-top: 40px;
+        justify-content: center;
+    }    
+}
+
 @media screen and (max-width: 551px) {
     nav .left{
         margin-left: 20px;

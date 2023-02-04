@@ -40,11 +40,11 @@ export default function Navbar() {
         <img src={Netflix_Logo} alt="Netflix Logo" className='logo' loading="lazy"/>
 
         <div className='nav_links'>
-          <p className='links active'>Home</p>
-          <p className='links'>TV Shows</p>
-          <p className='links'>Movies</p>
-          <p className='links'>New & Popular</p>
-          <p className='links'>My List</p>
+          <a className='links active' href='#HomePage'>Home</a>
+          <a className='links' href='#tvShows_now_container'>TV Shows</a>
+          <a className='links' href='#Movies_now_container'>Movies</a>
+          <a className='links' href='#Popular_now_container'>New & Popular</a>
+          <a className='links' href='#list_container'>My List</a>
 
           {/* For small devices links */}
           <div className='browse_container'  onClick={handleClick}>
@@ -90,19 +90,19 @@ export default function Navbar() {
           >
             <div></div>
             <MenuItem onClick={handleClose}>
-              <p className='mui_links mui_links_active'>Home</p>
+              <a className='mui_links mui_links_active' href='#HomePage'>Home</a>
             </MenuItem>
             <MenuItem onClick={handleClose}>
-              <p className='mui_links'>TV Shows</p>
+              <a className='mui_links' href='#tvShows_now_container'>TV Shows</a>
             </MenuItem>
             <MenuItem onClick={handleClose}>
-              <p className='mui_links'>Movies</p>
+              <a className='mui_links' href='#Movies_now_container'>Movies</a>
             </MenuItem>
             <MenuItem onClick={handleClose}>
-              <p className='mui_links'>New & Popular</p>
+              <a className='mui_links' href='#Popular_now_container'>New & Popular</a>
             </MenuItem>
             <MenuItem onClick={handleClose}>
-              <p className='mui_links'>My List</p>
+              <a className='mui_links' href='#list_container'>My List</a>
             </MenuItem>
             
           </Menu>

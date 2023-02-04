@@ -133,7 +133,7 @@ export default function HomePage() {
   }
 
   return (
-    <div className='HomePage'>
+    <div className='HomePage' id="HomePage">
 
         {/* For Cover Photo */}
         <div className='CoverPhoto_container' id="CoverPhoto_container">

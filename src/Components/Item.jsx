@@ -55,7 +55,6 @@ export default function Item(props) {
     if (window.innerWidth > 821) {
       document.getElementById(props.index_id).style.position = "static"
       document.getElementById(props.index_id).style.zIndex = "1"
-
       document.getElementById("each_image"+props.class_key).style.marginTop = "0px"
 
       props.class_count !== 0 ? document.getElementById("each_image"+props.class_key).style.marginLeft = "0" : ""
@@ -70,7 +69,6 @@ export default function Item(props) {
 
   function set_Movie_Details(){
     document.getElementById(props.mv_id).value = props.movie_id
-    // document.getElementById(props.mv_id).value ="test"
     document.getElementById(props.nm_id).value = props.title === undefined ? props.name : props.title
     document.getElementById(props.gr_id).value = props.genres
     document.getElementById(props.dk_id).value = props.date === undefined ? props.first_air_date : props.date

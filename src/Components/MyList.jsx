@@ -34,10 +34,13 @@ export default function MyList() {
     setGenres(res.data.genres);
   };
   
+
+  // Generates Random Number from 1 - 20   
+  var random_keyList =  Math.floor(Math.random() * 1) + 1;
   // Hook for getting all Trending Now
   const [trending, setTrending] = useState([]);
   const loadTrending = async () => {
-    const res = await axios.get(`${API_BASE_URL}/movie/popular?api_key=${API_KEY}`);
+    const res = await axios.get(`${API_BASE_URL}/movie/popular?api_key=${API_KEY}&language=en-US&page=${random_keyList}`);
     setTrending(res.data.results);
   };
 
@@ -218,11 +221,11 @@ export default function MyList() {
     />
 
     {/* Movie Id Key Value */}
-    <input type="text" id="movie_id_List"/>
-    <input type="text" id="name_key_List"/>
-    <input type="text" id="genre_key_List"/>
-    <input type="text" id="date_key_List"/>
-    <input type="text" id="overview_key_List"/>
+    <input type="hidden" id="movie_id_List"/>
+    <input type="hidden" id="name_key_List"/>
+    <input type="hidden" id="genre_key_List"/>
+    <input type="hidden" id="date_key_List"/>
+    <input type="hidden" id="overview_key_List"/>
     
     </div>
   )

@@ -35,10 +35,12 @@ export default function TvShows() {
     setGenres(res.data.genres);
   };
   
+  // Generates Random Number from 1 - 50   
+  var random_keyTVshows =  Math.floor(Math.random() * 10) + 1;
   // Hook for getting all tvShows Now
   const [tvShows, settvShows] = useState([]);
   const loadtvShows = async () => {
-    const res = await axios.get(`${API_BASE_URL}/tv/top_rated?api_key=${API_KEY}`);
+    const res = await axios.get(`${API_BASE_URL}/tv/top_rated?api_key=${API_KEY}&language=en-US&page=${random_keyTVshows}`);
     settvShows(res.data.results);
   };
 

@@ -35,10 +35,12 @@ export default function TrendingNow() {
     setGenres(res.data.genres);
   };
   
+  // Generates Random Number from 1 - 20   
+  var random_keyTrend =  Math.floor(Math.random() * 5) + 1;
   // Hook for getting all Trending Now
   const [trending, setTrending] = useState([]);
   const loadTrending = async () => {
-    const res = await axios.get(`${API_BASE_URL}/trending/all/day?api_key=${API_KEY}`);
+    const res = await axios.get(`${API_BASE_URL}/trending/all/day?api_key=${API_KEY}&language=en-US&page=${random_keyTrend}`);
     setTrending(res.data.results);
   };
 

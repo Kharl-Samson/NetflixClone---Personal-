@@ -35,10 +35,12 @@ export default function TopRated() {
     setGenres(res.data.genres);
   };
   
+  // Generates Random Number from 1 - 20   
+  var random_keyTopRated =  Math.floor(Math.random() * 50) + 30;
   // Hook for getting all topRated Now
   const [topRated, settopRated] = useState([]);
   const loadtopRated = async () => {
-    const res = await axios.get(`${API_BASE_URL}/movie/top_rated?api_key=${API_KEY}`);
+    const res = await axios.get(`${API_BASE_URL}/movie/top_rated?api_key=${API_KEY}&language=en-US&page=${random_keyTopRated}`);
     settopRated(res.data.results);
   };
 
@@ -81,7 +83,6 @@ export default function TopRated() {
         </SwiperSlide>
       )
   });
-
 
   function swipe_right() {
     document.getElementsByClassName("swiper-button-next")[3].click();

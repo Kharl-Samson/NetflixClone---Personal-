@@ -2,7 +2,6 @@
     height: 40px;
     width: auto;
     z-index: 1;
-    /* position: relative; */
 }
 #list_container{
     margin-top: -137px;
@@ -21,6 +20,7 @@
 }
 .list_container .title{
     font-size: 1.7rem;
+    margin-right: 20px;
     font-family: netflix_medium,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
     color: #ffff;
 }

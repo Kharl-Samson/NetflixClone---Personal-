@@ -14,7 +14,7 @@ import ActionMovies from "./Components/ActionMovies";
 import Fantasy from "./Components/Fantasy";
 
 function App() {
-  
+
   return (
     <div className="App">
       <Navbar/>
