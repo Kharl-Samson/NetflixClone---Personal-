@@ -218,11 +218,11 @@ export default function MyList() {
     />
 
     {/* Movie Id Key Value */}
-    <input type="hidden" id="movie_id_List"/>
-    <input type="hidden" id="name_key_List"/>
-    <input type="hidden" id="genre_key_List"/>
-    <input type="hidden" id="date_key_List"/>
-    <input type="hidden" id="overview_key_List"/>
+    <input type="text" id="movie_id_List"/>
+    <input type="text" id="name_key_List"/>
+    <input type="text" id="genre_key_List"/>
+    <input type="text" id="date_key_List"/>
+    <input type="text" id="overview_key_List"/>
     
     </div>
   )
