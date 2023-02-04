@@ -25,15 +25,6 @@ const LightTooltip = styled(({ className, ...props }) => (
 
 export default function Item(props) {
   function hover_this_item(){
-    console.log("TEST")
-    alert("test")
-    // document.getElementById(props.mv_id).value = props.movie_id
-    document.getElementById(props.mv_id).value ="test"
-    document.getElementById(props.nm_id).value = props.title === undefined ? props.name : props.title
-    document.getElementById(props.gr_id).value = props.genres
-    document.getElementById(props.dk_id).value = props.date === undefined ? props.first_air_date : props.date
-    document.getElementById(props.ov_id).value = props.overview
-
     if (window.innerWidth > 821) {
         document.getElementById(props.index_id).style.position = "relative"
         document.getElementById(props.index_id).style.zIndex = "2"
@@ -77,6 +68,15 @@ export default function Item(props) {
     }
   }
 
+  function set_Movie_Details(){
+    document.getElementById(props.mv_id).value = props.movie_id
+    // document.getElementById(props.mv_id).value ="test"
+    document.getElementById(props.nm_id).value = props.title === undefined ? props.name : props.title
+    document.getElementById(props.gr_id).value = props.genres
+    document.getElementById(props.dk_id).value = props.date === undefined ? props.first_air_date : props.date
+    document.getElementById(props.ov_id).value = props.overview
+  }
+
 
   // if (window.innerWidth < 551) {
   //   for (var x = 0 ; x < document.getElementsByClassName("each_image").length ; x++){
@@ -85,7 +85,9 @@ export default function Item(props) {
   // }
 
   return (
-    <div className="each_image" id={"each_image"+props.class_key} onMouseOver={hover_this_item} onMouseOut={out_hover_this_item} onClick={props.click_funtion}>
+    <div className="each_image" id={"each_image"+props.class_key} onMouseOver={hover_this_item} onMouseOut={out_hover_this_item}
+    onClick={() => { set_Movie_Details();props.click_funtion()}}
+    >
       <img src={"https://image.tmdb.org/t/p/original/"+props.image} 
         id={"movie_cover"+props.class_key}  
         alt="Movie Cover" 
