@@ -176,14 +176,31 @@ nav .right .avatar{
     color:#6d6c6c;
     font-family: netflix_regular,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
 }
-.modal_container .my_modal .details_container .overview{
+.modal_container .my_modal .details_container .ovrview_container{
     margin-top: 10px;
+    height: 30vh;
+    width: 100%;
+    overflow-y: scroll;
+}
+.modal_container .my_modal .details_container .ovrview_container::-webkit-scrollbar {
+    width: 4px;
+}
+.modal_container .my_modal .details_container .ovrview_container::-webkit-scrollbar-track {
+    background-color: #1f2024; 
+}
+.modal_container .my_modal .details_container .ovrview_container::-webkit-scrollbar-thumb {
+    background: #e50914; 
+}
+.modal_container .my_modal .details_container .ovrview_container::-webkit-scrollbar-thumb:window-inactive {
+    background: transparent; 
+}
+.modal_container .my_modal .details_container .overview{
+    margin-right: 10px;
     font-size: 1rem;
     color: #d0d0d0;
     line-height: 1.5rem;
     font-family: netflix_light,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
 }
-
 
 /* Footer */
 .footer_container{
@@ -253,20 +270,12 @@ nav .right .avatar{
     #youtube_player{
         height: 370px;
     }
-    .modal_container .my_modal .movie_banners{
-        margin-top: -375px;
-        height: 370px;
-    }
 }
 @media screen and (max-width: 1367px) {
     .modal_container .my_modal{
         width: 45%;
     }
     #youtube_player{
-        height: 300px;
-    }
-    .modal_container .my_modal .movie_banners{
-        margin-top: -305px;
         height: 300px;
     }
 }
@@ -299,10 +308,6 @@ nav .right .avatar{
     #youtube_player{
         height: 370px;
     }
-    .modal_container .my_modal .movie_banners{
-        margin-top: -375px;
-        height: 370px;
-    }
 
     .footer_container .top{
         max-width: 90%;
@@ -313,10 +318,6 @@ nav .right .avatar{
         width: 80%;
     }
     #youtube_player{
-        height: 350px;
-    }
-    .modal_container .my_modal .movie_banners{
-        margin-top: -355px;
         height: 350px;
     }
 
@@ -368,10 +369,6 @@ nav .right .avatar{
     #youtube_player{
         height: 200px;
     }
-    .modal_container .my_modal .movie_banners{
-        margin-top: -205px;
-        height: 200px;
-    }
 
     .modal_container .my_modal .details_container .title{
         font-size: .9rem;
@@ -394,6 +391,13 @@ nav .right .avatar{
 }
 
 @media screen and (max-width: 551px) {
+    .modal_container .my_modal{
+        width: 90%;
+        padding-bottom: 10px;
+    }
+    #youtube_player{
+        height: 280px;
+    }
     nav .left{
         margin-left: 20px;
     }

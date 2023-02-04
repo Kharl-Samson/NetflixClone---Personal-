@@ -34,7 +34,9 @@ export default function VideoModal_topRated(props) {
         <p className='title' id="modal_movie_title_topRated">N/A</p>
         <p className='genres' id="modal_movie_genre_topRated">N/A</p>
         <p className='date'><span>Release Date : </span> <span id="modal_movie_date_topRated">N/A</span></p>
-        <p className='overview' id="modal_movie_overview_topRated">N/A</p>
+        <div className='ovrview_container'>
+          <p className='overview' id="modal_movie_overview_topRated">N/A</p>
+        </div>
      </div>
    </div>
  </div>
