@@ -108,7 +108,8 @@ export default function TopRated() {
   var MOVIE_ID_topRated = ""
   function show_info_topRated(){
     for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
-      document.getElementsByClassName("list_container")[x].style.zIndex = "-10"
+      document.getElementsByClassName("list_container")[x].style.zIndex = "-1"
+      document.getElementsByClassName("list_container")[x].style.position = "static"
     }
 
     document.getElementById("youtube_modal_topRated").style.display = "flex"

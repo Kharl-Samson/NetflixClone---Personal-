@@ -107,6 +107,7 @@ export default function MyList() {
   function show_info(){
     for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
       document.getElementsByClassName("list_container")[x].style.zIndex = "-1"
+      document.getElementsByClassName("list_container")[x].style.position = "static"
     }
     
     document.getElementById("youtube_modal").style.display = "flex"

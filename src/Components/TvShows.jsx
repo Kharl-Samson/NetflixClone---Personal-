@@ -109,6 +109,7 @@ export default function TvShows() {
   function show_info_tvShows(){
     for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
       document.getElementsByClassName("list_container")[x].style.zIndex = "-1"
+      document.getElementsByClassName("list_container")[x].style.position = "static"
     }
     
     document.getElementById("youtube_modal_tvShows").style.display = "flex"

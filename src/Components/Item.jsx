@@ -30,19 +30,22 @@ export default function Item(props) {
     document.getElementById(props.ov_id).value = props.overview
 
     if (window.innerWidth > 821) {
-      document.getElementById(props.index_id).style.zIndex = "2"
-      props.class_count !== 0 ? document.getElementById("each_image"+props.class_key).style.marginLeft = "-55px" : ""
-      document.getElementById("each_image"+props.class_key).style.height = "auto"
-      document.getElementById("each_image"+props.class_key).style.width = "400px"
-      document.getElementById("each_image"+props.class_key).style.zIndex = "1"
-      document.getElementById("each_image"+props.class_key).style.boxShadow = "rgba(0, 0, 0, 0.24) 0px 3px 8px"
-
-      document.getElementById("movie_cover"+props.class_key).style.height = "200px"
-
-      for(var x = 0 ; x < document.getElementsByClassName("genres"+props.class_key).length ; x++){
-        document.getElementsByClassName("genres"+props.class_key)[x].style.color = "#CECBCB"
-      }
-    
+        document.getElementById(props.index_id).style.position = "relative"
+        document.getElementById(props.index_id).style.zIndex = "2"
+  
+        document.getElementById("each_image"+props.class_key).style.marginTop = "-100px"
+  
+        props.class_count !== 0 ? document.getElementById("each_image"+props.class_key).style.marginLeft = "-55px" : ""
+        document.getElementById("each_image"+props.class_key).style.height = "auto"
+        document.getElementById("each_image"+props.class_key).style.width = "400px"
+        document.getElementById("each_image"+props.class_key).style.zIndex = "1"
+        document.getElementById("each_image"+props.class_key).style.boxShadow = "rgba(0, 0, 0, 0.24) 0px 3px 8px"
+  
+        document.getElementById("movie_cover"+props.class_key).style.height = "220px"
+  
+        for(var x = 0 ; x < document.getElementsByClassName("genres"+props.class_key).length ; x++){
+          document.getElementsByClassName("genres"+props.class_key)[x].style.color = "#CECBCB"
+        }
     }
   }
 
@@ -54,7 +57,11 @@ export default function Item(props) {
     document.getElementById(props.ov_id).value = null
 
     if (window.innerWidth > 821) {
+      document.getElementById(props.index_id).style.position = "static"
       document.getElementById(props.index_id).style.zIndex = "1"
+
+      document.getElementById("each_image"+props.class_key).style.marginTop = "0px"
+
       props.class_count !== 0 ? document.getElementById("each_image"+props.class_key).style.marginLeft = "0" : ""
       document.getElementById("each_image"+props.class_key).style.height = "160px"
       document.getElementById("each_image"+props.class_key).style.width = "100%"

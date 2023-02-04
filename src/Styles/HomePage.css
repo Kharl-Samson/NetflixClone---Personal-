@@ -12,7 +12,7 @@
     height: 100vh;
     width: 100%;
     transition: 1.5s;
-    z-index: 0;
+    z-index: -1;
 }
 .HomePage .CoverPhoto_container img{
     height: 100%;
@@ -22,12 +22,16 @@
 
 /* Trailer Video */
 .HomePage .TrailerVideo_container{
-    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 0;
+    z-index: -2;
 }
 .HomePage .TrailerVideo_container video{
     height: 150vh;
@@ -153,6 +157,9 @@
     .HomePage .CoverPhoto_container{
         height: 80vh;
     }
+    .HomePage .TrailerVideo_container{
+        height: 80vh;
+    }
     .HomePage .TrailerVideo_container video{
         width: 250%;
     }
@@ -168,6 +175,9 @@
     }
     /* Cover Photo */
     .HomePage .CoverPhoto_container{
+        height: 50vh;
+    }
+    .HomePage .TrailerVideo_container{
         height: 50vh;
     }
     .HomePage .TrailerVideo_container video{
@@ -227,6 +237,9 @@
     }
     /* Cover Photo */
     .HomePage .CoverPhoto_container{
+        height: 60vh;
+    }
+    .HomePage .TrailerVideo_container{
         height: 60vh;
     }
     .HomePage .TrailerVideo_container video{

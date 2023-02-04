@@ -2,8 +2,10 @@
     height: 40px;
     width: auto;
     z-index: 1;
-    bottom: 14vh;
-    position: relative;
+    /* position: relative; */
+}
+#list_container{
+    margin-top: -137px;
 }
 .Trending_now_container,
 .tvShows_now_container,
@@ -21,11 +23,15 @@
     min-height: 160px;
     width: auto;
     transition: .2s;
+    margin-top: -85px;
 }
 .mySwiper{
     width:  100%;
     height: auto !important;
 }
+.swiper-slide {
+    padding-top: 100px !important;
+  }
 .eachSwiper{
     min-height: 160px !important;
     width: 280px !important;
@@ -43,6 +49,7 @@
     cursor: pointer;
     transition: .2s;
     z-index: 0;
+    position: relative;
 }
 .list_container .image_carousel_container .each_image:last-of-type{
     position: relative;
@@ -173,6 +180,7 @@
     margin-top: 10px;
     margin-bottom: 25px;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 10px;
     font-family: netflix_regular,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
@@ -191,18 +199,18 @@
 
 /* Responsive */
 @media screen and (max-width: 861px) {
-    .list_container{
-        bottom: 10vh;
+    #list_container{
+        margin-top: -78px;
     }
 }
 @media screen and (max-width: 631px) {
-    .list_container{
-        bottom: 7vh;
+    #list_container{
+        margin-top: -55px;
     }
 }
 @media screen and (max-width: 551px) {
-    .list_container{
-        bottom: 10vh;
+    #list_container{
+        margin-top: -79px;
     }
     .for_margin_left{
         margin-left: 20px;
