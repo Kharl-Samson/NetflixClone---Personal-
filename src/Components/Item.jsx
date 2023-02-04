@@ -25,6 +25,8 @@ const LightTooltip = styled(({ className, ...props }) => (
 
 export default function Item(props) {
   function hover_this_item(){
+    console.log("TEST")
+    alert("test")
     // document.getElementById(props.mv_id).value = props.movie_id
     document.getElementById(props.mv_id).value ="test"
     document.getElementById(props.nm_id).value = props.title === undefined ? props.name : props.title
