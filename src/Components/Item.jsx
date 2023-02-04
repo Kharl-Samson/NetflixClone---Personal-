@@ -2,12 +2,14 @@ import React from 'react';
 import play_icon from '../Assets/play_icon.png'
 import add_icon from '../Assets/add_icon.png'
 import down_icon from '../Assets/down_icon.png'
+import handler_img from "../Assets/handler_img.jpg"
 
 // From Mui
 import { styled } from '@mui/material/styles';
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 // uuid
 import uuid from 'react-uuid';
+
 
 // Tooltip Configuration
 const LightTooltip = styled(({ className, ...props }) => (
@@ -81,7 +83,12 @@ export default function Item(props) {
 
   return (
     <div className="each_image" id={"each_image"+props.class_key} onMouseOver={hover_this_item} onMouseOut={out_hover_this_item} onClick={props.click_funtion}>
-      <img src={"https://image.tmdb.org/t/p/original/"+props.image} id={"movie_cover"+props.class_key}  alt="Movie Cover" className='movie_cover'/>
+      <img src={"https://image.tmdb.org/t/p/original/"+props.image} 
+        id={"movie_cover"+props.class_key}  
+        alt="Movie Cover" 
+        className='movie_cover'
+        onError={(e)=>{e.target.onerror = null; e.target.src=handler_img}}
+        />
       
       <div className='btn_configuration'>
         <div className='side'>

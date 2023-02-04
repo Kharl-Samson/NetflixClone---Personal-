@@ -6,6 +6,12 @@ import TrendingNow from "./Components/TrendingNow";
 import Popular from "./Components/Popular";
 import TvShows from "./Components/TvShows";
 import TopRated from "./Components/TopRated";
+import Susepenseful from "./Components/Susepenseful";
+import Movies from "./Components/Movies";
+import Footer from "./Components/Footer";
+import Documentary from "./Components/Documentary";
+import ActionMovies from "./Components/ActionMovies";
+import Fantasy from "./Components/Fantasy";
 
 function App() {
   
@@ -15,9 +21,15 @@ function App() {
       <HomePage/>
       <MyList/>
       <TrendingNow/>
+      <Susepenseful/>
       <TopRated/>
       <TvShows/>
+      <Movies/>
       <Popular/>
+      <Documentary/>
+      <ActionMovies/>
+      <Fantasy/>
+      <Footer/>
     </div>
   )
 }

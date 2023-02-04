@@ -9,7 +9,13 @@
 }
 .Trending_now_container,
 .tvShows_now_container,
-.topRated_now_container
+.topRated_now_container,
+.suspenseful_now_container,
+.Movies_now_container,
+.Popular_now_container,
+.Documentary_now_container,
+.ActionMovies_now_container,
+.Fantasy_now_container
 {
     margin-top: 220px;
 }
@@ -73,6 +79,7 @@
     justify-content: center;
     transition: .4s;
     opacity: 0;
+    margin-top: 100px;
 }
 .list_container .image_carousel_container .right_btn{
     right: 0;

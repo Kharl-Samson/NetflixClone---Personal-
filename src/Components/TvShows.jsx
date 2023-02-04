@@ -84,14 +84,14 @@ export default function TvShows() {
 
 
   function swipe_right() {
-    document.getElementsByClassName("swiper-button-next")[3].click();
+    document.getElementsByClassName("swiper-button-next")[4].click();
 
     document.getElementsByClassName("left_btn_tvShows")[0].style.display = "flex"
     document.getElementsByClassName("left_btn_tvShows")[0].style.left = "0"
     document.getElementsByClassName("image_carousel_container_tvShows")[0].style.marginLeft = "0"
   }
   function swipe_left() {
-    document.getElementsByClassName("swiper-button-prev")[3].click();
+    document.getElementsByClassName("swiper-button-prev")[4].click();
   }
 
   function hover_swipe(classkey,img_icon){
