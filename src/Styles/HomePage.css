@@ -35,7 +35,7 @@
 }
 .HomePage .TrailerVideo_container video{
     height: 150vh;
-    width: 120%;
+    width: 125%;
     pointer-events: none;
 }
 

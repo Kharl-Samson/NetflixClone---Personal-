@@ -5,37 +5,37 @@ import info_icon from '../Assets/info_icon.svg'
 
 // Cover Photo
 import Titanic from "../Assets/Cover_Photo/Titanic.png"
-import OHF from "../Assets/Cover_Photo/ohf.jpg"
-import money_heist from "../Assets/Cover_Photo/money_heist.jpg"
-import ttb from "../Assets/Cover_Photo/ttb.jpg"
-import bnn from "../Assets/Cover_Photo/bnn.jpg"
+import lhf from "../Assets/Cover_Photo/lhf.jpg"
+import lucifer_cover from "../Assets/Cover_Photo/lucifer_cover.jpg"
+import nfs from "../Assets/Cover_Photo/nfs.png"
+import ds from "../Assets/Cover_Photo/ds.png"
 
 // Trailer Viedo
 import Titanic_video from "../Assets/Trailer_Videos/Titanic.mp4"
-import ohf_video from "../Assets/Trailer_Videos/ohf.mp4"
-import moneyHeist_video from "../Assets/Trailer_Videos/money_heist.mp4"
-import ttb_video from "../Assets/Trailer_Videos/ttb.mp4"
-import bnn_video from "../Assets/Trailer_Videos/bnn.mp4"
+import lhf_video from "../Assets/Trailer_Videos/lhf.mp4"
+import lucifer_video from "../Assets/Trailer_Videos/lucifer.mp4"
+import nfs_video from "../Assets/Trailer_Videos/nfs.mp4"
+import ds_video from "../Assets/Trailer_Videos/ds.mp4"
 
 // Movie Title
 import Titanic_Title from "../Assets/Movie_Titles/Titanic_title.png"
-import ohf_title from "../Assets/Movie_Titles/ohf_title.png"
-import MoneyHeist_title from "../Assets/Movie_Titles/MoneyHeist_title.png"
-import ttb_title from "../Assets/Movie_Titles/ttb_title.png"
-import bnn_title from "../Assets/Movie_Titles/bnn_title.png"
+import lhf_title from "../Assets/Movie_Titles/lhf_title.png"
+import lucifer_title from "../Assets/Movie_Titles/lucifer_title.png"
+import nfs_title from "../Assets/Movie_Titles/nfs_title.png"
+import ds_title from "../Assets/Movie_Titles/ds_title.png"
 
 
 export default function HomePage() {
 
-  const cover_photo_array = [Titanic, OHF, money_heist, ttb, bnn]
-  const trailer_video_array = [Titanic_video, ohf_video, moneyHeist_video, ttb_video, bnn_video] 
-  const movie_title_array = [Titanic_Title, ohf_title, MoneyHeist_title, ttb_title, bnn_title] 
+  const cover_photo_array = [Titanic, lhf, lucifer_cover, nfs, ds]
+  const trailer_video_array = [Titanic_video, lhf_video, lucifer_video, nfs_video, ds_video] 
+  const movie_title_array = [Titanic_Title, lhf_title, lucifer_title, nfs_title, ds_title] 
   const movie_description = [
     "Rose tells the whole story from Titanic's departure through to its death on its first and last voyage on April 15, 1912.",
-    "After a tragic event moves him to a desk job, an ex-Secret Service agent must rescue the president when the White House is attacked.",
-    "8 thieves take hostages and lock themselves in the Royal Mint as a criminal mastermind manipulates the police to carry out his plan.",
-    "Turning 30, a promising theater composer navigates love, friendship and the pressure to create something great before time runs out.",
-    "A single-camera ensemble comedy following the lives of an eclectic group of detectives in a New York precinct.",
+    "Hell-bent on revenge, terrorists attack a group of world leaders in London. Now, it's up to agent Banning to save the US president.",
+    "Lucifer has decided he's had enough of being dutiful servant in Hell and decides to spend time on Earth to understand humanity.",
+    "Fresh from prison, a street racer who was framed by a wealthy business associate joins a cross-country race with revenge in mind.",
+    "A Cabinet member becomes President of the United States after catastrophic attack kill everyone above him in the line of succession.",
   ]
   const age_restriction_array = ["16+","15+","18+","13+","15+"]
 
