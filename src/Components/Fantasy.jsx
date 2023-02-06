@@ -174,11 +174,10 @@ export default function Fantasy() {
     playerFantasy.playVideo();
   };
 
-  // Close all modals 
-  window.onclick = function(event) {
-    if (event.target === document.getElementById("youtube_modal_Fantasy")) {
+  function sub_close(){
+    if(event.srcElement.id === "youtube_modal_Fantasy"){
       close_info()
-    }   
+    }
   }
 
   return (
@@ -219,6 +218,7 @@ export default function Fantasy() {
         close_info = {close_info}
         trailerId = {trailerId_Fantasy}
         onReady = {onReady_Fantasy}
+        sub_close = {sub_close}
       />
 
 

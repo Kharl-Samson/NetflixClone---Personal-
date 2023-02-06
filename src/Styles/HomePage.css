@@ -1,15 +1,26 @@
 .HomePage{
     width: 100%;
-    height: 100vh;
+    height: 104vh;
     overflow: hidden;
 }
+
+/* Shadowing in bottom */
+.shadowing{
+    width: 100%;
+    height: 150px;
+    position: absolute;
+    margin-top: 93vh;
+    left: 0;
+    background-image: linear-gradient(180deg, transparent, #141414, #141414);
+}
+
 
 /* Cover Photo */
 .HomePage .CoverPhoto_container{
     position: absolute;
     top: 0;
     left: 0;
-    height: 100vh;
+    height: 104vh;
     width: 100%;
     transition: 1.5s;
     z-index: -1;
@@ -26,7 +37,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    height: 100vh;
+    height: 104vh;
     width: 100%;
     display: flex;
     align-items: center;
@@ -151,15 +162,20 @@
 
 @media screen and (max-width: 861px) {
     .HomePage{
-        height: 80vh;
+        height: 84vh;
     }
     /* Cover Photo */
     .HomePage .CoverPhoto_container{
-        height: 80vh;
+        height: 84vh;
     }
     .HomePage .TrailerVideo_container{
-        height: 80vh;
+        height: 84vh;
     }
+    /* Shadowing in bottom */
+    .shadowing{
+        margin-top: 73vh;
+    }
+
     .HomePage .TrailerVideo_container video{
         width: 250%;
     }
@@ -171,14 +187,18 @@
 }
 @media screen and (max-width: 701px) {
     .HomePage{
-        height: 50vh;
+        height: 54vh;
     }
     /* Cover Photo */
     .HomePage .CoverPhoto_container{
-        height: 50vh;
+        height: 54vh;
     }
     .HomePage .TrailerVideo_container{
-        height: 50vh;
+        height: 54vh;
+    }
+    /* Shadowing in bottom */
+    .shadowing{
+        margin-top: 43vh;
     }
     .HomePage .TrailerVideo_container video{
         width: 200%;
@@ -233,14 +253,18 @@
 }
 @media screen and (max-width: 551px) {
     .HomePage{
-        height: 60vh;
+        height: 64vh;
     }
     /* Cover Photo */
     .HomePage .CoverPhoto_container{
-        height: 60vh;
+        height: 64vh;
     }
     .HomePage .TrailerVideo_container{
-        height: 60vh;
+        height: 64vh;
+    }
+    /* Shadowing in bottom */
+    .shadowing{
+        margin-top: 53vh;
     }
     .HomePage .TrailerVideo_container video{
         width: 300%;

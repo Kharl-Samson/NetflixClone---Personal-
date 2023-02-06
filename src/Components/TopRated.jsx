@@ -174,9 +174,10 @@ export default function TopRated() {
     playertopRated.playVideo();
   };
 
-  // Close all modals 
-  window.onclick = function(event) {
- 
+  function sub_close(){
+    if(event.srcElement.id === "youtube_modal_topRated"){
+      close_info()
+    }
   }
 
   return (
@@ -217,6 +218,7 @@ export default function TopRated() {
         close_info = {close_info}
         trailerId = {trailerId_topRated}
         onReady = {onReady_topRated}
+        sub_close = {sub_close}
       />
 
       {/* Movie Id Key Value */}

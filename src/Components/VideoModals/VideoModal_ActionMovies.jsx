@@ -16,7 +16,7 @@ export default function VideoModal_ActionMovies(props) {
     };
 
   return (
-    <div className='modal_container' id="youtube_modal_ActionMovies">
+    <div className='modal_container' id="youtube_modal_ActionMovies" onClick={props.sub_close}>
     <Box sx={{ display: 'flex' }} id="progress_bar_ActionMovies">
       <CircularProgress sx={{color:"red"}} style={{height:"100px",width:"100px"}} />
     </Box>

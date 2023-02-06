@@ -1,47 +1,45 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import "../Styles/HomePage.css";
 import play_icon from '../Assets/play_icon.png'
 import info_icon from '../Assets/info_icon.svg'
 
+// From Moment
+import moment from 'moment';
+
 // Cover Photo
-import Titanic from "../Assets/Cover_Photo/Titanic.png"
 import lhf from "../Assets/Cover_Photo/lhf.jpg"
 import lucifer_cover from "../Assets/Cover_Photo/lucifer_cover.jpg"
 import nfs from "../Assets/Cover_Photo/nfs.png"
 import ds from "../Assets/Cover_Photo/ds.png"
 
 // Trailer Viedo
-import Titanic_video from "../Assets/Trailer_Videos/Titanic.mp4"
 import lhf_video from "../Assets/Trailer_Videos/lhf.mp4"
 import lucifer_video from "../Assets/Trailer_Videos/lucifer.mp4"
 import nfs_video from "../Assets/Trailer_Videos/nfs.mp4"
 import ds_video from "../Assets/Trailer_Videos/ds.mp4"
 
 // Movie Title
-import Titanic_Title from "../Assets/Movie_Titles/Titanic_title.png"
 import lhf_title from "../Assets/Movie_Titles/lhf_title.png"
 import lucifer_title from "../Assets/Movie_Titles/lucifer_title.png"
 import nfs_title from "../Assets/Movie_Titles/nfs_title.png"
 import ds_title from "../Assets/Movie_Titles/ds_title.png"
-
+import VideoModal_homepage from './VideoModals/VideoModal_homepage';
 
 export default function HomePage() {
 
-  const cover_photo_array = [Titanic, lhf, lucifer_cover, nfs, ds]
-  const trailer_video_array = [Titanic_video, lhf_video, lucifer_video, nfs_video, ds_video] 
-  const movie_title_array = [Titanic_Title, lhf_title, lucifer_title, nfs_title, ds_title] 
+  // Generates Random Number from 0 - 4 
+  var random_Number =  Math.floor(Math.random() * 4) + 0;
+  const cover_photo_array = [lhf, lucifer_cover, nfs, ds]
+  const trailer_video_array = [lhf_video, lucifer_video, nfs_video, ds_video] 
+  const movie_title_array = [lhf_title, lucifer_title, nfs_title, ds_title] 
   const movie_description = [
-    "Rose tells the whole story from Titanic's departure through to its death on its first and last voyage on April 15, 1912.",
     "Hell-bent on revenge, terrorists attack a group of world leaders in London. Now, it's up to agent Banning to save the US president.",
     "Lucifer has decided he's had enough of being dutiful servant in Hell and decides to spend time on Earth to understand humanity.",
     "Fresh from prison, a street racer who was framed by a wealthy business associate joins a cross-country race with revenge in mind.",
-    "A Cabinet member becomes President of the United States after catastrophic attack kill everyone above him in the line of succession.",
+    "A Cabinet member becomes President of the United States after catastrophic attack kill everyone above him in the line of succession."
   ]
-  const age_restriction_array = ["16+","15+","18+","13+","15+"]
-
-  // Generates Random Number from 0 - 4   
-  var random_Number =  Math.floor(Math.random() * 5) + 0;
-
+  const age_restriction_array = ["15+","18+","13+","15+"]
 
   var isVideoloaded = false;
   function check_video_is_loaded(){
@@ -131,6 +129,73 @@ export default function HomePage() {
       trailer_ctr = 2
     }
   }
+  
+  // Youtube player functions 
+  function play_youtube(videoId){
+    document.getElementById("trailer_video").muted = true
+    document.getElementById("unmute_icon").style.display = "block"
+    document.getElementById("replay_icon").style.display = "none"
+    document.getElementById("mute_icon").style.display = "none"
+    trailer_ctr = 1
+
+    const iframe = document.getElementById("youtube_player");
+    iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0`;
+  }
+
+  var myVideo = ""
+  function show_info(){
+      if(random_Number === 0){
+        myVideo = "3AsOdX7NcJs"
+        document.getElementById("modal_movie_title_homepage").textContent = "London Has Fallen"
+        document.getElementById("modal_movie_genre_homepage").textContent = "Action ● Thriller"
+        document.getElementById("modal_movie_date_homepage").textContent = "March 9, 2016"
+        document.getElementById("modal_movie_overview_homepage").textContent = "In London for the Prime Minister's funeral, Mike Banning discovers a plot to assassinate all the attending world leaders."
+      }
+      else if(random_Number === 1){
+        myVideo = "X4bF_quwNtw"
+        document.getElementById("modal_movie_title_homepage").textContent = "Lucifer"
+        document.getElementById("modal_movie_genre_homepage").textContent = "Crime ● Sci-Fi & Fantasy"
+        document.getElementById("modal_movie_date_homepage").textContent = "January 25, 2016"
+        document.getElementById("modal_movie_overview_homepage").textContent = "Bored and unhappy as the Lord of Hell, Lucifer Morningstar abandoned his throne and retired to Los Angeles, where he has teamed up with LAPD detective Chloe Decker to take down criminals. But the longer he's away from the underworld, the greater the threat that the worst of humanity could escape."
+      }
+      else if(random_Number === 2){
+        myVideo = "H_5t589hePA"
+        document.getElementById("modal_movie_title_homepage").textContent = "Need For Speed"
+        document.getElementById("modal_movie_genre_homepage").textContent = "Action ● Crime ● Drama ● Thriller"
+        document.getElementById("modal_movie_date_homepage").textContent = "March 12, 2014"
+        document.getElementById("modal_movie_overview_homepage").textContent = "The film revolves around a local street-racer who partners with a rich and arrogant business associate, only to find himself framed by his colleague and sent to prison. After he gets out, he joins a New York-to-Los Angeles race to get revenge. But when the ex-partner learns of the scheme, he puts a massive bounty on the racer's head, forcing him to run a cross-country gauntlet of illegal racers in all manner of supercharged vehicles."
+      }
+      else if(random_Number === 3){
+        myVideo = "zTJbUVjS--M"
+        document.getElementById("modal_movie_title_homepage").textContent = "Designated Survivor"
+        document.getElementById("modal_movie_genre_homepage").textContent = "Drama ● War & Politics"
+        document.getElementById("modal_movie_date_homepage").textContent = "September 21, 2016"
+        document.getElementById("modal_movie_overview_homepage").textContent = "Tom Kirkman, a low-level cabinet member is suddenly appointed President of the United States after a catastrophic attack during the State of the Union kills everyone above him in the Presidential line of succession."
+      }
+      for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
+        document.getElementsByClassName("list_container")[x].style.zIndex = "-1"
+        document.getElementsByClassName("list_container")[x].style.position = "static"
+      }
+      document.getElementById("youtube_modal_homepage").style.display = "flex"
+      document.getElementById("progress_bar_homepage").style.display = "flex"
+  
+  
+      setTimeout(function () {
+        document.getElementById("progress_bar_homepage").style.display = "none"
+        document.getElementById("my_modal_homepage").style.display = "block"
+        play_youtube(myVideo);
+      }, 700);
+  }
+  function close_info(){
+    for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
+      document.getElementsByClassName("list_container")[x].style.zIndex = "1"
+    }
+    const iframe = document.getElementById("youtube_player");
+    iframe.src = "";
+    document.getElementById("youtube_modal_homepage").style.display = "none"
+    document.getElementById("progress_bar_homepage").style.display = "block"
+    document.getElementById("my_modal_homepage").style.display = "none"
+  }
 
   return (
     <div className='HomePage' id="HomePage">
@@ -147,16 +212,16 @@ export default function HomePage() {
 
         {/* Movie Primary Details */}
         <div className='Primary_Details'>
-            <img src={movie_title_array[random_Number]} alt='Title' className='title_img' id="title_img" loading="lazy"/>
+            <img src={movie_title_array[random_Number]} alt='Title' className='title_img' id="title_img"/>
             <p className='description' id="description">{movie_description[random_Number]}</p>
 
             <div className='btn_container' id="btn_container">
-              <div className='btn'>
+              <div className='btn' onClick={show_info}>
                 <img src={play_icon} alt="Play Icon" loading="lazy"/>
                 <span>Play</span>
               </div>
 
-              <div className='btn'>
+              <div className='btn' onClick={show_info}>
                 <img src={info_icon} alt="Play Icon" loading="lazy"/>
                 <span>More Info</span>
               </div>
@@ -177,6 +242,14 @@ export default function HomePage() {
             <span>{age_restriction_array[random_Number]}</span>
           </div>
         </div>
+
+      <div className='shadowing'></div>
+
+
+      {/* Modal for clicking each_item */}
+      <VideoModal_homepage
+        close_info = {close_info}
+      />
 
     </div>
   )

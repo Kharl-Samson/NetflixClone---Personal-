@@ -173,13 +173,12 @@ export default function MyList() {
     player.playVideo();
   };
 
-  // Close all modals 
-  window.onclick = function(event) {
-    if (event.target === document.getElementById("youtube_modal")) {
+  function sub_close(){
+    if(event.srcElement.id === "youtube_modal"){
       close_info()
-    }   
+    }
   }
-
+  
   return (
     <div className='list_container' id="list_container">
         <p className='title for_margin_left'>My List</p>
@@ -218,6 +217,7 @@ export default function MyList() {
       close_info = {close_info}
       trailerId = {trailerId}
       onReady = {onReady}
+      sub_close = {sub_close}
     />
 
     {/* Movie Id Key Value */}

@@ -149,7 +149,7 @@ export default function TvShows() {
   }
 
   const loadTrailer_tvShows = async () => {
-    const res = await axios.get(`${API_BASE_URL}/movie/${MOVIE_ID_tvShows}/videos?api_key=${API_KEY}`);
+    const res = await axios.get(`${API_BASE_URL}/tv/${MOVIE_ID_tvShows}/videos?api_key=${API_KEY}`);
     for(var i = 0 ; i < res.data.results.length ; i++){
       if (res.data.results[i].name.toUpperCase().indexOf('TRAILER') > -1)
       {
@@ -174,13 +174,12 @@ export default function TvShows() {
     playertvShows.playVideo();
   };
 
-  // Close all modals 
-  window.onclick = function(event) {
-    if (event.target === document.getElementById("youtube_modal_tvShows")) {
+  function sub_close(){
+    if(event.srcElement.id === "youtube_modal_tvShows"){
       close_info()
-    }   
+    }
   }
-
+  
   return (
     <div className='list_container tvShows_now_container' id="tvShows_now_container">
         <p className='title for_margin_left'>TV Shows</p>
@@ -219,6 +218,7 @@ export default function TvShows() {
         close_info = {close_info}
         trailerId = {trailerId_tvShows}
         onReady = {onReady_tvShows}
+        sub_close = {sub_close}
       />
 
       {/* Movie Id Key Value */}

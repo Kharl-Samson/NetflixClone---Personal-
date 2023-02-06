@@ -174,11 +174,10 @@ export default function Documentary() {
     playerDocumentary.playVideo();
   };
 
-  // Close all modals 
-  window.onclick = function(event) {
-    if (event.target === document.getElementById("youtube_modal_Documentary")) {
+  function sub_close(){
+    if(event.srcElement.id === "youtube_modal_Documentary"){
       close_info()
-    }   
+    }
   }
 
   return (
@@ -219,6 +218,7 @@ export default function Documentary() {
         close_info = {close_info}
         trailerId = {trailerId_Documentary}
         onReady = {onReady_Documentary}
+        sub_close = {sub_close}
       />
 
 

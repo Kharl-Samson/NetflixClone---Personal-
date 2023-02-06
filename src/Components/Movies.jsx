@@ -175,13 +175,12 @@ export default function Movies() {
     playerMovies.playVideo();
   };
 
-  // Close all modals 
-  window.onclick = function(event) {
-    if (event.target === document.getElementById("youtube_modal_Movies")) {
+  function sub_close(){
+    if(event.srcElement.id === "youtube_modal_Movies"){
       close_info()
-    }   
+    }
   }
-
+  
   return (
     <div className='list_container Movies_now_container' id="Movies_now_container">
         <p className='title for_margin_left'>Movies</p>
@@ -220,6 +219,7 @@ export default function Movies() {
            close_info = {close_info}
            trailerId = {trailerId_Movies}
            onReady = {onReady_Movies}
+           sub_close = {sub_close}
       />
 
       {/* Movie Id Key Value */}

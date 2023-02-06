@@ -44,8 +44,6 @@ export default function Popular() {
     setPopular(res.data.results);
   };
 
-
-
   // Use effect for all hooks
   useEffect(() => {
     loadPopular();
@@ -176,11 +174,10 @@ export default function Popular() {
     playerPopular.playVideo();
   };
 
-  // Close all modals 
-  window.onclick = function(event) {
-    if (event.target === document.getElementById("youtube_modal_Popular")) {
+  function sub_close(){
+    if(event.srcElement.id === "youtube_modal_Popular"){
       close_info()
-    }   
+    }
   }
 
   return (
@@ -221,6 +218,7 @@ export default function Popular() {
         close_info = {close_info}
         trailerId = {trailerId_Popular}
         onReady = {onReady_Popular}
+        sub_close = {sub_close}
       />
 
 

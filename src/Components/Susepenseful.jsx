@@ -176,11 +176,10 @@ export default function Susepenseful() {
     playersuspenseful.playVideo();
   };
 
-  // Close all modals 
-  window.onclick = function(event) {
-    if (event.target === document.getElementById("youtube_modal_suspenseful")) {
+  function sub_close(){
+    if(event.srcElement.id === "youtube_modal_suspenseful"){
       close_info()
-    }   
+    }
   }
 
   return (
@@ -221,6 +220,7 @@ export default function Susepenseful() {
           close_info = {close_info}
           trailerId = {trailerId_suspenseful}
           onReady = {onReady_suspenseful}
+          sub_close = {sub_close}
       />
 
 

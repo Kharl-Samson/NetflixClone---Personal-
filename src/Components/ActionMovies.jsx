@@ -174,11 +174,10 @@ export default function ActionMovies() {
     playerActionMovies.playVideo();
   };
 
-  // Close all modals 
-  window.onclick = function(event) {
-    if (event.target === document.getElementById("youtube_modal_ActionMovies")) {
+  function sub_close(){
+    if(event.srcElement.id === "youtube_modal_ActionMovies"){
       close_info()
-    }   
+    }
   }
 
   return (
@@ -219,6 +218,7 @@ export default function ActionMovies() {
         close_info = {close_info}
         trailerId = {trailerId_ActionMovies}
         onReady = {onReady_ActionMovies}
+        sub_close = {sub_close}
       />
 
 

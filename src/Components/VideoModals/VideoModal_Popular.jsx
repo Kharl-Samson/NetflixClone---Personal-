@@ -16,7 +16,7 @@ export default function VideoModal_Popular(props) {
     };
 
   return (
-    <div className='modal_container' id="youtube_modal_Popular">
+    <div className='modal_container' id="youtube_modal_Popular" onClick={props.sub_close}>
     <Box sx={{ display: 'flex' }} id="progress_bar_Popular">
       <CircularProgress sx={{color:"red"}} style={{height:"100px",width:"100px"}} />
     </Box>

@@ -16,7 +16,7 @@ export default function VideoModal_Fantasy(props) {
     };
 
   return (
-    <div className='modal_container' id="youtube_modal_Fantasy">
+    <div className='modal_container' id="youtube_modal_Fantasy" onClick={props.sub_close}>
     <Box sx={{ display: 'flex' }} id="progress_bar_Fantasy">
       <CircularProgress sx={{color:"red"}} style={{height:"100px",width:"100px"}} />
     </Box>

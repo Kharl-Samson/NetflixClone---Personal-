@@ -174,13 +174,12 @@ export default function TrendingNow() {
     playerTrending.playVideo();
   };
 
-  // Close all modals 
-  window.onclick = function(event) {
-    if (event.target === document.getElementById("youtube_modal_trending")) {
+  function sub_close(){
+    if(event.srcElement.id === "youtube_modal_trending"){
       close_info()
-    }   
+    }
   }
-
+  
   return (
     <div className='list_container Trending_now_container' id="Trending_now_container">
         <p className='title for_margin_left'>Trending Now</p>
@@ -219,6 +218,7 @@ export default function TrendingNow() {
           close_info = {close_info}
           trailerId = {trailerId_trending}
           onReady = {onReady_Trending}
+          sub_close = {sub_close}
       />
 
       {/* Movie Id Key Value */}
