@@ -31,7 +31,7 @@ export default function Susepenseful() {
   // Hook for getting genres
   const [genres, setGenres] = useState([]);
   const loadGenre = async () => {
-    const res = await axios.get(`${API_BASE_URL}/genre/movie/list?api_key=${API_KEY}`);
+    const res = await axios.get(`${API_BASE_URL}/genre/tv/list?api_key=${API_KEY}`);
     setGenres(res.data.genres);
   };
   
@@ -151,7 +151,7 @@ export default function Susepenseful() {
   }
 
   const loadTrailer_suspenseful = async () => {
-    const res = await axios.get(`${API_BASE_URL}/movie/${MOVIE_ID_suspenseful}/videos?api_key=${API_KEY}`);
+    const res = await axios.get(`${API_BASE_URL}/tv/${MOVIE_ID_suspenseful}/videos?api_key=${API_KEY}`);
     for(var i = 0 ; i < res.data.results.length ; i++){
       if (res.data.results[i].name.toUpperCase().indexOf('TRAILER') > -1)
       {

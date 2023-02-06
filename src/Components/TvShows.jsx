@@ -31,7 +31,7 @@ export default function TvShows() {
   // Hook for getting genres
   const [genres, setGenres] = useState([]);
   const loadGenre = async () => {
-    const res = await axios.get(`${API_BASE_URL}/genre/movie/list?api_key=${API_KEY}`);
+    const res = await axios.get(`${API_BASE_URL}/genre/tv/list?api_key=${API_KEY}`);
     setGenres(res.data.genres);
   };
   
