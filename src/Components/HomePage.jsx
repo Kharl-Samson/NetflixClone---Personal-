@@ -1,11 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
 import "../Styles/HomePage.css";
 import play_icon from '../Assets/play_icon.png'
 import info_icon from '../Assets/info_icon.svg'
-
-// From Moment
-import moment from 'moment';
 
 // Cover Photo
 import lhf from "../Assets/Cover_Photo/lhf.jpg"
