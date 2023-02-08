@@ -31,7 +31,7 @@ export default function TrendingNow() {
   // Hook for getting genres
   const [genres, setGenres] = useState([]);
   const loadGenre = async () => {
-    const res = await axios.get(`${API_BASE_URL}/genre/movie/list?api_key=${API_KEY}`);
+    const res = await axios.get(`${API_BASE_URL}/genre/${document.getElementById("mediaType_key_Trending").value}/list?api_key=${API_KEY}`);
     setGenres(res.data.genres);
   };
   
@@ -72,6 +72,7 @@ export default function TrendingNow() {
            date = {res.release_date}
            first_air_date = {res.first_air_date}
            overview = {res.overview}
+           media_Type = {res.media_type}
            click_funtion = {show_info_trending}
            index_id = {"Trending_now_container"}
            mv_id = {"movie_id_Trending"}
@@ -79,6 +80,7 @@ export default function TrendingNow() {
            gr_id = {"genre_key_Trending"}
            dk_id = {"date_key_Trending"}
            ov_id = {"overview_key_Trending"}
+           mt_id = {"mediaType_key_Trending"}
           />
         </SwiperSlide>
       )
@@ -146,10 +148,11 @@ export default function TrendingNow() {
     document.getElementById("youtube_modal_trending").style.display = "none"
     document.getElementById("progress_bar_trending").style.display = "block"
     document.getElementById("my_modal_trending").style.display = "none"
+    document.getElementById("mediaType_key_Trending").value = null
   }
 
   const loadTrailer_Trending = async () => {
-    const res = await axios.get(`${API_BASE_URL}/movie/${MOVIE_ID_TRENDING}/videos?api_key=${API_KEY}`);
+    const res = await axios.get(`${API_BASE_URL}/${document.getElementById("mediaType_key_Trending").value}/${MOVIE_ID_TRENDING}/videos?api_key=${API_KEY}`);
     for(var i = 0 ; i < res.data.results.length ; i++){
       if (res.data.results[i].name.toUpperCase().indexOf('OFFICIAL TRAILER') > -1)
       {
@@ -227,6 +230,7 @@ export default function TrendingNow() {
       <input type="hidden" id="genre_key_Trending"/>
       <input type="hidden" id="date_key_Trending"/>
       <input type="hidden" id="overview_key_Trending"/>
+      <input type="hidden" id="mediaType_key_Trending"/>
 
   </div>
   )
