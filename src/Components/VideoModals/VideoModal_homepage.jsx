@@ -13,7 +13,7 @@ export default function VideoModal_homepage(props) {
         document.getElementsByClassName("list_container")[x].style.zIndex = "1"
       }
    
-      const iframe = document.getElementById("youtube_player");
+      const iframe = document.getElementById("youtube_player_hp");
       iframe.src = "";
   
       document.getElementById("youtube_modal_homepage").style.display = "none"
@@ -31,9 +31,9 @@ export default function VideoModal_homepage(props) {
      <div className='close_btn' onClick={props.close_info}><CloseIcon/></div>
      {/* Testing youtube player */}
      <iframe 
-        id="youtube_player"
+        id="youtube_player_hp"
         frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture">
-    </iframe>
+      </iframe>
 
      <div className='details_container'>
         <p className='title' id="modal_movie_title_homepage">N/A</p>
