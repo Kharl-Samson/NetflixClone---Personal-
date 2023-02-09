@@ -100,6 +100,12 @@ export default function HomePage() {
   // Trailer Controls
   var trailer_ctr = 1
   function trailer_controls(){
+    document.getElementById("Search_container").style.backgroundColor = "transparent"
+    document.getElementById("Search_container").style.border = "1px solid transparent"
+    document.getElementById("search_input").style.width = "0px"
+    document.getElementById("close_icon").style.width = "0px"
+    document.getElementById("close_search").style.display = "none"
+
     if(trailer_ctr === 1){// With sounds
       document.getElementById("trailer_video").muted = false
       document.getElementById("unmute_icon").style.display = "none"
@@ -128,6 +134,12 @@ export default function HomePage() {
   
   // Youtube player functions 
   function play_youtube(videoId){
+    document.getElementById("Search_container").style.backgroundColor = "transparent"
+    document.getElementById("Search_container").style.border = "1px solid transparent"
+    document.getElementById("search_input").style.width = "0px"
+    document.getElementById("close_icon").style.width = "0px"
+    document.getElementById("close_search").style.display = "none"
+
     document.getElementById("trailer_video").muted = true
     document.getElementById("unmute_icon").style.display = "block"
     document.getElementById("replay_icon").style.display = "none"
@@ -193,8 +205,16 @@ export default function HomePage() {
     document.getElementById("my_modal_homepage").style.display = "none"
   }
 
+  function close_srch(){
+    document.getElementById("Search_container").style.backgroundColor = "transparent"
+    document.getElementById("Search_container").style.border = "1px solid transparent"
+    document.getElementById("search_input").style.width = "0px"
+    document.getElementById("close_icon").style.width = "0px"
+    document.getElementById("close_search").style.display = "none"
+  }
+
   return (
-    <div className='HomePage' id="HomePage">
+    <div className='HomePage' id="HomePage" onClick={close_srch}>
 
         {/* For Cover Photo */}
         <div className='CoverPhoto_container' id="CoverPhoto_container">

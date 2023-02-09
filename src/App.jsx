@@ -14,22 +14,30 @@ import ActionMovies from "./Components/ActionMovies";
 import Fantasy from "./Components/Fantasy";
 
 function App() {
-
+  function close_srch(){
+    document.getElementById("Search_container").style.backgroundColor = "transparent"
+    document.getElementById("Search_container").style.border = "1px solid transparent"
+    document.getElementById("search_input").style.width = "0px"
+    document.getElementById("close_icon").style.width = "0px"
+    document.getElementById("close_search").style.display = "none"
+  }
   return (
     <div className="App">
       <Navbar/>
-      <HomePage/>
-      <MyList/>
-      <TrendingNow/>
-      <Susepenseful/>
-      <TopRated/>
-      <TvShows/>
-      <Movies/>
-      <Popular/>
-      <Documentary/>
-      <ActionMovies/>
-      <Fantasy/>
-      <Footer/>
+      <div onClick={close_srch}>
+        <HomePage/>
+        <MyList/>
+        <TrendingNow/>
+        <Susepenseful/>
+        <TopRated/>
+        <TvShows/>
+        <Movies/>
+        <Popular/>
+        <Documentary/>
+        <ActionMovies/>
+        <Fantasy/>
+        <Footer/>
+      </div>
     </div>
   )
 }

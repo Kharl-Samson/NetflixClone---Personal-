@@ -13,6 +13,10 @@ import MenuItem from '@mui/material/MenuItem';
 //Call jquery library
 import $ from 'jquery'; 
 import SearchItems from './SearchItems';
+import VideoModal_Search from './VideoModals/VideoModal_Search';
+
+// From Moment
+import moment from 'moment';
 
 export default function Navbar() {
 
@@ -23,6 +27,7 @@ export default function Navbar() {
   };
   const handleClose = () => {
     setAnchorEl(null);
+    close_search();
   };
 
   //Navigation bar effect when user is scrolling
@@ -45,23 +50,26 @@ export default function Navbar() {
 
       document.getElementById("search_input").style.width = "190px"
       document.getElementById("close_icon").style.width = "40px"
-      setTimeout(function () {
-        document.getElementById("close_search").style.display = "block"
-      }, 400);
   } 
   function close_search(){
+    setResults([]);
+    
     document.getElementById("search_input").value = null
 
-    
-    // document.getElementById("Search_container").style.backgroundColor = "transparent"
-    // document.getElementById("Search_container").style.border = "1px solid transparent"
+    document.getElementById("Search_collection").style.backgroundColor = "transparent"
+    document.getElementById("Search_collection").style.opacity = "0"
+    setTimeout(function () {
+      document.getElementById("Search_collection").style.display = "none"
+    }, 400);
 
-    // document.getElementById("search_input").style.width = "0px"
-    // document.getElementById("close_icon").style.width = "0px"
-    // document.getElementById("close_search").style.display = "none"
+    document.getElementById("Search_container").style.backgroundColor = "transparent"
+    document.getElementById("Search_container").style.border = "1px solid transparent"
+
+    document.getElementById("search_input").style.width = "0px"
+    document.getElementById("close_icon").style.width = "0px"
+    document.getElementById("close_search").style.display = "none"
 
   }
-
 
   // My API Setting Configuration
   const API_KEY = "11a61ae7e3b2ca3ab361c0a1fa158769";
@@ -69,33 +77,35 @@ export default function Navbar() {
 
   // const [searchTerm, setSearchTerm] = useState('');
   const [results, setResults] = useState([]);
-
   const handleChange = async (event) => {
     if(document.getElementById("search_input").value.length !== 0){
+      document.getElementById("close_search").style.display = "block"
       document.getElementById("Search_collection").style.display = "block"
       setTimeout(function () {
         document.getElementById("Search_collection").style.backgroundColor = "#141414"
         document.getElementById("Search_collection").style.opacity = "100%"
+        document.getElementById("related_title").style.opacity = "100%"
       }, 400);
 
-      const response = await fetch(`${API_BASE_URL}/search/multi?api_key=${API_KEY}&query=${document.getElementById("search_input").value}`);
+      const response = await fetch(`${API_BASE_URL}/search/multi?page=1&api_key=${API_KEY}&query=${document.getElementById("search_input").value}`);
+      const response_page2 = await fetch(`${API_BASE_URL}/search/multi?page=2&api_key=${API_KEY}&query=${document.getElementById("search_input").value}`);
+      const response_page3 = await fetch(`${API_BASE_URL}/search/multi?page=3&api_key=${API_KEY}&query=${document.getElementById("search_input").value}`);
       const data = await response.json();
-      setResults(data.results);
+      const data_page2 = await response_page2.json();
+      const data_page3 = await response_page3.json();
+      setResults([...data.results, ...data_page2.results, ...data_page3.results]);
     }
     else{
       document.getElementById("Search_collection").style.backgroundColor = "transparent"
       document.getElementById("Search_collection").style.opacity = "0"
+      document.getElementById("related_title").style.opacity = "0"
       setTimeout(function () {
         document.getElementById("Search_collection").style.display = "none"
-      }, 400);
-
-      const response = await fetch(`${API_BASE_URL}/search/multi?api_key=${API_KEY}&query=A`);
-      const data = await response.json();
+      }, 300);
       setResults([]);
     }
   };
 
-  
   function uniqurArray(array){
     var a = array.concat();
     for(var i=0; i<a.length; i++) {
@@ -111,59 +121,151 @@ export default function Navbar() {
   var ctr_related_title = 0
   const related_Titles = uniqurArray(results).map((result) => {
     ctr_related_title++
-    if(ctr_related_title < 5){
+    if(ctr_related_title < 6 && result.title !== undefined){
       return (
         <span id="related_searches_list" key={result.id}>
-          {result.title}&nbsp;|&nbsp;
+          {result.title}
+          {ctr_related_title !== 5 ? " | " : ""}  
         </span>
       )
     }
   });
 
-
   // Hook for getting genres
-  // const [genres, setGenres] = useState([]);
-  // const loadGenre = async () => {
-  //   const res = await axios.get(`${API_BASE_URL}/genre/movie/list?api_key=${API_KEY}`);
-  //   setGenres(res.data.genres);
-  // };
-  // // Use effect for all hooks
-  // useEffect(() => {
-  //   loadGenre();
-  // }, [API_KEY, API_BASE_URL]);
+  const [genres, setGenres] = useState([]);
+  const loadGenre = async () => {
+    const res = await axios.get(`${API_BASE_URL}/genre/movie/list?api_key=${API_KEY}`);
+    setGenres(res.data.genres);
+  };
+  // Use effect for all hooks
+  useEffect(() => {
+    loadGenre();
+  }, [API_KEY, API_BASE_URL]);
+
+
+  function uniqurArrayID(array){
+    var a = array.concat();
+    for(var i=0; i<a.length; i++) {
+        for(var j=i+1; j<a.length; j++) {
+            if(a[i].id === a[j].id){
+                a.splice(j--, 1);
+            }
+        }
+    }
+    return a;
+  }
 
   var key_mapping = -1;
-  const EachItems = results.map((res) => {
+  const EachItems = uniqurArrayID(results).map((res) => {
     key_mapping++
     var genres_array = [] 
-    // genres.map((response) => {
-    //     for(var x = 0 ; x < res.genre_ids.length ; x++){
-    //       response.id === res.genre_ids[x] ? genres_array.push(response.name) : ""
-    //     }
-    // });
+    if(res.genre_ids !== undefined){
+      genres.map((response) => {
+        for(var x = 0 ; x < res.genre_ids.length ; x++){
+          response.id === res.genre_ids[x] ? genres_array.push(response.name) : ""
+        }
+      });
+    }
       return (
         <div className='eachSwiper_Search' key={res.id}>
           <SearchItems
             image = {res.backdrop_path}
             movie_id = {res.id}
             class_count = {key_mapping}
-            class_key = {"Popular"+key_mapping}
-            genres = {["Drama", "Comedy"]}
+            class_key = {"Search"+key_mapping}
+            genres = {genres_array}
             title = {res.title}
             name = {res.name}
             date = {res.release_date}
             first_air_date = {res.first_air_date}
             overview = {res.overview}
-            // click_funtion = {show_info_Popular}
-            mv_id = {"movie_id_Popular"}
-            nm_id = {"name_key_Popular"}
-            gr_id = {"genre_key_Popular"}
-            dk_id = {"date_key_Popular"}
-            ov_id = {"overview_key_Popular"}
+            click_funtion = {show_info_Search}
+            media_Type = {res.media_type}
+            mv_id = {"movie_id_Search"}
+            nm_id = {"name_key_Search"}
+            gr_id = {"genre_key_Search"}
+            dk_id = {"date_key_Search"}
+            ov_id = {"overview_key_Search"}
+            mt_id = {"mediaType_key_Search"}
           />
         </div>
       )
   });
+
+  // Youtube player functions 
+  const [trailerId_Search, settrailerId_Search] = useState("");
+  var MOVIE_ID_Search = ""
+  function show_info_Search(){
+    for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
+      document.getElementsByClassName("list_container")[x].style.zIndex = "-1"
+      document.getElementsByClassName("list_container")[x].style.position = "static"
+    }
+    
+    document.getElementById("youtube_modal_Search").style.display = "flex"
+    document.getElementById("progress_bar_Search").style.display = "flex"
+
+    var title = document.getElementById("name_key_Search").value
+    var genre = document.getElementById("genre_key_Search").value
+    var date = document.getElementById("date_key_Search").value
+    var overview = document.getElementById("overview_key_Search").value
+
+    document.getElementById("modal_movie_title_Search").textContent = title
+    genre = genre.replace(/,/g, " ● ");
+    document.getElementById("modal_movie_genre_Search").textContent = genre
+    var dateFormat =  moment(date).format('LL');
+    document.getElementById("modal_movie_date_Search").textContent = dateFormat
+    document.getElementById("modal_movie_overview_Search").textContent = overview
+
+    MOVIE_ID_Search = document.getElementById("movie_id_Search").value;
+    setTimeout(function () {
+      document.getElementById("progress_bar_Search").style.display = "none"
+      document.getElementById("my_modal_Search").style.display = "block"
+      loadTrailer_Search();
+      playVideo_Search()
+    }, 700);
+  }
+  function close_info(){
+    for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
+      document.getElementsByClassName("list_container")[x].style.zIndex = "1"
+    }
+    stopVideo_Search()
+    settrailerId_Search(null);
+    document.getElementById("youtube_modal_Search").style.display = "none"
+    document.getElementById("progress_bar_Search").style.display = "block"
+    document.getElementById("my_modal_Search").style.display = "none"
+  }
+
+  const loadTrailer_Search = async () => {
+    const res = await axios.get(`${API_BASE_URL}/${document.getElementById("mediaType_key_Search").value}/${MOVIE_ID_Search}/videos?api_key=${API_KEY}`);
+    for(var i = 0 ; i < res.data.results.length ; i++){
+      if (res.data.results[i].name.toUpperCase().indexOf('TRAILER') > -1)
+      {
+        settrailerId_Search(res.data.results[i].key);
+        break;
+      }
+      else{
+        settrailerId_Search(null);
+      }
+    }
+  };
+
+  // Youtube Video Configuration
+  const [playerSearch, setPlayerSearch] = useState(null);
+  const onReady_Search = (event) => {
+    setPlayerSearch(event.target);
+  };
+  const stopVideo_Search = () => {
+    playerSearch.stopVideo();
+  };
+  const playVideo_Search = () => {
+    playerSearch.playVideo();
+  };
+
+  function sub_close(){
+    if(event.srcElement.id === "youtube_modal_Search"){
+      close_info()
+    }
+  }
 
 
   return (
@@ -176,7 +278,7 @@ export default function Navbar() {
           <a className='links active' href='#HomePage'>Home</a>
           <a className='links' href='#tvShows_now_container'>TV Shows</a>
           <a className='links' href='#Movies_now_container'>Movies</a>
-          <a className='links' href='#Popular_now_container'>New & Popular</a>
+          <a className='links' href='#Search_now_container'>New & Search</a>
           <a className='links' href='#list_container'>My List</a>
 
           {/* For small devices links */}
@@ -232,7 +334,7 @@ export default function Navbar() {
               <a className='mui_links' href='#Movies_now_container'>Movies</a>
             </MenuItem>
             <MenuItem onClick={handleClose}>
-              <a className='mui_links' href='#Popular_now_container'>New & Popular</a>
+              <a className='mui_links' href='#Search_now_container'>New & Search</a>
             </MenuItem>
             <MenuItem onClick={handleClose}>
               <a className='mui_links' href='#list_container'>My List</a>
@@ -252,6 +354,7 @@ export default function Navbar() {
             id="search_input" 
             placeholder='Titles, people, genres'
             onChange={handleChange}
+            autoComplete="off"
             />
           <div className='search_icon' id="close_icon">
             <img src={close_icon} alt="Close" id="close_search" onClick={close_search}/>
@@ -265,7 +368,7 @@ export default function Navbar() {
     {/* Search Container Collection*/}
     <div className='Search_collection' id="Search_collection">
       <div className='container'>
-        <p className='related_title'>Explore titles related to: &nbsp;
+        <p className='related_title' id="related_title">Explore titles related to: &nbsp;
           {related_Titles}
         </p>
 
@@ -273,7 +376,23 @@ export default function Navbar() {
             {EachItems}
         </div>
       </div>
-        
+
+
+      {/* Modal for clicking each_item */}
+      <VideoModal_Search
+         close_info = {close_info}
+         trailerId = {trailerId_Search}
+         onReady = {onReady_Search}
+         sub_close = {sub_close}
+      />
+
+      {/* Movie Id Key Value */}
+      <input type="hidden" id="movie_id_Search"/>
+      <input type="hidden" id="name_key_Search"/>
+      <input type="hidden" id="genre_key_Search"/>
+      <input type="hidden" id="date_key_Search"/>
+      <input type="hidden" id="overview_key_Search"/>
+      <input type="hidden" id="mediaType_key_Search"/>
     </div>
     </>
   )

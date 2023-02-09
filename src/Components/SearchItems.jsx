@@ -27,7 +27,7 @@ export default function SearchItems(props) {
   function hover_this_item(){
     if (window.innerWidth > 821) {
         document.getElementById("for_search_container"+props.class_key).style.width = "400px"
-        document.getElementById("for_search_container"+props.class_key).style.position = "fixed"
+        document.getElementById("for_search_container"+props.class_key).style.position = "absolute"
         document.getElementById("for_search_container"+props.class_key).style.marginTop = "-100px"
   
         props.class_count !== 0 ? document.getElementById("for_search_container"+props.class_key).style.marginLeft = "-55px" : ""
@@ -72,12 +72,6 @@ export default function SearchItems(props) {
     document.getElementById(props.ov_id).value = props.overview
   }
 
-
-  // if (window.innerWidth < 551) {
-  //   for (var x = 0 ; x < document.getElementsByClassName("for_search_container").length ; x++){
-  //     document.getElementsByClassName("for_search_container")[x].style.pointerEvents = "none"
-  //   }
-  // }
 
   return (
     <div className="for_search_container" id={"for_search_container"+props.class_key} onMouseOver={hover_this_item} onMouseOut={out_hover_this_item}

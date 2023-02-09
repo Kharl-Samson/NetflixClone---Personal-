@@ -32,7 +32,7 @@ nav{
     width: 100%;
     height: 68px;
     background: transparent;
-    transition: .5s ease;
+    transition: .3s ease;
     z-index: 99;
 }
 nav .left{
@@ -70,7 +70,7 @@ nav .left .nav_links .browse_container{
 nav .right{
     margin-right: 60px;
     display: flex;
-    gap: 25px;
+    gap: 15px;
     align-items: center;
 }
 nav .right .Search_container{
@@ -174,6 +174,8 @@ nav .right .avatar{
     color: #808080;
     font-size: 1.5rem;
     font-family: netflix_light,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+    opacity: 0;
+    transition: .3s;
 }
 .Search_collection .container .related_title span{
     color: #ffff;
@@ -539,7 +541,7 @@ nav .right .avatar{
         max-width: 90%;
     }
 }
-@media screen and (max-width: 884px) {
+@media screen and (max-width: 951px) {
     .modal_container .my_modal{
         width: 80%;
     }
@@ -607,6 +609,12 @@ nav .right .avatar{
     }
     .modal_container .my_modal .details_container .overview{
         font-size: .9rem;
+    }
+}
+
+@media screen and (max-width: 665px) {
+    nav .right .Search_container{
+        display: none;
     }
 }
 @media screen and (max-width: 601px) {

@@ -67,6 +67,12 @@ export default function Item(props) {
   }
 
   function set_Movie_Details(){
+    document.getElementById("Search_container").style.backgroundColor = "transparent"
+    document.getElementById("Search_container").style.border = "1px solid transparent"
+    document.getElementById("search_input").style.width = "0px"
+    document.getElementById("close_icon").style.width = "0px"
+    document.getElementById("close_search").style.display = "none"
+
     props.media_Type !== undefined ? document.getElementById(props.mt_id).value = props.media_Type : ""
     document.getElementById(props.mv_id).value = props.movie_id
     document.getElementById(props.nm_id).value = props.title === undefined ? props.name : props.title
