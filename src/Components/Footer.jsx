@@ -11,7 +11,7 @@ export default function Footer() {
 
     <div className="info">
         <div className="info_content">
-            <p>This site was developed by Me. It cannot and should not be reproduced in any forms or by any means without the consent from him.</p>
+            <p>This site was developed by Kharl. It cannot and should not be reproduced in any forms or by any means without the consent from him.</p>
         </div>
     </div>
 
@@ -22,7 +22,7 @@ export default function Footer() {
             <a href="#Popular_now_container">New & Popular</a>
             <a href="#list_container">My List</a>
         </div>
-        <p>Netflix Clone by Me © {(new Date().getFullYear())}</p>
+        <p>Netflix Clone by Kharl © {(new Date().getFullYear())}</p>
     </div>
    </div>
 </div>
