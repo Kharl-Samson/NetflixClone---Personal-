@@ -275,11 +275,11 @@ export default function Navbar() {
         <img src={Netflix_Logo} alt="Netflix Logo" className='logo' loading="lazy"/>
 
         <div className='nav_links'>
-          <a className='links active' href='#HomePage'>Home</a>
-          <a className='links' href='#tvShows_now_container'>TV Shows</a>
-          <a className='links' href='#Movies_now_container'>Movies</a>
-          <a className='links' href='#Search_now_container'>New & Search</a>
-          <a className='links' href='#list_container'>My List</a>
+          <a onClick={close_search} className='links active' href='#HomePage'>Home</a>
+          <a onClick={close_search} className='links' href='#tvShows_now_container'>TV Shows</a>
+          <a onClick={close_search} className='links' href='#Movies_now_container'>Movies</a>
+          <a onClick={close_search} className='links' href='#Search_now_container'>New & Search</a>
+          <a onClick={close_search} className='links' href='#list_container'>My List</a>
 
           {/* For small devices links */}
           <div className='browse_container'  onClick={handleClick}>
