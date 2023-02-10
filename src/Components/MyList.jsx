@@ -165,16 +165,18 @@ export default function MyList() {
   const [loaded, setLoaded] = useState(false);
   const loadTrailer = async () => {
     const res = await axios.get(`${API_BASE_URL}/movie/${MOVIE_ID}/videos?api_key=${API_KEY}`);
-    for(var i = 0 ; i < res.data.results.length ; i++){
-      if (res.data.results[i].name.toUpperCase().indexOf('OFFICIAL TRAILER') > -1)
-      {
-        setLoaded(true)
-        setTrailerId(res.data.results[i].key);
-        break;
-      }
-      else{
-        setLoaded(false)
-        setTrailerId(null);
+    if(res.data.results.length !== 0){
+      for(var i = 0 ; i < res.data.results.length ; i++){
+        if (res.data.results[i].name.toUpperCase().indexOf('OFFICIAL TRAILER') > -1)
+        {
+          setLoaded(true)
+          setTrailerId(res.data.results[i].key);
+          break;
+        }
+        else{
+          setLoaded(false)
+          setTrailerId(res.data.results[0].key);
+        }
       }
     }
   };

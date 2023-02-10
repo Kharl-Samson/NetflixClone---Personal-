@@ -166,16 +166,18 @@ export default function Fantasy() {
   const [loaded, setLoaded] = useState(false);
   const loadTrailer_Fantasy = async () => {
     const res = await axios.get(`${API_BASE_URL}/movie/${MOVIE_ID_Fantasy}/videos?api_key=${API_KEY}`);
-    for(var i = 0 ; i < res.data.results.length ; i++){
-      if (res.data.results[i].name.toUpperCase().indexOf('TRAILER') > -1)
-      {
-        setLoaded(true)
-        settrailerId_Fantasy(res.data.results[i].key);
-        break;
-      }
-      else{
-        setLoaded(false)
-        settrailerId_Fantasy(null);
+    if(res.data.results.length !== 0){
+      for(var i = 0 ; i < res.data.results.length ; i++){
+        if (res.data.results[i].name.toUpperCase().indexOf('TRAILER') > -1)
+        {
+          setLoaded(true)
+          settrailerId_Fantasy(res.data.results[i].key);
+          break;
+        }
+        else{
+          setLoaded(false)
+          settrailerId_Fantasy(res.data.results[0].key);
+        }
       }
     }
   };

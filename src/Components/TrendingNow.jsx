@@ -36,7 +36,7 @@ export default function TrendingNow() {
   };
   
   // Generates Random Number from 1 - 20   
-  var random_keyTrend =  Math.floor(Math.random() * 5) + 1;
+  var random_keyTrend =  Math.floor(Math.random() * 20) + 1;
   // Hook for getting all Trending Now
   const [trending, setTrending] = useState([]);
   const loadTrending = async () => {
@@ -169,16 +169,18 @@ export default function TrendingNow() {
   const [loaded, setLoaded] = useState(false);
   const loadTrailer_Trending = async () => {
     const res = await axios.get(`${API_BASE_URL}/${document.getElementById("mediaType_key_Trending").value}/${MOVIE_ID_TRENDING}/videos?api_key=${API_KEY}`);
-    for(var i = 0 ; i < res.data.results.length ; i++){
-      if (res.data.results[i].name.toUpperCase().indexOf('OFFICIAL TRAILER') > -1)
-      {
-        setLoaded(true)
-        settrailerId_trending(res.data.results[i].key);
-        break;
-      }
-      else{
-        setLoaded(false)
-        settrailerId_trending(null);
+    if(res.data.results.length !== 0){
+      for(var i = 0 ; i < res.data.results.length ; i++){
+        if (res.data.results[i].name.toUpperCase().indexOf('OFFICIAL TRAILER') > -1)
+        {
+          setLoaded(true)
+          settrailerId_trending(res.data.results[i].key);
+          break;
+        }
+        else{
+          setLoaded(false)
+          settrailerId_trending(res.data.results[0].key);
+        }
       }
     }
   };

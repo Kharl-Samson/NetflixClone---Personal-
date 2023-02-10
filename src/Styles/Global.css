@@ -147,10 +147,9 @@ nav .right .avatar{
     z-index: 98;
     overflow-y: scroll;
     background-color: transparent;
-    /* background-color: #141414; */
     display: none;
     opacity: 0;
-    transition: .4s;
+    transition: .2s;
 }
 .Search_collection::-webkit-scrollbar {
     width: 5px;

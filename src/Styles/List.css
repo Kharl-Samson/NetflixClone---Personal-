@@ -20,7 +20,6 @@
 }
 .list_container .title{
     position: relative;
-    z-index: 1;
     font-size: 1.7rem;
     margin-right: 20px;
     font-family: netflix_medium,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;

@@ -47,28 +47,24 @@ export default function Navbar() {
   function click_search_icon(){
       document.getElementById("Search_container").style.backgroundColor = "rgba(0, 0, 0, 0.616)"
       document.getElementById("Search_container").style.border = "1px solid #ffff"
-
       document.getElementById("search_input").style.width = "190px"
       document.getElementById("close_icon").style.width = "40px"
+      document.getElementById("search_input").focus();
   } 
   function close_search(){
     setResults([]);
-    
+    document.getElementById("search_input").blur();
     document.getElementById("search_input").value = null
-
     document.getElementById("Search_collection").style.backgroundColor = "transparent"
     document.getElementById("Search_collection").style.opacity = "0"
     setTimeout(function () {
       document.getElementById("Search_collection").style.display = "none"
     }, 400);
-
     document.getElementById("Search_container").style.backgroundColor = "transparent"
     document.getElementById("Search_container").style.border = "1px solid transparent"
-
     document.getElementById("search_input").style.width = "0px"
     document.getElementById("close_icon").style.width = "0px"
     document.getElementById("close_search").style.display = "none"
-
   }
 
   // My API Setting Configuration
@@ -85,7 +81,7 @@ export default function Navbar() {
         document.getElementById("Search_collection").style.backgroundColor = "#141414"
         document.getElementById("Search_collection").style.opacity = "100%"
         document.getElementById("related_title").style.opacity = "100%"
-      }, 400);
+      }, 300);
 
       const response = await fetch(`${API_BASE_URL}/search/multi?page=1&api_key=${API_KEY}&query=${document.getElementById("search_input").value}`);
       const response_page2 = await fetch(`${API_BASE_URL}/search/multi?page=2&api_key=${API_KEY}&query=${document.getElementById("search_input").value}`);
@@ -101,7 +97,7 @@ export default function Navbar() {
       document.getElementById("related_title").style.opacity = "0"
       setTimeout(function () {
         document.getElementById("Search_collection").style.display = "none"
-      }, 300);
+      }, 400);
       setResults([]);
     }
   };
@@ -141,7 +137,6 @@ export default function Navbar() {
   useEffect(() => {
     loadGenre();
   }, [API_KEY, API_BASE_URL]);
-
 
   function uniqurArrayID(array){
     var a = array.concat();
@@ -254,16 +249,18 @@ export default function Navbar() {
   const [loaded, setLoaded] = useState(false);
   const loadTrailer_Search = async () => {
     const res = await axios.get(`${API_BASE_URL}/${document.getElementById("mediaType_key_Search").value}/${MOVIE_ID_Search}/videos?api_key=${API_KEY}`);
-    for(var i = 0 ; i < res.data.results.length ; i++){
-      if (res.data.results[i].name.toUpperCase().indexOf('TRAILER') > -1)
-      {
-        setLoaded(true)
-        settrailerId_Search(res.data.results[i].key);
-        break;
-      }
-      else{
-        setLoaded(false)
-        settrailerId_Search(null);
+    if(res.data.results.length !== 0){
+      for(var i = 0 ; i < res.data.results.length ; i++){
+        if (res.data.results[i].name.toUpperCase().indexOf('TRAILER') > -1)
+        {
+          setLoaded(true)
+          settrailerId_Search(res.data.results[i].key);
+          break;
+        }
+        else{
+          setLoaded(false)
+          settrailerId_Search(null);
+        }
       }
     }
   };

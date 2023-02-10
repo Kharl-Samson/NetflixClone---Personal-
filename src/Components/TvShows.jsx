@@ -167,16 +167,18 @@ export default function TvShows() {
   const [loaded, setLoaded] = useState(false);
   const loadTrailer_tvShows = async () => {
     const res = await axios.get(`${API_BASE_URL}/tv/${MOVIE_ID_tvShows}/videos?api_key=${API_KEY}`);
-    for(var i = 0 ; i < res.data.results.length ; i++){
-      if (res.data.results[i].name.toUpperCase().indexOf('TRAILER') > -1)
-      {
-        setLoaded(true)
-        settrailerId_tvShows(res.data.results[i].key);
-        break;
-      }
-      else{
-        setLoaded(false)
-        settrailerId_tvShows(null);
+    if(res.data.results.length !== 0){
+      for(var i = 0 ; i < res.data.results.length ; i++){
+        if (res.data.results[i].name.toUpperCase().indexOf('TRAILER') > -1)
+        {
+          setLoaded(true)
+          settrailerId_tvShows(res.data.results[i].key);
+          break;
+        }
+        else{
+          setLoaded(false)
+          settrailerId_tvShows(res.data.results[0].key);
+        }
       }
     }
   };

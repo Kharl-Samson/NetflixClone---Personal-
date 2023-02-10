@@ -166,16 +166,18 @@ export default function Documentary() {
   const [loaded, setLoaded] = useState(false);
   const loadTrailer_Documentary = async () => {
     const res = await axios.get(`${API_BASE_URL}/tv/${MOVIE_ID_Documentary}/videos?api_key=${API_KEY}`);
-    for(var i = 0 ; i < res.data.results.length ; i++){
-      if (res.data.results[i].name.toUpperCase().indexOf('TRAILER') > -1)
-      {
-        setLoaded(true)
-        settrailerId_Documentary(res.data.results[i].key);
-        break;
-      }
-      else{
-        setLoaded(false)
-        settrailerId_Documentary(null);
+    if(res.data.results.length !== 0){
+      for(var i = 0 ; i < res.data.results.length ; i++){
+        if (res.data.results[i].name.toUpperCase().indexOf('TRAILER') > -1)
+        {
+          setLoaded(true)
+          settrailerId_Documentary(res.data.results[i].key);
+          break;
+        }
+        else{
+            setLoaded(false)
+            settrailerId_Documentary(res.data.results[0].key);
+        }
       }
     }
   };
