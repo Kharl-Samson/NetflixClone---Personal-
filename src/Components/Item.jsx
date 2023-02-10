@@ -10,7 +10,7 @@ import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 // uuid
 import uuid from 'react-uuid';
 
-import LazyLoad from 'react-lazyload';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 // Tooltip Configuration
 const LightTooltip = styled(({ className, ...props }) => (
@@ -88,16 +88,16 @@ export default function Item(props) {
     onClick={() => { set_Movie_Details();props.click_funtion()}}
     >
 
-    <LazyLoad once={true} placeholder={<img src={handler_img} alt="Movie Cover" className='movie_cover' />}>
-      <img src={"https://image.tmdb.org/t/p/original/" + props.image}
-        id={"movie_cover" + props.class_key}
-        alt="Movie Cover"
-        className='movie_cover'
-        onError={(e) => { e.target.onerror = null; e.target.src = handler_img }}
-      />
-    </LazyLoad>
+    <LazyLoadImage
+      id={"movie_cover" + props.class_key}
+      alt="Movie Cover"
+      src={"https://image.tmdb.org/t/p/original/" + props.image}
+      className='movie_cover'
+      onError={(e) => { e.target.onerror = null; e.target.src = handler_img }}
+      placeholderSrc = {handler_img}
+    />
 
-      
+
       <div className='btn_configuration'>
         <div className='side'>
           <div className='circle'>
