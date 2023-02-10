@@ -80,6 +80,7 @@ export default function SearchItems(props) {
     >
 
     <LazyLoadImage
+      effect="blur"
       id={"movie_cover"+props.class_key}  
       alt="Movie Cover" 
       src={"https://image.tmdb.org/t/p/original/"+props.image} 
