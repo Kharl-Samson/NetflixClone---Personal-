@@ -107,6 +107,7 @@ export default function TopRated() {
   // Youtube player functions 
   const [trailerId_topRated, settrailerId_topRated] = useState("");
   var MOVIE_ID_topRated = ""
+
   function show_info_topRated(){
     for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
       document.getElementsByClassName("list_container")[x].style.zIndex = "-1"
@@ -133,7 +134,9 @@ export default function TopRated() {
       document.getElementById("progress_bar_topRated").style.display = "none"
       document.getElementById("my_modal_topRated").style.display = "block"
       loadTrailer_topRated();
-      playVideo_topRated()
+      if(loaded === true){
+        playVideo_topRated()
+      }
     }, 700);
   }
   function close_info(){
@@ -141,22 +144,29 @@ export default function TopRated() {
       document.getElementsByClassName("list_container")[x].style.zIndex = "1"
     }
 
-    stopVideo_topRated()
+    if(loaded === true){
+      stopVideo_topRated()
+    }
     settrailerId_topRated(null);
+    setLoaded(false)
+
     document.getElementById("youtube_modal_topRated").style.display = "none"
     document.getElementById("progress_bar_topRated").style.display = "block"
     document.getElementById("my_modal_topRated").style.display = "none"
   }
 
+  const [loaded, setLoaded] = useState(false);
   const loadTrailer_topRated = async () => {
     const res = await axios.get(`${API_BASE_URL}/movie/${MOVIE_ID_topRated}/videos?api_key=${API_KEY}`);
     for(var i = 0 ; i < res.data.results.length ; i++){
       if (res.data.results[i].name.toUpperCase().indexOf('TRAILER') > -1)
       {
+        setLoaded(true)
         settrailerId_topRated(res.data.results[i].key);
         break;
       }
       else{
+        setLoaded(false)
         settrailerId_topRated(null);
       }
     }

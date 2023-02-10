@@ -188,7 +188,7 @@ nav .right .avatar{
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
+    justify-content:center;
     gap: 15px;
 }
 

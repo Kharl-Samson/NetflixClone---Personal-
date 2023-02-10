@@ -221,29 +221,37 @@ export default function Navbar() {
       document.getElementById("progress_bar_Search").style.display = "none"
       document.getElementById("my_modal_Search").style.display = "block"
       loadTrailer_Search();
-      playVideo_Search()
+      if(loaded === true){
+        playVideo_Search()
+      }
     }, 700);
   }
   function close_info(){
     for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
       document.getElementsByClassName("list_container")[x].style.zIndex = "1"
     }
-    stopVideo_Search()
+    if(loaded === true){
+      stopVideo_Search()
+    }
     settrailerId_Search(null);
+    setLoaded(false)
     document.getElementById("youtube_modal_Search").style.display = "none"
     document.getElementById("progress_bar_Search").style.display = "block"
     document.getElementById("my_modal_Search").style.display = "none"
   }
 
+  const [loaded, setLoaded] = useState(false);
   const loadTrailer_Search = async () => {
     const res = await axios.get(`${API_BASE_URL}/${document.getElementById("mediaType_key_Search").value}/${MOVIE_ID_Search}/videos?api_key=${API_KEY}`);
     for(var i = 0 ; i < res.data.results.length ; i++){
       if (res.data.results[i].name.toUpperCase().indexOf('TRAILER') > -1)
       {
+        setLoaded(true)
         settrailerId_Search(res.data.results[i].key);
         break;
       }
       else{
+        setLoaded(false)
         settrailerId_Search(null);
       }
     }
@@ -270,7 +278,7 @@ export default function Navbar() {
 
   return (
     <>
-    <nav id="navbar">
+    <nav id="navbar" onClick={close_info}>
       <div className='left'>
         <img src={Netflix_Logo} alt="Netflix Logo" className='logo' loading="lazy"/>
 

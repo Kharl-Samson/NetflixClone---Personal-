@@ -134,29 +134,37 @@ export default function Fantasy() {
       document.getElementById("progress_bar_Fantasy").style.display = "none"
       document.getElementById("my_modal_Fantasy").style.display = "block"
       loadTrailer_Fantasy();
-      playVideo_Fantasy()
+      if(loaded === true){
+        playVideo_Fantasy()
+      }
     }, 700);
   }
   function close_info(){
     for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
       document.getElementsByClassName("list_container")[x].style.zIndex = "1"
     }
-    stopVideo_Fantasy()
+    if(loaded === true){
+      stopVideo_Fantasy()
+    }
     settrailerId_Fantasy(null);
+    setLoaded(false)
     document.getElementById("youtube_modal_Fantasy").style.display = "none"
     document.getElementById("progress_bar_Fantasy").style.display = "block"
     document.getElementById("my_modal_Fantasy").style.display = "none"
   }
 
+  const [loaded, setLoaded] = useState(false);
   const loadTrailer_Fantasy = async () => {
     const res = await axios.get(`${API_BASE_URL}/movie/${MOVIE_ID_Fantasy}/videos?api_key=${API_KEY}`);
     for(var i = 0 ; i < res.data.results.length ; i++){
       if (res.data.results[i].name.toUpperCase().indexOf('TRAILER') > -1)
       {
+        setLoaded(true)
         settrailerId_Fantasy(res.data.results[i].key);
         break;
       }
       else{
+        setLoaded(false)
         settrailerId_Fantasy(null);
       }
     }

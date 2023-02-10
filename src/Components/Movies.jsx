@@ -135,29 +135,37 @@ export default function Movies() {
       document.getElementById("progress_bar_Movies").style.display = "none"
       document.getElementById("my_modal_Movies").style.display = "block"
       loadTrailer_Movies();
-      playVideo_Movies()
+      if(loaded === true){
+        playVideo_Movies()
+      }
     }, 700);
   }
   function close_info(){
     for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
       document.getElementsByClassName("list_container")[x].style.zIndex = "1"
     }
-    stopVideo_Movies()
+    if(loaded === true){
+      stopVideo_Movies()
+    }
     settrailerId_Movies(null);
+    setLoaded(false)
     document.getElementById("youtube_modal_Movies").style.display = "none"
     document.getElementById("progress_bar_Movies").style.display = "block"
     document.getElementById("my_modal_Movies").style.display = "none"
   }
 
+  const [loaded, setLoaded] = useState(false);
   const loadTrailer_Movies = async () => {
     const res = await axios.get(`${API_BASE_URL}/movie/${MOVIE_ID_Movies}/videos?api_key=${API_KEY}`);
     for(var i = 0 ; i < res.data.results.length ; i++){
       if (res.data.results[i].name.toUpperCase().indexOf('TRAILER') > -1)
       {
+        setLoaded(true)
         settrailerId_Movies(res.data.results[i].key);
         break;
       }
       else{
+        setLoaded(false)
         settrailerId_Movies(null);
       }
     }

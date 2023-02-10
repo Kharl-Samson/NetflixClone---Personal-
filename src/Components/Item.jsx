@@ -10,6 +10,7 @@ import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 // uuid
 import uuid from 'react-uuid';
 
+import LazyLoad from 'react-lazyload';
 
 // Tooltip Configuration
 const LightTooltip = styled(({ className, ...props }) => (
@@ -82,22 +83,20 @@ export default function Item(props) {
   }
 
 
-  // if (window.innerWidth < 551) {
-  //   for (var x = 0 ; x < document.getElementsByClassName("each_image").length ; x++){
-  //     document.getElementsByClassName("each_image")[x].style.pointerEvents = "none"
-  //   }
-  // }
-
   return (
     <div className="each_image" id={"each_image"+props.class_key} onMouseOver={hover_this_item} onMouseOut={out_hover_this_item}
     onClick={() => { set_Movie_Details();props.click_funtion()}}
     >
-      <img src={"https://image.tmdb.org/t/p/original/"+props.image} 
-        id={"movie_cover"+props.class_key}  
-        alt="Movie Cover" 
+
+    <LazyLoad once={true} placeholder={<img src={handler_img} alt="Movie Cover" className='movie_cover' />}>
+      <img src={"https://image.tmdb.org/t/p/original/" + props.image}
+        id={"movie_cover" + props.class_key}
+        alt="Movie Cover"
         className='movie_cover'
-        onError={(e)=>{e.target.onerror = null; e.target.src=handler_img}}
-        />
+        onError={(e) => { e.target.onerror = null; e.target.src = handler_img }}
+      />
+    </LazyLoad>
+
       
       <div className='btn_configuration'>
         <div className='side'>
@@ -127,7 +126,7 @@ export default function Item(props) {
       <div className='section_part'>
         {
           props.genres.map((response) => {
-            return <p key={uuid()}><b>●</b>&nbsp;<span className={"genres"+props.class_key}>{response}</span></p>
+            return <p key={uuid()}><b>● &nbsp;</b><span className={"genres"+props.class_key}>{response}</span></p>
           })
         }
       </div>

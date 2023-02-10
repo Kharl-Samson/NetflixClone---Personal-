@@ -134,29 +134,37 @@ export default function ActionMovies() {
       document.getElementById("progress_bar_ActionMovies").style.display = "none"
       document.getElementById("my_modal_ActionMovies").style.display = "block"
       loadTrailer_ActionMovies();
-      playVideo_ActionMovies()
+      if(loaded === true){
+        playVideo_ActionMovies()
+      }   
     }, 700);
   }
   function close_info(){
     for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
       document.getElementsByClassName("list_container")[x].style.zIndex = "1"
     }
-    stopVideo_ActionMovies()
+    if(loaded === true){
+      stopVideo_ActionMovies()
+    }
     settrailerId_ActionMovies(null);
+    setLoaded(false)
     document.getElementById("youtube_modal_ActionMovies").style.display = "none"
     document.getElementById("progress_bar_ActionMovies").style.display = "block"
     document.getElementById("my_modal_ActionMovies").style.display = "none"
   }
 
+  const [loaded, setLoaded] = useState(false);
   const loadTrailer_ActionMovies = async () => {
     const res = await axios.get(`${API_BASE_URL}/movie/${MOVIE_ID_ActionMovies}/videos?api_key=${API_KEY}`);
     for(var i = 0 ; i < res.data.results.length ; i++){
       if (res.data.results[i].name.toUpperCase().indexOf('TRAILER') > -1)
       {
+        setLoaded(true)
         settrailerId_ActionMovies(res.data.results[i].key);
         break;
       }
       else{
+        setLoaded(false)
         settrailerId_ActionMovies(null);
       }
     }

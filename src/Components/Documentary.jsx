@@ -134,29 +134,37 @@ export default function Documentary() {
       document.getElementById("progress_bar_Documentary").style.display = "none"
       document.getElementById("my_modal_Documentary").style.display = "block"
       loadTrailer_Documentary();
-      playVideo_Documentary()
+      if(loaded === true){
+        playVideo_Documentary()
+      }
     }, 700);
   }
   function close_info(){
     for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
       document.getElementsByClassName("list_container")[x].style.zIndex = "1"
     }
-    stopVideo_Documentary()
+    if(loaded === true){
+      stopVideo_Documentary()
+    }
     settrailerId_Documentary(null);
+    setLoaded(false)
     document.getElementById("youtube_modal_Documentary").style.display = "none"
     document.getElementById("progress_bar_Documentary").style.display = "block"
     document.getElementById("my_modal_Documentary").style.display = "none"
   }
 
+  const [loaded, setLoaded] = useState(false);
   const loadTrailer_Documentary = async () => {
     const res = await axios.get(`${API_BASE_URL}/tv/${MOVIE_ID_Documentary}/videos?api_key=${API_KEY}`);
     for(var i = 0 ; i < res.data.results.length ; i++){
       if (res.data.results[i].name.toUpperCase().indexOf('TRAILER') > -1)
       {
+        setLoaded(true)
         settrailerId_Documentary(res.data.results[i].key);
         break;
       }
       else{
+        setLoaded(false)
         settrailerId_Documentary(null);
       }
     }
