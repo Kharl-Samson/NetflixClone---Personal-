@@ -220,7 +220,7 @@ export default function MyList() {
       sub_close = {sub_close}
     />
 
-    {/* Movie Id Key Value */}
+    {/* Movie Id Key Values */}
     <input type="hidden" id="movie_id_List"/>
     <input type="hidden" id="name_key_List"/>
     <input type="hidden" id="genre_key_List"/>
