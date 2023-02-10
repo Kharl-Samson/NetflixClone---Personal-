@@ -43,6 +43,18 @@ export default function Navbar() {
       lastScrollTop = st;
   }); 
 
+  $("#Search_collection").scroll(function(event){    
+    var st = $(this).scrollTop();
+    if (st > lastScrollTop){
+      document.getElementById("navbar").style.backgroundColor = "#080808"
+    }
+    else if($(window).scrollTop() === 0) {  
+      document.getElementById("navbar").style.backgroundColor = "transparent"
+    }
+    lastScrollTop = st;
+  }); 
+
+
   //Click Search Icon
   function click_search_icon(){
       document.getElementById("Search_container").style.backgroundColor = "rgba(0, 0, 0, 0.616)"
