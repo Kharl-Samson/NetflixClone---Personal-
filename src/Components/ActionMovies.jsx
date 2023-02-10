@@ -108,38 +108,48 @@ export default function ActionMovies() {
   // Youtube player functions 
   const [trailerId_ActionMovies, settrailerId_ActionMovies] = useState("");
   var MOVIE_ID_ActionMovies = ""
+
+  const [videoStatus, setVideoStatus] = useState(false);
   function show_info_ActionMovies(){
-    for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
-      document.getElementsByClassName("list_container")[x].style.zIndex = "-1"
-      document.getElementsByClassName("list_container")[x].style.position = "static"
-    }
-    
-    document.getElementById("youtube_modal_ActionMovies").style.display = "flex"
-    document.getElementById("progress_bar_ActionMovies").style.display = "flex"
-
-    var title = document.getElementById("name_key_ActionMovies").value
-    var genre = document.getElementById("genre_key_ActionMovies").value
-    var date = document.getElementById("date_key_ActionMovies").value
-    var overview = document.getElementById("overview_key_ActionMovies").value
-
-    document.getElementById("modal_movie_title_ActionMovies").textContent = title
-    genre = genre.replace(/,/g, " ● ");
-    document.getElementById("modal_movie_genre_ActionMovies").textContent = genre
-    var dateFormat =  moment(date).format('LL');
-    document.getElementById("modal_movie_date_ActionMovies").textContent = dateFormat
-    document.getElementById("modal_movie_overview_ActionMovies").textContent = overview
-
-    MOVIE_ID_ActionMovies = document.getElementById("movie_id_ActionMovies").value;
-    setTimeout(function () {
-      document.getElementById("progress_bar_ActionMovies").style.display = "none"
-      document.getElementById("my_modal_ActionMovies").style.display = "block"
-      loadTrailer_ActionMovies();
-      if(loaded === true){
-        playVideo_ActionMovies()
-      }   
-    }, 700);
+    setVideoStatus(true)
   }
+
+  useEffect(() => {
+    if(videoStatus === true){
+      for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
+        document.getElementsByClassName("list_container")[x].style.zIndex = "-1"
+        document.getElementsByClassName("list_container")[x].style.position = "static"
+      }
+      
+      document.getElementById("youtube_modal_ActionMovies").style.display = "flex"
+      document.getElementById("progress_bar_ActionMovies").style.display = "flex"
+  
+      var title = document.getElementById("name_key_ActionMovies").value
+      var genre = document.getElementById("genre_key_ActionMovies").value
+      var date = document.getElementById("date_key_ActionMovies").value
+      var overview = document.getElementById("overview_key_ActionMovies").value
+  
+      document.getElementById("modal_movie_title_ActionMovies").textContent = title
+      genre = genre.replace(/,/g, " ● ");
+      document.getElementById("modal_movie_genre_ActionMovies").textContent = genre
+      var dateFormat =  moment(date).format('LL');
+      document.getElementById("modal_movie_date_ActionMovies").textContent = dateFormat
+      document.getElementById("modal_movie_overview_ActionMovies").textContent = overview
+  
+      MOVIE_ID_ActionMovies = document.getElementById("movie_id_ActionMovies").value;
+      setTimeout(function () {
+        document.getElementById("progress_bar_ActionMovies").style.display = "none"
+        document.getElementById("my_modal_ActionMovies").style.display = "block"
+        loadTrailer_ActionMovies();
+        if(loaded === true){
+          playVideo_ActionMovies()
+        }   
+      }, 700);
+    }
+  }, [videoStatus]);
+
   function close_info(){
+    setVideoStatus(false)
     for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
       document.getElementsByClassName("list_container")[x].style.zIndex = "1"
     }
@@ -222,13 +232,15 @@ export default function ActionMovies() {
     </div>
 
       {/* Modal for clicking each_item */}
-      <VideoModal_ActionMovies
-        close_info = {close_info}
-        trailerId = {trailerId_ActionMovies}
-        onReady = {onReady_ActionMovies}
-        sub_close = {sub_close}
-      />
-
+      {
+      videoStatus ?
+        <VideoModal_ActionMovies
+          close_info = {close_info}
+          trailerId = {trailerId_ActionMovies}
+          onReady = {onReady_ActionMovies}
+          sub_close = {sub_close}
+        /> : ""
+      }
 
       {/* Movie Id Key Value */}
       <input type="hidden" id="movie_id_ActionMovies"/>

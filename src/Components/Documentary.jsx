@@ -108,38 +108,48 @@ export default function Documentary() {
   // Youtube player functions 
   const [trailerId_Documentary, settrailerId_Documentary] = useState("");
   var MOVIE_ID_Documentary = ""
+
+  const [videoStatus, setVideoStatus] = useState(false);
   function show_info_Documentary(){
-    for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
-      document.getElementsByClassName("list_container")[x].style.zIndex = "-1"
-      document.getElementsByClassName("list_container")[x].style.position = "static"
-    }
-    
-    document.getElementById("youtube_modal_Documentary").style.display = "flex"
-    document.getElementById("progress_bar_Documentary").style.display = "flex"
-
-    var title = document.getElementById("name_key_Documentary").value
-    var genre = document.getElementById("genre_key_Documentary").value
-    var date = document.getElementById("date_key_Documentary").value
-    var overview = document.getElementById("overview_key_Documentary").value
-
-    document.getElementById("modal_movie_title_Documentary").textContent = title
-    genre = genre.replace(/,/g, " ● ");
-    document.getElementById("modal_movie_genre_Documentary").textContent = genre
-    var dateFormat =  moment(date).format('LL');
-    document.getElementById("modal_movie_date_Documentary").textContent = dateFormat
-    document.getElementById("modal_movie_overview_Documentary").textContent = overview
-
-    MOVIE_ID_Documentary = document.getElementById("movie_id_Documentary").value;
-    setTimeout(function () {
-      document.getElementById("progress_bar_Documentary").style.display = "none"
-      document.getElementById("my_modal_Documentary").style.display = "block"
-      loadTrailer_Documentary();
-      if(loaded === true){
-        playVideo_Documentary()
-      }
-    }, 700);
+    setVideoStatus(true)
   }
+
+  useEffect(() => {
+    if(videoStatus === true){
+      for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
+        document.getElementsByClassName("list_container")[x].style.zIndex = "-1"
+        document.getElementsByClassName("list_container")[x].style.position = "static"
+      }
+      
+      document.getElementById("youtube_modal_Documentary").style.display = "flex"
+      document.getElementById("progress_bar_Documentary").style.display = "flex"
+  
+      var title = document.getElementById("name_key_Documentary").value
+      var genre = document.getElementById("genre_key_Documentary").value
+      var date = document.getElementById("date_key_Documentary").value
+      var overview = document.getElementById("overview_key_Documentary").value
+  
+      document.getElementById("modal_movie_title_Documentary").textContent = title
+      genre = genre.replace(/,/g, " ● ");
+      document.getElementById("modal_movie_genre_Documentary").textContent = genre
+      var dateFormat =  moment(date).format('LL');
+      document.getElementById("modal_movie_date_Documentary").textContent = dateFormat
+      document.getElementById("modal_movie_overview_Documentary").textContent = overview
+  
+      MOVIE_ID_Documentary = document.getElementById("movie_id_Documentary").value;
+      setTimeout(function () {
+        document.getElementById("progress_bar_Documentary").style.display = "none"
+        document.getElementById("my_modal_Documentary").style.display = "block"
+        loadTrailer_Documentary();
+        if(loaded === true){
+          playVideo_Documentary()
+        }
+      }, 700);
+    }
+  }, [videoStatus]);
+
   function close_info(){
+    setVideoStatus(false)
     for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
       document.getElementsByClassName("list_container")[x].style.zIndex = "1"
     }
@@ -222,13 +232,15 @@ export default function Documentary() {
     </div>
 
       {/* Modal for clicking each_item */}
-      <VideoModal_Documentary
-        close_info = {close_info}
-        trailerId = {trailerId_Documentary}
-        onReady = {onReady_Documentary}
-        sub_close = {sub_close}
-      />
-
+      {
+      videoStatus ?
+        <VideoModal_Documentary
+          close_info = {close_info}
+          trailerId = {trailerId_Documentary}
+          onReady = {onReady_Documentary}
+          sub_close = {sub_close}
+        /> : ""
+      }
 
       {/* Movie Id Key Value */}
       <input type="hidden" id="movie_id_Documentary"/>

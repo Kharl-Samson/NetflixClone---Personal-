@@ -110,38 +110,48 @@ export default function Susepenseful() {
   // Youtube player functions 
   const [trailerId_suspenseful, settrailerId_suspenseful] = useState("");
   var MOVIE_ID_suspenseful = ""
+
+  const [videoStatus, setVideoStatus] = useState(false);
   function show_info_suspenseful(){
-    for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
-      document.getElementsByClassName("list_container")[x].style.zIndex = "-1"
-      document.getElementsByClassName("list_container")[x].style.position = "static"
-    }
-    
-    document.getElementById("youtube_modal_suspenseful").style.display = "flex"
-    document.getElementById("progress_bar_suspenseful").style.display = "flex"
-
-    var title = document.getElementById("name_key_suspenseful").value
-    var genre = document.getElementById("genre_key_suspenseful").value
-    var date = document.getElementById("date_key_suspenseful").value
-    var overview = document.getElementById("overview_key_suspenseful").value
-
-    document.getElementById("modal_movie_title_suspenseful").textContent = title
-    genre = genre.replace(/,/g, " ● ");
-    document.getElementById("modal_movie_genre_suspenseful").textContent = genre
-    var dateFormat =  moment(date).format('LL');
-    document.getElementById("modal_movie_date_suspenseful").textContent = dateFormat
-    document.getElementById("modal_movie_overview_suspenseful").textContent = overview
-
-    MOVIE_ID_suspenseful = document.getElementById("movie_id_suspenseful").value;
-    setTimeout(function () {
-      document.getElementById("progress_bar_suspenseful").style.display = "none"
-      document.getElementById("my_modal_suspenseful").style.display = "block"
-      loadTrailer_suspenseful();
-      if(loaded === true){
-        playVideo_suspenseful()
-      }
-    }, 700);
+    setVideoStatus(true)
   }
+
+  useEffect(() => {
+    if(videoStatus === true){
+      for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
+        document.getElementsByClassName("list_container")[x].style.zIndex = "-1"
+        document.getElementsByClassName("list_container")[x].style.position = "static"
+      }
+      
+      document.getElementById("youtube_modal_suspenseful").style.display = "flex"
+      document.getElementById("progress_bar_suspenseful").style.display = "flex"
+  
+      var title = document.getElementById("name_key_suspenseful").value
+      var genre = document.getElementById("genre_key_suspenseful").value
+      var date = document.getElementById("date_key_suspenseful").value
+      var overview = document.getElementById("overview_key_suspenseful").value
+  
+      document.getElementById("modal_movie_title_suspenseful").textContent = title
+      genre = genre.replace(/,/g, " ● ");
+      document.getElementById("modal_movie_genre_suspenseful").textContent = genre
+      var dateFormat =  moment(date).format('LL');
+      document.getElementById("modal_movie_date_suspenseful").textContent = dateFormat
+      document.getElementById("modal_movie_overview_suspenseful").textContent = overview
+  
+      MOVIE_ID_suspenseful = document.getElementById("movie_id_suspenseful").value;
+      setTimeout(function () {
+        document.getElementById("progress_bar_suspenseful").style.display = "none"
+        document.getElementById("my_modal_suspenseful").style.display = "block"
+        loadTrailer_suspenseful();
+        if(loaded === true){
+          playVideo_suspenseful()
+        }
+      }, 700);
+    }
+  }, [videoStatus]);
+
   function close_info(){
+    setVideoStatus(false)
     for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
       document.getElementsByClassName("list_container")[x].style.zIndex = "1"
     }
@@ -224,13 +234,16 @@ export default function Susepenseful() {
     </div>
 
       {/* Modal for clicking each_item */}
-      <VideoModal_suspenseful
-          close_info = {close_info}
-          trailerId = {trailerId_suspenseful}
-          onReady = {onReady_suspenseful}
-          sub_close = {sub_close}
-      />
-
+      {
+        videoStatus ?
+          <VideoModal_suspenseful
+            close_info = {close_info}
+            trailerId = {trailerId_suspenseful}
+            onReady = {onReady_suspenseful}
+            sub_close = {sub_close}
+          /> : ""
+      }
+   
 
       {/* Movie Id Key Value */}
       <input type="hidden" id="movie_id_suspenseful"/>

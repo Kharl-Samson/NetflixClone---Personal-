@@ -108,38 +108,48 @@ export default function TvShows() {
   // Youtube player functions 
   const [trailerId_tvShows, settrailerId_tvShows] = useState("");
   var MOVIE_ID_tvShows = ""
+
+  const [videoStatus, setVideoStatus] = useState(false);
   function show_info_tvShows(){
-    for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
-      document.getElementsByClassName("list_container")[x].style.zIndex = "-1"
-      document.getElementsByClassName("list_container")[x].style.position = "static"
-    }
-    
-    document.getElementById("youtube_modal_tvShows").style.display = "flex"
-    document.getElementById("progress_bar_tvShows").style.display = "flex"
-
-    var title = document.getElementById("name_key_tvShows").value
-    var genre = document.getElementById("genre_key_tvShows").value
-    var date = document.getElementById("date_key_tvShows").value
-    var overview = document.getElementById("overview_key_tvShows").value
-
-    document.getElementById("modal_movie_title_tvShows").textContent = title
-    genre = genre.replace(/,/g, " ● ");
-    document.getElementById("modal_movie_genre_tvShows").textContent = genre
-    var dateFormat =  moment(date).format('LL');
-    document.getElementById("modal_movie_date_tvShows").textContent = dateFormat
-    document.getElementById("modal_movie_overview_tvShows").textContent = overview
-
-    MOVIE_ID_tvShows = document.getElementById("movie_id_tvShows").value;
-    setTimeout(function () {
-      document.getElementById("progress_bar_tvShows").style.display = "none"
-      document.getElementById("my_modal_tvShows").style.display = "block"
-      loadTrailer_tvShows();
-      if(loaded === true){
-        playVideo_tvShows()
-      } 
-    }, 700);
+    setVideoStatus(true)
   }
+
+  useEffect(() => {
+    if(videoStatus === true){
+      for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
+        document.getElementsByClassName("list_container")[x].style.zIndex = "-1"
+        document.getElementsByClassName("list_container")[x].style.position = "static"
+      }
+      
+      document.getElementById("youtube_modal_tvShows").style.display = "flex"
+      document.getElementById("progress_bar_tvShows").style.display = "flex"
+  
+      var title = document.getElementById("name_key_tvShows").value
+      var genre = document.getElementById("genre_key_tvShows").value
+      var date = document.getElementById("date_key_tvShows").value
+      var overview = document.getElementById("overview_key_tvShows").value
+  
+      document.getElementById("modal_movie_title_tvShows").textContent = title
+      genre = genre.replace(/,/g, " ● ");
+      document.getElementById("modal_movie_genre_tvShows").textContent = genre
+      var dateFormat =  moment(date).format('LL');
+      document.getElementById("modal_movie_date_tvShows").textContent = dateFormat
+      document.getElementById("modal_movie_overview_tvShows").textContent = overview
+  
+      MOVIE_ID_tvShows = document.getElementById("movie_id_tvShows").value;
+      setTimeout(function () {
+        document.getElementById("progress_bar_tvShows").style.display = "none"
+        document.getElementById("my_modal_tvShows").style.display = "block"
+        loadTrailer_tvShows();
+        if(loaded === true){
+          playVideo_tvShows()
+        } 
+      }, 700);
+    }
+  }, [videoStatus]);
+
   function close_info(){
+    setVideoStatus(false)
     for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
       document.getElementsByClassName("list_container")[x].style.zIndex = "1"
     }
@@ -223,12 +233,15 @@ export default function TvShows() {
     </div>
 
       {/* Modal for clicking each_item */}
-      <VideoModal_tvShows
-        close_info = {close_info}
-        trailerId = {trailerId_tvShows}
-        onReady = {onReady_tvShows}
-        sub_close = {sub_close}
-      />
+      {
+      videoStatus ?
+        <VideoModal_tvShows
+          close_info = {close_info}
+          trailerId = {trailerId_tvShows}
+          onReady = {onReady_tvShows}
+          sub_close = {sub_close}
+        /> : ""
+      }
 
       {/* Movie Id Key Value */}
       <input type="hidden" id="movie_id_tvShows"/>

@@ -108,38 +108,48 @@ export default function Fantasy() {
   // Youtube player functions 
   const [trailerId_Fantasy, settrailerId_Fantasy] = useState("");
   var MOVIE_ID_Fantasy = ""
+
+  const [videoStatus, setVideoStatus] = useState(false);
   function show_info_Fantasy(){
-    for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
-      document.getElementsByClassName("list_container")[x].style.zIndex = "-1"
-      document.getElementsByClassName("list_container")[x].style.position = "static"
-    }
-    
-    document.getElementById("youtube_modal_Fantasy").style.display = "flex"
-    document.getElementById("progress_bar_Fantasy").style.display = "flex"
-
-    var title = document.getElementById("name_key_Fantasy").value
-    var genre = document.getElementById("genre_key_Fantasy").value
-    var date = document.getElementById("date_key_Fantasy").value
-    var overview = document.getElementById("overview_key_Fantasy").value
-
-    document.getElementById("modal_movie_title_Fantasy").textContent = title
-    genre = genre.replace(/,/g, " ● ");
-    document.getElementById("modal_movie_genre_Fantasy").textContent = genre
-    var dateFormat =  moment(date).format('LL');
-    document.getElementById("modal_movie_date_Fantasy").textContent = dateFormat
-    document.getElementById("modal_movie_overview_Fantasy").textContent = overview
-
-    MOVIE_ID_Fantasy = document.getElementById("movie_id_Fantasy").value;
-    setTimeout(function () {
-      document.getElementById("progress_bar_Fantasy").style.display = "none"
-      document.getElementById("my_modal_Fantasy").style.display = "block"
-      loadTrailer_Fantasy();
-      if(loaded === true){
-        playVideo_Fantasy()
-      }
-    }, 700);
+    setVideoStatus(true)
   }
+
+  useEffect(() => {
+    if(videoStatus === true){
+      for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
+        document.getElementsByClassName("list_container")[x].style.zIndex = "-1"
+        document.getElementsByClassName("list_container")[x].style.position = "static"
+      }
+      
+      document.getElementById("youtube_modal_Fantasy").style.display = "flex"
+      document.getElementById("progress_bar_Fantasy").style.display = "flex"
+  
+      var title = document.getElementById("name_key_Fantasy").value
+      var genre = document.getElementById("genre_key_Fantasy").value
+      var date = document.getElementById("date_key_Fantasy").value
+      var overview = document.getElementById("overview_key_Fantasy").value
+  
+      document.getElementById("modal_movie_title_Fantasy").textContent = title
+      genre = genre.replace(/,/g, " ● ");
+      document.getElementById("modal_movie_genre_Fantasy").textContent = genre
+      var dateFormat =  moment(date).format('LL');
+      document.getElementById("modal_movie_date_Fantasy").textContent = dateFormat
+      document.getElementById("modal_movie_overview_Fantasy").textContent = overview
+  
+      MOVIE_ID_Fantasy = document.getElementById("movie_id_Fantasy").value;
+      setTimeout(function () {
+        document.getElementById("progress_bar_Fantasy").style.display = "none"
+        document.getElementById("my_modal_Fantasy").style.display = "block"
+        loadTrailer_Fantasy();
+        if(loaded === true){
+          playVideo_Fantasy()
+        }
+      }, 700);
+    }
+  }, [videoStatus]);
+
   function close_info(){
+    setVideoStatus(false)
     for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
       document.getElementsByClassName("list_container")[x].style.zIndex = "1"
     }
@@ -222,13 +232,15 @@ export default function Fantasy() {
     </div>
 
       {/* Modal for clicking each_item */}
-      <VideoModal_Fantasy
-        close_info = {close_info}
-        trailerId = {trailerId_Fantasy}
-        onReady = {onReady_Fantasy}
-        sub_close = {sub_close}
-      />
-
+      {
+      videoStatus ?
+        <VideoModal_Fantasy
+          close_info = {close_info}
+          trailerId = {trailerId_Fantasy}
+          onReady = {onReady_Fantasy}
+          sub_close = {sub_close}
+        /> : ""
+      }
 
       {/* Movie Id Key Value */}
       <input type="hidden" id="movie_id_Fantasy"/>

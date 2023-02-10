@@ -107,38 +107,48 @@ export default function MyList() {
   // Youtube player functions 
   const [trailerId, setTrailerId] = useState("");
   var MOVIE_ID = ""
+
+  const [videoStatus, setVideoStatus] = useState(false);
   function show_info(){
-    for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
-      document.getElementsByClassName("list_container")[x].style.zIndex = "-1"
-      document.getElementsByClassName("list_container")[x].style.position = "static"
-    }
-    
-    document.getElementById("youtube_modal").style.display = "flex"
-    document.getElementById("progress_bar").style.display = "flex"
-
-    var title = document.getElementById("name_key_List").value
-    var genre = document.getElementById("genre_key_List").value
-    var date = document.getElementById("date_key_List").value
-    var overview = document.getElementById("overview_key_List").value
-
-    document.getElementById("modal_movie_title").textContent = title
-    genre = genre.replace(/,/g, " ● ");
-    document.getElementById("modal_movie_genre").textContent = genre
-    var dateFormat =  moment(date).format('LL');
-    document.getElementById("modal_movie_date").textContent = dateFormat
-    document.getElementById("modal_movie_overview").textContent = overview
-
-    MOVIE_ID = document.getElementById("movie_id_List").value;
-    setTimeout(function () {
-      document.getElementById("progress_bar").style.display = "none"
-      document.getElementById("my_modal").style.display = "block"
-        loadTrailer();
-        if(loaded === true){
-          playVideo()
-        }
-    }, 700);
+    setVideoStatus(true)
   }
+
+  useEffect(() => {
+    if(videoStatus === true){
+      for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
+        document.getElementsByClassName("list_container")[x].style.zIndex = "-1"
+        document.getElementsByClassName("list_container")[x].style.position = "static"
+      }
+      
+      document.getElementById("youtube_modal").style.display = "flex"
+      document.getElementById("progress_bar").style.display = "flex"
+  
+      var title = document.getElementById("name_key_List").value
+      var genre = document.getElementById("genre_key_List").value
+      var date = document.getElementById("date_key_List").value
+      var overview = document.getElementById("overview_key_List").value
+  
+      document.getElementById("modal_movie_title").textContent = title
+      genre = genre.replace(/,/g, " ● ");
+      document.getElementById("modal_movie_genre").textContent = genre
+      var dateFormat =  moment(date).format('LL');
+      document.getElementById("modal_movie_date").textContent = dateFormat
+      document.getElementById("modal_movie_overview").textContent = overview
+  
+      MOVIE_ID = document.getElementById("movie_id_List").value;
+      setTimeout(function () {
+        document.getElementById("progress_bar").style.display = "none"
+        document.getElementById("my_modal").style.display = "block"
+          loadTrailer();
+          if(loaded === true){
+            playVideo()
+          }
+      }, 700);
+    }
+  }, [videoStatus]);
+
   function close_info(){
+    setVideoStatus(false)
     for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
       document.getElementsByClassName("list_container")[x].style.zIndex = "1"
     }
@@ -221,12 +231,16 @@ export default function MyList() {
         </div>
 
     {/* Modal for clicking each_item */}
-    <VideoModal_List
-      close_info = {close_info}
-      trailerId = {trailerId}
-      onReady = {onReady}
-      sub_close = {sub_close}
-    />
+    {
+      videoStatus ?
+        <VideoModal_List
+          close_info = {close_info}
+          trailerId = {trailerId}
+          onReady = {onReady}
+          sub_close = {sub_close}
+        /> : ""
+    }
+
 
     {/* Movie Id Key Values */}
     <input type="hidden" id="movie_id_List"/>

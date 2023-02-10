@@ -195,38 +195,49 @@ export default function Navbar() {
   // Youtube player functions 
   const [trailerId_Search, settrailerId_Search] = useState("");
   var MOVIE_ID_Search = ""
+  
+  const [videoStatus, setVideoStatus] = useState(false);
   function show_info_Search(){
-    for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
-      document.getElementsByClassName("list_container")[x].style.zIndex = "-1"
-      document.getElementsByClassName("list_container")[x].style.position = "static"
-    }
-    
-    document.getElementById("youtube_modal_Search").style.display = "flex"
-    document.getElementById("progress_bar_Search").style.display = "flex"
-
-    var title = document.getElementById("name_key_Search").value
-    var genre = document.getElementById("genre_key_Search").value
-    var date = document.getElementById("date_key_Search").value
-    var overview = document.getElementById("overview_key_Search").value
-
-    document.getElementById("modal_movie_title_Search").textContent = title
-    genre = genre.replace(/,/g, " ● ");
-    document.getElementById("modal_movie_genre_Search").textContent = genre
-    var dateFormat =  moment(date).format('LL');
-    document.getElementById("modal_movie_date_Search").textContent = dateFormat
-    document.getElementById("modal_movie_overview_Search").textContent = overview
-
-    MOVIE_ID_Search = document.getElementById("movie_id_Search").value;
-    setTimeout(function () {
-      document.getElementById("progress_bar_Search").style.display = "none"
-      document.getElementById("my_modal_Search").style.display = "block"
-      loadTrailer_Search();
-      if(loaded === true){
-        playVideo_Search()
-      }
-    }, 700);
+    setVideoStatus(true)
   }
+
+  useEffect(() => {
+    if(videoStatus === true){
+      for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
+        document.getElementsByClassName("list_container")[x].style.zIndex = "-1"
+        document.getElementsByClassName("list_container")[x].style.position = "static"
+      }
+      
+      document.getElementById("youtube_modal_Search").style.display = "flex"
+      document.getElementById("progress_bar_Search").style.display = "flex"
+  
+      var title = document.getElementById("name_key_Search").value
+      var genre = document.getElementById("genre_key_Search").value
+      var date = document.getElementById("date_key_Search").value
+      var overview = document.getElementById("overview_key_Search").value
+  
+      document.getElementById("modal_movie_title_Search").textContent = title
+      genre = genre.replace(/,/g, " ● ");
+      document.getElementById("modal_movie_genre_Search").textContent = genre
+      var dateFormat =  moment(date).format('LL');
+      document.getElementById("modal_movie_date_Search").textContent = dateFormat
+      document.getElementById("modal_movie_overview_Search").textContent = overview
+  
+      MOVIE_ID_Search = document.getElementById("movie_id_Search").value;
+      setTimeout(function () {
+        document.getElementById("progress_bar_Search").style.display = "none"
+        document.getElementById("my_modal_Search").style.display = "block"
+        loadTrailer_Search();
+        if(loaded === true){
+          playVideo_Search()
+        }
+      }, 700);
+    }
+  }, [videoStatus]);
+
+
   function close_info(){
+    setVideoStatus(false)
     for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
       document.getElementsByClassName("list_container")[x].style.zIndex = "1"
     }
@@ -387,12 +398,15 @@ export default function Navbar() {
 
 
       {/* Modal for clicking each_item */}
-      <VideoModal_Search
-         close_info = {close_info}
-         trailerId = {trailerId_Search}
-         onReady = {onReady_Search}
-         sub_close = {sub_close}
-      />
+      {
+      videoStatus ?
+        <VideoModal_Search
+          close_info = {close_info}
+          trailerId = {trailerId_Search}
+          onReady = {onReady_Search}
+          sub_close = {sub_close}
+        /> : ""
+      }
 
       {/* Movie Id Key Value */}
       <input type="hidden" id="movie_id_Search"/>

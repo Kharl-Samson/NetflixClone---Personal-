@@ -108,38 +108,48 @@ export default function Popular() {
   // Youtube player functions 
   const [trailerId_Popular, settrailerId_Popular] = useState("");
   var MOVIE_ID_Popular = ""
+
+  const [videoStatus, setVideoStatus] = useState(false);
   function show_info_Popular(){
-    for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
-      document.getElementsByClassName("list_container")[x].style.zIndex = "-1"
-      document.getElementsByClassName("list_container")[x].style.position = "static"
-    }
-    
-    document.getElementById("youtube_modal_Popular").style.display = "flex"
-    document.getElementById("progress_bar_Popular").style.display = "flex"
-
-    var title = document.getElementById("name_key_Popular").value
-    var genre = document.getElementById("genre_key_Popular").value
-    var date = document.getElementById("date_key_Popular").value
-    var overview = document.getElementById("overview_key_Popular").value
-
-    document.getElementById("modal_movie_title_Popular").textContent = title
-    genre = genre.replace(/,/g, " ● ");
-    document.getElementById("modal_movie_genre_Popular").textContent = genre
-    var dateFormat =  moment(date).format('LL');
-    document.getElementById("modal_movie_date_Popular").textContent = dateFormat
-    document.getElementById("modal_movie_overview_Popular").textContent = overview
-
-    MOVIE_ID_Popular = document.getElementById("movie_id_Popular").value;
-    setTimeout(function () {
-      document.getElementById("progress_bar_Popular").style.display = "none"
-      document.getElementById("my_modal_Popular").style.display = "block"
-      loadTrailer_Popular();
-      if(loaded === true){
-        playVideo_Popular()
-      }
-    }, 700);
+    setVideoStatus(true)
   }
+
+  useEffect(() => {
+    if(videoStatus === true){
+      for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
+        document.getElementsByClassName("list_container")[x].style.zIndex = "-1"
+        document.getElementsByClassName("list_container")[x].style.position = "static"
+      }
+      
+      document.getElementById("youtube_modal_Popular").style.display = "flex"
+      document.getElementById("progress_bar_Popular").style.display = "flex"
+  
+      var title = document.getElementById("name_key_Popular").value
+      var genre = document.getElementById("genre_key_Popular").value
+      var date = document.getElementById("date_key_Popular").value
+      var overview = document.getElementById("overview_key_Popular").value
+  
+      document.getElementById("modal_movie_title_Popular").textContent = title
+      genre = genre.replace(/,/g, " ● ");
+      document.getElementById("modal_movie_genre_Popular").textContent = genre
+      var dateFormat =  moment(date).format('LL');
+      document.getElementById("modal_movie_date_Popular").textContent = dateFormat
+      document.getElementById("modal_movie_overview_Popular").textContent = overview
+  
+      MOVIE_ID_Popular = document.getElementById("movie_id_Popular").value;
+      setTimeout(function () {
+        document.getElementById("progress_bar_Popular").style.display = "none"
+        document.getElementById("my_modal_Popular").style.display = "block"
+        loadTrailer_Popular();
+        if(loaded === true){
+          playVideo_Popular()
+        }
+      }, 700);
+    }
+  }, [videoStatus]);
+
   function close_info(){
+    setVideoStatus(false)
     for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
       document.getElementsByClassName("list_container")[x].style.zIndex = "1"
     }
@@ -222,13 +232,15 @@ export default function Popular() {
     </div>
 
       {/* Modal for clicking each_item */}
-      <VideoModal_Popular
-        close_info = {close_info}
-        trailerId = {trailerId_Popular}
-        onReady = {onReady_Popular}
-        sub_close = {sub_close}
-      />
-
+      {
+      videoStatus ?
+        <VideoModal_Popular
+          close_info = {close_info}
+          trailerId = {trailerId_Popular}
+          onReady = {onReady_Popular}
+          sub_close = {sub_close}
+        /> : ""
+      }
 
       {/* Movie Id Key Value */}
       <input type="hidden" id="movie_id_Popular"/>

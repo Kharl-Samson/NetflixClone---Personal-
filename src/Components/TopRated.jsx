@@ -108,38 +108,47 @@ export default function TopRated() {
   const [trailerId_topRated, settrailerId_topRated] = useState("");
   var MOVIE_ID_topRated = ""
 
+  const [videoStatus, setVideoStatus] = useState(false);
   function show_info_topRated(){
-    for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
-      document.getElementsByClassName("list_container")[x].style.zIndex = "-1"
-      document.getElementsByClassName("list_container")[x].style.position = "static"
-    }
-
-    document.getElementById("youtube_modal_topRated").style.display = "flex"
-    document.getElementById("progress_bar_topRated").style.display = "flex"
-
-    var title = document.getElementById("name_key_topRated").value
-    var genre = document.getElementById("genre_key_topRated").value
-    var date = document.getElementById("date_key_topRated").value
-    var overview = document.getElementById("overview_key_topRated").value
-
-    document.getElementById("modal_movie_title_topRated").textContent = title
-    genre = genre.replace(/,/g, " ● ");
-    document.getElementById("modal_movie_genre_topRated").textContent = genre
-    var dateFormat =  moment(date).format('LL');
-    document.getElementById("modal_movie_date_topRated").textContent = dateFormat
-    document.getElementById("modal_movie_overview_topRated").textContent = overview
-
-    MOVIE_ID_topRated = document.getElementById("movie_id_topRated").value;
-    setTimeout(function () {
-      document.getElementById("progress_bar_topRated").style.display = "none"
-      document.getElementById("my_modal_topRated").style.display = "block"
-      loadTrailer_topRated();
-      if(loaded === true){
-        playVideo_topRated()
-      }
-    }, 700);
+    setVideoStatus(true)
   }
+
+  useEffect(() => {
+    if(videoStatus === true){
+      for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
+        document.getElementsByClassName("list_container")[x].style.zIndex = "-1"
+        document.getElementsByClassName("list_container")[x].style.position = "static"
+      }
+  
+      document.getElementById("youtube_modal_topRated").style.display = "flex"
+      document.getElementById("progress_bar_topRated").style.display = "flex"
+  
+      var title = document.getElementById("name_key_topRated").value
+      var genre = document.getElementById("genre_key_topRated").value
+      var date = document.getElementById("date_key_topRated").value
+      var overview = document.getElementById("overview_key_topRated").value
+  
+      document.getElementById("modal_movie_title_topRated").textContent = title
+      genre = genre.replace(/,/g, " ● ");
+      document.getElementById("modal_movie_genre_topRated").textContent = genre
+      var dateFormat =  moment(date).format('LL');
+      document.getElementById("modal_movie_date_topRated").textContent = dateFormat
+      document.getElementById("modal_movie_overview_topRated").textContent = overview
+  
+      MOVIE_ID_topRated = document.getElementById("movie_id_topRated").value;
+      setTimeout(function () {
+        document.getElementById("progress_bar_topRated").style.display = "none"
+        document.getElementById("my_modal_topRated").style.display = "block"
+        loadTrailer_topRated();
+        if(loaded === true){
+          playVideo_topRated()
+        }
+      }, 700);
+    }
+  }, [videoStatus]);
+
   function close_info(){
+    setVideoStatus(false)
     for (var x = 0 ; x < document.getElementsByClassName("list_container").length ; x++){
       document.getElementsByClassName("list_container")[x].style.zIndex = "1"
     }
@@ -224,12 +233,15 @@ export default function TopRated() {
     </div>
 
       {/* Modal for clicking each_item */}
-      <VideoModal_topRated
-        close_info = {close_info}
-        trailerId = {trailerId_topRated}
-        onReady = {onReady_topRated}
-        sub_close = {sub_close}
-      />
+      {
+      videoStatus ?
+        <VideoModal_topRated
+          close_info = {close_info}
+          trailerId = {trailerId_topRated}
+          onReady = {onReady_topRated}
+          sub_close = {sub_close}
+        /> : ""
+      }
 
       {/* Movie Id Key Value */}
       <input type="hidden" id="movie_id_topRated"/>
