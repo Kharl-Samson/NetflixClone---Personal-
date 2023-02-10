@@ -198,16 +198,17 @@ nav .right .avatar{
 }
 .for_search_container{
     height: 160px;
-    width: 100%;
+    width: 280px;
     background-color: #181818;
     border-radius: 5px;
     overflow: hidden;
     cursor: pointer;
     z-index: 0;
     position: relative;
+    transition: .2s;
 }
 .for_search_container .movie_cover{
-    width: 100%;
+    width: 280px;
     height: 160px;
     transition: .2s;
 }

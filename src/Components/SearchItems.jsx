@@ -37,6 +37,7 @@ export default function SearchItems(props) {
         document.getElementById("for_search_container"+props.class_key).style.boxShadow = "rgba(0, 0, 0, 0.24) 0px 3px 8px"
   
         document.getElementById("movie_cover"+props.class_key).style.height = "220px"
+        document.getElementById("movie_cover"+props.class_key).style.width = "400px"
   
         for(var x = 0 ; x < document.getElementsByClassName("genres"+props.class_key).length ; x++){
           document.getElementsByClassName("genres"+props.class_key)[x].style.color = "#CECBCB"
@@ -56,11 +57,12 @@ export default function SearchItems(props) {
 
       props.class_count !== 0 ? document.getElementById("for_search_container"+props.class_key).style.marginLeft = "0" : ""
       document.getElementById("for_search_container"+props.class_key).style.height = "160px"
-      document.getElementById("for_search_container"+props.class_key).style.width = "100%"
+      document.getElementById("for_search_container"+props.class_key).style.width = "280px"
       document.getElementById("for_search_container"+props.class_key).style.zIndex = "0"
       document.getElementById("for_search_container"+props.class_key).style.boxShadow = "none"
 
       document.getElementById("movie_cover"+props.class_key).style.height = "160px"
+      document.getElementById("movie_cover"+props.class_key).style.width = "280px"
     }
   }
 

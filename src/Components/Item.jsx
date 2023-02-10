@@ -39,6 +39,7 @@ export default function Item(props) {
         document.getElementById("each_image"+props.class_key).style.boxShadow = "rgba(0, 0, 0, 0.24) 0px 3px 8px"
   
         document.getElementById("movie_cover"+props.class_key).style.height = "220px"
+        document.getElementById("movie_cover"+props.class_key).style.width = "400px"
   
         for(var x = 0 ; x < document.getElementsByClassName("genres"+props.class_key).length ; x++){
           document.getElementsByClassName("genres"+props.class_key)[x].style.color = "#CECBCB"
@@ -64,6 +65,7 @@ export default function Item(props) {
       document.getElementById("each_image"+props.class_key).style.boxShadow = "none"
 
       document.getElementById("movie_cover"+props.class_key).style.height = "160px"
+      document.getElementById("movie_cover"+props.class_key).style.width = "280px"
     }
   }
 
@@ -90,7 +92,7 @@ export default function Item(props) {
 
     <LazyLoadImage
       effect="blur"
-      id={"movie_cover" + props.class_key}
+      id={"movie_cover"+props.class_key}
       alt="Movie Cover"
       src={"https://image.tmdb.org/t/p/original/" + props.image}
       className='movie_cover'
