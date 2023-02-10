@@ -65,7 +65,7 @@ export default function HomePage() {
       document.getElementById("trailer_video").play();
 
       document.getElementById("trailer_video").onended = function(e) {
-        trailer_ctr = 3
+        localStorage.setItem("trailer_ctr", 3)
         document.getElementById("unmute_icon").style.display = "none"
         document.getElementById("mute_icon").style.display = "none"
         document.getElementById("replay_icon").style.display = "block"
@@ -98,23 +98,23 @@ export default function HomePage() {
 
 
   // Trailer Controls
-  var trailer_ctr = 1
+  localStorage.setItem("trailer_ctr", 1)
   function trailer_controls(){
-    if(trailer_ctr === 1){// With sounds
+    if(localStorage.getItem("trailer_ctr") === "1"){// With sounds
       document.getElementById("trailer_video").muted = false
       document.getElementById("unmute_icon").style.display = "none"
       document.getElementById("replay_icon").style.display = "none"
       document.getElementById("mute_icon").style.display = "block"
-      trailer_ctr = 2
+      localStorage.setItem("trailer_ctr", 2)
     }
-    else if(trailer_ctr === 2){// No sounds
+    else if(localStorage.getItem("trailer_ctr") === "2"){// No sounds
       document.getElementById("trailer_video").muted = true
       document.getElementById("unmute_icon").style.display = "block"
       document.getElementById("replay_icon").style.display = "none"
       document.getElementById("mute_icon").style.display = "none"
-      trailer_ctr = 1
+      localStorage.setItem("trailer_ctr", 1)
     }  
-    else if (trailer_ctr === 3){
+    else if (localStorage.getItem("trailer_ctr") === "3"){
       document.getElementById("CoverPhoto_container").style.opacity = "0%"
       document.getElementById("CoverPhoto_container").style.transition = ".1s%"
       document.getElementById("trailer_video").muted = false
@@ -122,7 +122,7 @@ export default function HomePage() {
       document.getElementById("unmute_icon").style.display = "none"
       document.getElementById("replay_icon").style.display = "none"
       document.getElementById("mute_icon").style.display = "block"
-      trailer_ctr = 2
+      localStorage.setItem("trailer_ctr", 2)
     }
   }
   
@@ -132,7 +132,7 @@ export default function HomePage() {
     document.getElementById("unmute_icon").style.display = "block"
     document.getElementById("replay_icon").style.display = "none"
     document.getElementById("mute_icon").style.display = "none"
-    trailer_ctr = 1
+    localStorage.setItem("trailer_ctr", 1)
 
     const iframe = document.getElementById("youtube_player_hp");
     iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0`;

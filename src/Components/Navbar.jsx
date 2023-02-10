@@ -83,6 +83,16 @@ export default function Navbar() {
         document.getElementById("related_title").style.opacity = "100%"
       }, 300);
 
+      setTimeout(function () {
+        // Mute trailer
+        document.getElementById("trailer_video").muted = true
+        document.getElementById("unmute_icon").style.display = "block"
+        document.getElementById("replay_icon").style.display = "none"
+        document.getElementById("mute_icon").style.display = "none"
+        localStorage.setItem("trailer_ctr", 1)
+      }, 500);
+
+
       const response = await fetch(`${API_BASE_URL}/search/multi?page=1&api_key=${API_KEY}&query=${document.getElementById("search_input").value}`);
       const response_page2 = await fetch(`${API_BASE_URL}/search/multi?page=2&api_key=${API_KEY}&query=${document.getElementById("search_input").value}`);
       const response_page3 = await fetch(`${API_BASE_URL}/search/multi?page=3&api_key=${API_KEY}&query=${document.getElementById("search_input").value}`);
@@ -238,12 +248,12 @@ export default function Navbar() {
     }
     if(loaded === true){
       stopVideo_Search()
+      document.getElementById("youtube_modal_Search").style.display = "none"
+      document.getElementById("progress_bar_Search").style.display = "block"
+      document.getElementById("my_modal_Search").style.display = "none"
     }
     settrailerId_Search(null);
     setLoaded(false)
-    document.getElementById("youtube_modal_Search").style.display = "none"
-    document.getElementById("progress_bar_Search").style.display = "block"
-    document.getElementById("my_modal_Search").style.display = "none"
   }
 
   const [loaded, setLoaded] = useState(false);
@@ -259,7 +269,7 @@ export default function Navbar() {
         }
         else{
           setLoaded(false)
-          settrailerId_Search(null);
+          settrailerId_Search(res.data.results[0].key);
         }
       }
     }

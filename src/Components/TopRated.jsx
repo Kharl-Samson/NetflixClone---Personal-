@@ -143,6 +143,11 @@ export default function TopRated() {
         if(loaded === true){
           playVideo_topRated()
         }
+        document.getElementById("trailer_video").muted = true
+        document.getElementById("unmute_icon").style.display = "block"
+        document.getElementById("replay_icon").style.display = "none"
+        document.getElementById("mute_icon").style.display = "none"
+        localStorage.setItem("trailer_ctr", 1)
       }, 700);
     }
   }, [videoStatus]);
