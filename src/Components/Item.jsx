@@ -95,7 +95,6 @@ export default function Item(props) {
       src={"https://image.tmdb.org/t/p/original/" + props.image}
       className='movie_cover'
       onError={(e) => { e.target.onerror = null; e.target.src = handler_img }}
-      placeholderSrc = {handler_img}
     />
 
 
