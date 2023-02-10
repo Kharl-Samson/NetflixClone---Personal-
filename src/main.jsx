@@ -2,11 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 
+ReactDOM.createRoot(document.getElementById('root')).render(
+    <App />
+)
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
     navigator.serviceWorker
-      .register('/service-worker.jsx')
+      .register('/service-worker.js')
       .then(registration => {
         console.log('Service Worker registration successful');
       })
@@ -15,7 +18,3 @@ if ('serviceWorker' in navigator) {
       });
   });
 }
-
-ReactDOM.createRoot(document.getElementById('root')).render(
-    <App />
-)
