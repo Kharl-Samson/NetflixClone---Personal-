@@ -272,8 +272,6 @@
     /* Primary Details */
     .Primary_Details{
         left: 20px;
-        bottom: 53vh;
-        position: absolute;
         height: 48vh;
         padding-bottom: 16vh;
         display: flex;
