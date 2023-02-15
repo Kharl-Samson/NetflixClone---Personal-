@@ -273,7 +273,14 @@
     .Primary_Details{
         left: 20px;
         bottom: 53vh;
-        margin-top: 200px;
+        position: absolute;
+        height: 48vh;
+        padding-bottom: 16vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        bottom: 0;
+        top: 0;
     }
     .Primary_Details .description{
         margin-top: 10px;
