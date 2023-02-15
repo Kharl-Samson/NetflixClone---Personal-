@@ -272,8 +272,8 @@
     /* Primary Details */
     .Primary_Details{
         left: 20px;
-        bottom: 0;
-        margin-bottom: 53vh;
+        bottom: 53vh;
+        margin-top: 200px;
     }
     .Primary_Details .description{
         margin-top: 10px;
