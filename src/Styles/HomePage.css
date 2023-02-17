@@ -269,6 +269,16 @@
     .HomePage .TrailerVideo_container video{
         width: 300%;
     }
+
+    .age_play{    
+        height: 46vh;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding-bottom: 18vh;
+        top: 0;
+        bottom: 0;
+    }
+
     /* Primary Details */
     .Primary_Details{
         left: 20px;
@@ -316,13 +326,7 @@
     }
 }
 @media screen and (max-width: 431px) {
-    .age_play{    
-        height: auto;
-        flex-direction: column;
-        justify-content: flex-end;
-        bottom: 55vh;
-        top: 0;
-    }
+
 }
 @media screen and (max-width: 401px) {
     .Primary_Details .description{
