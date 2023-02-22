@@ -316,7 +316,7 @@ export default function Navbar() {
           <a onClick={close_search} className='links active' href='#HomePage'>Home</a>
           <a onClick={close_search} className='links' href='#tvShows_now_container'>TV Shows</a>
           <a onClick={close_search} className='links' href='#Movies_now_container'>Movies</a>
-          <a onClick={close_search} className='links' href='#Search_now_container'>New & Search</a>
+          <a onClick={close_search} className='links' href='#Popular_now_container'>New & Popular</a>
           <a onClick={close_search} className='links' href='#list_container'>My List</a>
 
           {/* For small devices links */}
