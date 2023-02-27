@@ -372,7 +372,7 @@ export default function Navbar() {
               <a className='mui_links' href='#Movies_now_container'>Movies</a>
             </MenuItem>
             <MenuItem onClick={handleClose}>
-              <a className='mui_links' href='#Search_now_container'>New & Search</a>
+              <a className='mui_links' href='#Popular_now_container'>New & Popular</a>
             </MenuItem>
             <MenuItem onClick={handleClose}>
               <a className='mui_links' href='#list_container'>My List</a>
