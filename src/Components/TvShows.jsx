@@ -20,41 +20,20 @@ import "swiper/css/navigation";
 // import required modules
 import {Navigation} from "swiper";
 import VideoModal_tvShows from './VideoModals/VideoModal_tvShows';
+import {useQuery} from '@tanstack/react-query'
 
-
-export default function TvShows() {
-
-  // My API Setting Configuration
-  const API_KEY = "11a61ae7e3b2ca3ab361c0a1fa158769";
-  const API_BASE_URL = "https://api.themoviedb.org/3";
-
-  // Hook for getting genres
-  const [genres, setGenres] = useState([]);
-  const loadGenre = async () => {
-    const res = await axios.get(`${API_BASE_URL}/genre/tv/list?api_key=${API_KEY}`);
-    setGenres(res.data.genres);
-  };
-  
+export default function TvShows(props) {
   // Generates Random Number from 1 - 50   
   var random_keyTVshows =  Math.floor(Math.random() * 10) + 1;
-  // Hook for getting all tvShows Now
-  const [tvShows, settvShows] = useState([]);
-  const loadtvShows = async () => {
-    const res = await axios.get(`${API_BASE_URL}/tv/top_rated?api_key=${API_KEY}&language=en-US&page=${random_keyTVshows}`);
-    settvShows(res.data.results);
-  };
-
-  // Use effect for all hooks
-  useEffect(() => {
-    loadtvShows();
-    loadGenre();
-  }, [API_KEY, API_BASE_URL]);
+  const {data: tvShows} = useQuery(["tvShows"], ()=>{
+    return axios.get(`${props.api_base_url}/tv/top_rated?api_key=${props.api_key}&language=en-US&page=${random_keyTVshows}`).then((res) => res.data.results);
+  });
 
   var key_mapping = -1; 
-  const myList_mapping = tvShows.map((res) => {
+  const myList_mapping = tvShows?.map((res) => {
       key_mapping++
       var genres_array = [] 
-      genres.map((response) => {
+      props.genres?.map((response) => {
           for(var x = 0 ; x < res.genre_ids.length ; x++){
             response.id === res.genre_ids[x] ? genres_array.push(response.name) : ""
           }
@@ -171,7 +150,7 @@ export default function TvShows() {
 
   const [loaded, setLoaded] = useState(false);
   const loadTrailer_tvShows = async () => {
-    const res = await axios.get(`${API_BASE_URL}/tv/${MOVIE_ID_tvShows}/videos?api_key=${API_KEY}`);
+    const res = await axios.get(`${props.api_base_url}/tv/${MOVIE_ID_tvShows}/videos?api_key=${props.api_key}`);
     if(res.data.results.length !== 0){
       for(var i = 0 ; i < res.data.results.length ; i++){
         if (res.data.results[i].name.toUpperCase().indexOf('TRAILER') > -1)

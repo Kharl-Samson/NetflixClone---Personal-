@@ -20,43 +20,20 @@ import "swiper/css/navigation";
 // import required modules
 import {Navigation} from "swiper";
 import VideoModal_suspenseful from './VideoModals/VideoModal_suspensful';
+import {useQuery} from '@tanstack/react-query'
 
-
-export default function Susepenseful() {
-
-  // My API Setting Configuration
-  const API_KEY = "11a61ae7e3b2ca3ab361c0a1fa158769";
-  const API_BASE_URL = "https://api.themoviedb.org/3";
-
-  // Hook for getting genres
-  const [genres, setGenres] = useState([]);
-  const loadGenre = async () => {
-    const res = await axios.get(`${API_BASE_URL}/genre/tv/list?api_key=${API_KEY}`);
-    setGenres(res.data.genres);
-  };
-  
+export default function Susepenseful(props) {
   // Generates Random Number from 1 - 20   
   var random_keySus =  Math.floor(Math.random() * 20) + 1;
-  // Hook for getting all suspenseful Now
-  const [suspenseful, setsuspenseful] = useState([]);
-  const loadsuspenseful = async () => {
-    const res = await axios.get(`${API_BASE_URL}/tv/popular?api_key=${API_KEY}&language=en-US&page=${random_keySus}`);
-    setsuspenseful(res.data.results);
-  };
-
-
-
-  // Use effect for all hooks
-  useEffect(() => {
-    loadsuspenseful();
-    loadGenre();
-  }, [API_KEY, API_BASE_URL]);
+  const {data: suspenseful} = useQuery(["suspenseful"], ()=>{
+    return axios.get(`${props.api_base_url}/tv/popular?api_key=${props.api_key}&language=en-US&page=${random_keySus}`).then((res) => res.data.results);
+  });
 
   var key_mapping = -1; 
-  const myList_mapping = suspenseful.map((res) => {
+  const myList_mapping = suspenseful?.map((res) => {
       key_mapping++
       var genres_array = [] 
-      genres.map((response) => {
+      props.genres?.map((response) => {
           for(var x = 0 ; x < res.genre_ids.length ; x++){
             response.id === res.genre_ids[x] ? genres_array.push(response.name) : ""
           }
@@ -172,7 +149,7 @@ export default function Susepenseful() {
 
   const [loaded, setLoaded] = useState(false);
   const loadTrailer_suspenseful = async () => {
-    const res = await axios.get(`${API_BASE_URL}/tv/${MOVIE_ID_suspenseful}/videos?api_key=${API_KEY}`);
+    const res = await axios.get(`${props.api_base_url}/tv/${MOVIE_ID_suspenseful}/videos?api_key=${props.api_key}`);
     if(res.data.results.length !== 0){
       for(var i = 0 ; i < res.data.results.length ; i++){
         if (res.data.results[i].name.toUpperCase().indexOf('TRAILER') > -1)

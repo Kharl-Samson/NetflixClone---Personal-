@@ -20,41 +20,25 @@ import "swiper/css/navigation";
 // import required modules
 import {Navigation} from "swiper";
 import VideoModal_Trending from './VideoModals/VideoModal_Trending';
+import {useQuery} from '@tanstack/react-query'
+
+export default function TrendingNow(props) {
+  const {data: genres} = useQuery(["genresTN"], ()=>{
+    return axios.get(`${props.api_base_url}/genre/${document.getElementById("mediaType_key_Trending").value}/list?api_key=${props.api_key}`).then((res) => res.data.genres);
+  });
 
 
-export default function TrendingNow() {
-
-  // My API Setting Configuration
-  const API_KEY = "11a61ae7e3b2ca3ab361c0a1fa158769";
-  const API_BASE_URL = "https://api.themoviedb.org/3";
-
-  // Hook for getting genres
-  const [genres, setGenres] = useState([]);
-  const loadGenre = async () => {
-    const res = await axios.get(`${API_BASE_URL}/genre/${document.getElementById("mediaType_key_Trending").value}/list?api_key=${API_KEY}`);
-    setGenres(res.data.genres);
-  };
-  
   // Generates Random Number from 1 - 20   
   var random_keyTrend =  Math.floor(Math.random() * 20) + 1;
-  // Hook for getting all Trending Now
-  const [trending, setTrending] = useState([]);
-  const loadTrending = async () => {
-    const res = await axios.get(`${API_BASE_URL}/trending/all/day?api_key=${API_KEY}&language=en-US&page=${random_keyTrend}`);
-    setTrending(res.data.results);
-  };
-
-  // Use effect for all hooks
-  useEffect(() => {
-    loadTrending();
-    loadGenre();
-  }, [API_KEY, API_BASE_URL]);
+  const {data: trending} = useQuery(["TrendingTN"], ()=>{
+    return axios.get(`${props.api_base_url}/trending/all/day?api_key=${props.api_key}&language=en-US&page=${random_keyTrend}`).then((res) => res.data.results);
+  });
 
   var key_mapping = -1; 
-  const myList_mapping = trending.map((res) => {
+  const myList_mapping = trending?.map((res) => {
       key_mapping++
       var genres_array = [] 
-      genres.map((response) => {
+      genres?.map((response) => {
           for(var x = 0 ; x < res.genre_ids.length ; x++){
             response.id === res.genre_ids[x] ? genres_array.push(response.name) : ""
           }
@@ -173,7 +157,7 @@ export default function TrendingNow() {
 
   const [loaded, setLoaded] = useState(false);
   const loadTrailer_Trending = async () => {
-    const res = await axios.get(`${API_BASE_URL}/${document.getElementById("mediaType_key_Trending").value}/${MOVIE_ID_TRENDING}/videos?api_key=${API_KEY}`);
+    const res = await axios.get(`${props.api_base_url}/${document.getElementById("mediaType_key_Trending").value}/${MOVIE_ID_TRENDING}/videos?api_key=${props.api_key}`);
     if(res.data.results.length !== 0){
       for(var i = 0 ; i < res.data.results.length ; i++){
         if (res.data.results[i].name.toUpperCase().indexOf('OFFICIAL TRAILER') > -1)

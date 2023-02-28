@@ -18,7 +18,7 @@ import VideoModal_Search from './VideoModals/VideoModal_Search';
 // From Moment
 import moment from 'moment';
 
-export default function Navbar() {
+export default function Navbar(props) {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -79,10 +79,6 @@ export default function Navbar() {
     document.getElementById("close_search").style.display = "none"
   }
 
-  // My API Setting Configuration
-  const API_KEY = "11a61ae7e3b2ca3ab361c0a1fa158769";
-  const API_BASE_URL = "https://api.themoviedb.org/3";
-
   // const [searchTerm, setSearchTerm] = useState('');
   const [results, setResults] = useState([]);
   const handleChange = async (event) => {
@@ -105,9 +101,9 @@ export default function Navbar() {
       }, 500);
 
 
-      const response = await fetch(`${API_BASE_URL}/search/multi?page=1&api_key=${API_KEY}&query=${document.getElementById("search_input").value}`);
-      const response_page2 = await fetch(`${API_BASE_URL}/search/multi?page=2&api_key=${API_KEY}&query=${document.getElementById("search_input").value}`);
-      const response_page3 = await fetch(`${API_BASE_URL}/search/multi?page=3&api_key=${API_KEY}&query=${document.getElementById("search_input").value}`);
+      const response = await fetch(`${props.api_base_url}/search/multi?page=1&api_key=${props.api_key}&query=${document.getElementById("search_input").value}`);
+      const response_page2 = await fetch(`${props.api_base_url}/search/multi?page=2&api_key=${props.api_key}&query=${document.getElementById("search_input").value}`);
+      const response_page3 = await fetch(`${props.api_base_url}/search/multi?page=3&api_key=${props.api_key}&query=${document.getElementById("search_input").value}`);
       const data = await response.json();
       const data_page2 = await response_page2.json();
       const data_page3 = await response_page3.json();
@@ -152,13 +148,13 @@ export default function Navbar() {
   // Hook for getting genres
   const [genres, setGenres] = useState([]);
   const loadGenre = async () => {
-    const res = await axios.get(`${API_BASE_URL}/genre/movie/list?api_key=${API_KEY}`);
+    const res = await axios.get(`${props.api_base_url}/genre/movie/list?api_key=${props.api_key}`);
     setGenres(res.data.genres);
   };
   // Use effect for all hooks
   useEffect(() => {
     loadGenre();
-  }, [API_KEY, API_BASE_URL]);
+  }, [props.api_base_url, props.api_key]);
 
   function uniqurArrayID(array){
     var a = array.concat();
@@ -270,7 +266,7 @@ export default function Navbar() {
 
   const [loaded, setLoaded] = useState(false);
   const loadTrailer_Search = async () => {
-    const res = await axios.get(`${API_BASE_URL}/${document.getElementById("mediaType_key_Search").value}/${MOVIE_ID_Search}/videos?api_key=${API_KEY}`);
+    const res = await axios.get(`${props.api_base_url}/${document.getElementById("mediaType_key_Search").value}/${MOVIE_ID_Search}/videos?api_key=${props.api_key}`);
     if(res.data.results.length !== 0){
       for(var i = 0 ; i < res.data.results.length ; i++){
         if (res.data.results[i].name.toUpperCase().indexOf('TRAILER') > -1)
