@@ -17,7 +17,7 @@ import axios from 'axios';
 import {useQuery} from '@tanstack/react-query'
 
 function App() {
-  // My API Setting Configuration
+  // My API Setting Configurations
   const API_KEY = "11a61ae7e3b2ca3ab361c0a1fa158769";
   const API_BASE_URL = "https://api.themoviedb.org/3";
 
